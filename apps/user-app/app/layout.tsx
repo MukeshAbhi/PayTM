@@ -1,6 +1,5 @@
-
+import "@repo/ui/globals.css";
 import localFont from "next/font/local";
-import "./globals.css";
 import { Providers } from "./provider";
 
 const geistSans = localFont({
