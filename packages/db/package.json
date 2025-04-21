@@ -7,6 +7,10 @@
     "prisma": "^6.6.0"
   },
   "dependencies": {
+    "@auth/prisma-adapter": "^2.9.0",
     "@prisma/client": "6.6.0"
+  },
+  "exports":{
+    "./prisma":"./src/index.ts"
   }
 }
