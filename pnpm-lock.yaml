@@ -20,6 +20,9 @@ importers:
 
   apps/merchant-app:
     dependencies:
+      '@repo/store':
+        specifier: workspace:^
+        version: link:../../packages/store
       '@repo/ui':
         specifier: workspace:*
         version: link:../../packages/ui
@@ -29,6 +32,9 @@ importers:
       install:
         specifier: ^0.13.0
         version: 0.13.0
+      jotai:
+        specifier: ^2.12.3
+        version: 2.12.3(@types/react@19.1.0)(react@19.1.0)
       lucide-react:
         specifier: ^0.475.0
         version: 0.475.0(react@19.1.0)
@@ -75,6 +81,9 @@ importers:
 
   apps/user-app:
     dependencies:
+      '@repo/store':
+        specifier: workspace:^
+        version: link:../../packages/store
       '@repo/ui':
         specifier: workspace:*
         version: link:../../packages/ui
@@ -84,6 +93,9 @@ importers:
       install:
         specifier: ^0.13.0
         version: 0.13.0
+      jotai:
+        specifier: ^2.12.3
+        version: 2.12.3(@types/react@19.1.0)(react@19.1.0)
       lucide-react:
         specifier: ^0.475.0
         version: 0.475.0(react@19.1.0)
@@ -163,6 +175,12 @@ importers:
       typescript-eslint:
         specifier: ^8.29.0
         version: 8.29.0(eslint@9.24.0(jiti@2.4.2))(typescript@5.8.2)
+
+  packages/store:
+    dependencies:
+      jotai:
+        specifier: ^2.12.3
+        version: 2.12.3(@types/react@19.1.0)(react@19.1.0)
 
   packages/typescript-config: {}
 
@@ -1531,6 +1549,18 @@ packages:
   jiti@2.4.2:
     resolution: {integrity: sha512-rg9zJN+G4n2nfJl5MW3BMygZX56zKPNVEYYqq7adpmMh4Jn2QNEwhvQlFy6jPVdcod7txZtKHWnyZiA3a0zP7A==}
     hasBin: true
+
+  jotai@2.12.3:
+    resolution: {integrity: sha512-DpoddSkmPGXMFtdfnoIHfueFeGP643nqYUWC6REjUcME+PG2UkAtYnLbffRDw3OURI9ZUTcRWkRGLsOvxuWMCg==}
+    engines: {node: '>=12.20.0'}
+    peerDependencies:
+      '@types/react': '>=17.0.0'
+      react: '>=17.0.0'
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      react:
+        optional: true
 
   js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
@@ -3879,6 +3909,11 @@ snapshots:
       set-function-name: 2.0.2
 
   jiti@2.4.2: {}
+
+  jotai@2.12.3(@types/react@19.1.0)(react@19.1.0):
+    optionalDependencies:
+      '@types/react': 19.1.0
+      react: 19.1.0
 
   js-tokens@4.0.0: {}
 

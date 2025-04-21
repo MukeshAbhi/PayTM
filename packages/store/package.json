@@ -1,0 +1,10 @@
+{
+  "name": "@repo/store",
+  "version": "1.0.0",
+  "dependencies": {
+    "jotai": "^2.12.3"
+  },
+  "exports": {
+    "./useBalance" : "./src/hooks/useBalance.ts"
+  }
+}

@@ -1,3 +1,4 @@
+import Balance from "@/components/Balance"
 import { Button } from "@repo/ui/components/button"
 
 export default function Page() {
@@ -6,6 +7,7 @@ export default function Page() {
       <div className="flex flex-col items-center justify-center gap-4">
         <h1 className="text-2xl font-bold">Hello World</h1>
         <Button  size="lg" className="text-3xl">Button</Button>
+        <Balance/>
       </div>
     </div>
   )
