@@ -1,5 +1,5 @@
 "use client"
-import Button from '@/components/Button'
+import Button from '@/app/components/Button'
 import React, { useState } from 'react'
 import { getData } from '../actions/user';
 import Link from 'next/link';

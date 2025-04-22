@@ -1,8 +1,8 @@
 import { Geist, Geist_Mono } from "next/font/google"
 
 import "@repo/ui/globals.css"
-import { Providers } from "@/components/providers"
-import { JotaiProvider } from "@/components/jotaiProviders"
+import { Providers } from "@/app/components/providers"
+import { JotaiProvider } from "@/app/components/jotaiProviders"
 
 const fontSans = Geist({
   subsets: ["latin"],
