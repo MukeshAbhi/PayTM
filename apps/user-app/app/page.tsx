@@ -12,7 +12,7 @@ export default async function Page() {
     return(
       <div className="flex flex-col gap-4 text-2xl font-bold bg-amber-300 h-screen justify-center items-center"> 
       <Link href={"/user-info"} >User Info</Link>
-      <Link href={"/test-info"}>Test</Link>
+      <Link href={"/test-info"}>Test db</Link>
       <Balance />
       <SignOut />
     </div>
