@@ -6,7 +6,7 @@ import React from 'react'
 function SignOut() {
   return (
     <div>
-      <Button onClick={() => logout()}>SignOut</Button>
+      <Button variant={'secondary'} onClick={() => logout()}>SignOut</Button>
     </div>
   )
 }

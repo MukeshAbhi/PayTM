@@ -5,7 +5,7 @@ import  Button from "components/Button";
 function SignIn() {
   return (
     <div>
-      <Button onClick={() => login()}>SignIn</Button>
+      <Button variant={"destructive"} onClick={() => login()}>SignIn</Button>
     </div>
   )
 }
