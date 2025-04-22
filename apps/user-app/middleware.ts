@@ -1,25 +1,22 @@
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
-import { getToken } from "next-auth/jwt";
+import { NextRequest, NextResponse } from "next/server";
+import { auth } from "./authTypes";
 
 const protectedRoutes = ["/user-info"];
 
-export default async function middleware(request: NextRequest) {
-    const token = await getToken({
-        req: request,
-        secret: process.env.AUTH_SECRET, // match this with authOptions.secret
-    });
-
-    console.log("token:", token);
+export const middleware = async (request:NextRequest) =>  {
+    const session = await auth();
+    console.log("session : ", session)
 
     const { pathname } = request.nextUrl;
-    const isProtected = protectedRoutes.some((route) =>
+
+    const isProtected = protectedRoutes.some((route) => 
         pathname.startsWith(route)
     );
 
-    if (isProtected && !token) {
-        return NextResponse.redirect(new URL("/api/auth/signin", request.url));
+    if(isProtected && !session) {
+        return NextResponse.redirect(new URL("api/auth/signin", request.url));
     }
 
     return NextResponse.next();
+    
 }

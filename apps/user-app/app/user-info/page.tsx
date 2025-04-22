@@ -1,4 +1,4 @@
-import { auth } from "@/nextAuthTypes"
+import { auth } from "@/authTypes"
 import Image from "next/image"
 import Link from "next/link"
 

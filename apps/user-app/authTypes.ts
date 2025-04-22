@@ -1,5 +1,5 @@
+import NextAuth, { NextAuthResult } from "next-auth";
 import { authOptions } from "./auth";
-import NextAuth, { type NextAuthResult } from 'next-auth';
 
 const result = NextAuth(authOptions);
 

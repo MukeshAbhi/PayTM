@@ -1,4 +1,4 @@
-import { auth } from "@/nextAuthTypes";
+import { auth } from "@/authTypes";
 import SignIn from "./components/SignIn";
 import Link from "next/link";
 import Balance from "./components/Balance";
