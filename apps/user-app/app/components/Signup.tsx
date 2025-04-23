@@ -1,3 +1,4 @@
+"use client"
 import { cn } from "@repo/ui/lib/utils"
 import { Button } from "@repo/ui/components/button"
 import {
@@ -9,11 +10,22 @@ import {
 } from "@repo/ui/components/card"
 import { Input } from "@repo/ui/components/input"
 import { Label } from "@repo/ui/components/label"
+import { login } from "../actions/auth"
+import { useState } from "react"
 
 export function SignUpForm({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<"div">) {
+  const [email, setEmail] = useState<string>();
+
+  const clickHandler = () => {
+    console.log("email: ", email);
+    
+    login({email: email as string});
+
+  }
+
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
@@ -24,15 +36,16 @@ export function SignUpForm({
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form>
+          <form onSubmit={clickHandler}>
             <div className="flex flex-col gap-6">
               <div className="grid gap-5">
                 <Label htmlFor="email">Email</Label>
                 <Input
                   id="email"
                   type="email"
-                  placeholder="m@example.com"
+                  placeholder="johndoe@example.com"
                   required
+                  onChange={e => setEmail(e.target.value)}
                 />
               </div>
               <Button type="submit" className="w-full">
