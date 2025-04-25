@@ -21,8 +21,7 @@ export function SignUpForm({
 
   const clickHandler = () => {
     console.log("email: ", email);
-    
-    login({email: email as string});
+  
 
   }
 
@@ -36,11 +35,12 @@ export function SignUpForm({
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form onSubmit={clickHandler}>
+          <form action={login}>
             <div className="flex flex-col gap-6">
               <div className="grid gap-5">
                 <Label htmlFor="email">Email</Label>
                 <Input
+                  name="email"
                   id="email"
                   type="email"
                   placeholder="johndoe@example.com"

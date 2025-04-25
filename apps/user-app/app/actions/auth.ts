@@ -2,7 +2,7 @@
 
 import { signIn, signOut } from "@/authTypes"
 
-export const login = async (formDta: {email: string}) => {
+export const login = async (formDta: FormData) => {
     await signIn("resend", formDta);
 }
 

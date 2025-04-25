@@ -6,7 +6,7 @@ export const authOptions : NextAuthConfig = ({
   adapter: adapter,
   providers: [
     Resend({
-      from: "money@money.com",
+      from: "no-reply@updates.mukeshtech.site",
       sendVerificationRequest,
       secret: process.env.AUTH_RESEND_KEY
     })
@@ -14,7 +14,7 @@ export const authOptions : NextAuthConfig = ({
   session: {
     strategy: "jwt"
   },
-  secret: process.env.AUTH_JWT_SECRET
+  secret: process.env.AUTH_SECRET
 })
 
 export async function sendVerificationRequest(params: { identifier: string; provider: any; url: string; theme: any }) {
