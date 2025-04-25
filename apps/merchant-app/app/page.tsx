@@ -1,8 +1,7 @@
 import { auth } from "@/authTypes";
-import SignIn from "./components/SignIn";
 import Link from "next/link";
-import Balance from "./components/Balance";
-import SignOut from "./components/SignOut";
+import Button from "./components/Button";
+import { logout } from "./actions/auth";
 
 export default async function Page() {
 
@@ -11,17 +10,15 @@ export default async function Page() {
   if(session?.user) {
     return(
       <div className="flex flex-col gap-4 text-2xl font-bold bg-amber-300 h-screen justify-center items-center"> 
-      <Link href={"/user-info"} >User Info</Link>
-      <Balance />
-      <SignOut />
-    </div>
+        <Button onClick={logout}>Sign Out</Button>
+      </div>
     )
   }
   return (
     <div className="flex items-center justify-center min-h-svh">
       <div className="flex flex-col items-center justify-center gap-4">
         <div>You are not Signed In</div>
-        <SignIn/>
+        <Link href={"/admin-signin"}>Sign In</Link>
       </div>
     </div>
   )
