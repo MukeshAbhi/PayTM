@@ -19,6 +19,16 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
 /**
+ * Model OnRampTranscation
+ * 
+ */
+export type OnRampTranscation = $Result.DefaultSelection<Prisma.$OnRampTranscationPayload>
+/**
+ * Model Balance
+ * 
+ */
+export type Balance = $Result.DefaultSelection<Prisma.$BalancePayload>
+/**
  * Model Account
  * 
  */
@@ -38,6 +48,24 @@ export type VerificationToken = $Result.DefaultSelection<Prisma.$VerificationTok
  * 
  */
 export type Authenticator = $Result.DefaultSelection<Prisma.$AuthenticatorPayload>
+
+/**
+ * Enums
+ */
+export namespace $Enums {
+  export const OnRampStatus: {
+  Success: 'Success',
+  Failure: 'Failure',
+  Processing: 'Processing'
+};
+
+export type OnRampStatus = (typeof OnRampStatus)[keyof typeof OnRampStatus]
+
+}
+
+export type OnRampStatus = $Enums.OnRampStatus
+
+export const OnRampStatus: typeof $Enums.OnRampStatus
 
 /**
  * ##  Prisma Client ʲˢ
@@ -173,6 +201,26 @@ export class PrismaClient<
     * ```
     */
   get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.onRampTranscation`: Exposes CRUD operations for the **OnRampTranscation** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more OnRampTranscations
+    * const onRampTranscations = await prisma.onRampTranscation.findMany()
+    * ```
+    */
+  get onRampTranscation(): Prisma.OnRampTranscationDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.balance`: Exposes CRUD operations for the **Balance** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Balances
+    * const balances = await prisma.balance.findMany()
+    * ```
+    */
+  get balance(): Prisma.BalanceDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.account`: Exposes CRUD operations for the **Account** model.
@@ -654,6 +702,8 @@ export namespace Prisma {
 
   export const ModelName: {
     User: 'User',
+    OnRampTranscation: 'OnRampTranscation',
+    Balance: 'Balance',
     Account: 'Account',
     Session: 'Session',
     VerificationToken: 'VerificationToken',
@@ -676,7 +726,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "account" | "session" | "verificationToken" | "authenticator"
+      modelProps: "user" | "onRampTranscation" | "balance" | "account" | "session" | "verificationToken" | "authenticator"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -751,6 +801,154 @@ export namespace Prisma {
           count: {
             args: Prisma.UserCountArgs<ExtArgs>
             result: $Utils.Optional<UserCountAggregateOutputType> | number
+          }
+        }
+      }
+      OnRampTranscation: {
+        payload: Prisma.$OnRampTranscationPayload<ExtArgs>
+        fields: Prisma.OnRampTranscationFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.OnRampTranscationFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OnRampTranscationPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.OnRampTranscationFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OnRampTranscationPayload>
+          }
+          findFirst: {
+            args: Prisma.OnRampTranscationFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OnRampTranscationPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.OnRampTranscationFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OnRampTranscationPayload>
+          }
+          findMany: {
+            args: Prisma.OnRampTranscationFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OnRampTranscationPayload>[]
+          }
+          create: {
+            args: Prisma.OnRampTranscationCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OnRampTranscationPayload>
+          }
+          createMany: {
+            args: Prisma.OnRampTranscationCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.OnRampTranscationCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OnRampTranscationPayload>[]
+          }
+          delete: {
+            args: Prisma.OnRampTranscationDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OnRampTranscationPayload>
+          }
+          update: {
+            args: Prisma.OnRampTranscationUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OnRampTranscationPayload>
+          }
+          deleteMany: {
+            args: Prisma.OnRampTranscationDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.OnRampTranscationUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.OnRampTranscationUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OnRampTranscationPayload>[]
+          }
+          upsert: {
+            args: Prisma.OnRampTranscationUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OnRampTranscationPayload>
+          }
+          aggregate: {
+            args: Prisma.OnRampTranscationAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateOnRampTranscation>
+          }
+          groupBy: {
+            args: Prisma.OnRampTranscationGroupByArgs<ExtArgs>
+            result: $Utils.Optional<OnRampTranscationGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.OnRampTranscationCountArgs<ExtArgs>
+            result: $Utils.Optional<OnRampTranscationCountAggregateOutputType> | number
+          }
+        }
+      }
+      Balance: {
+        payload: Prisma.$BalancePayload<ExtArgs>
+        fields: Prisma.BalanceFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.BalanceFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BalancePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.BalanceFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BalancePayload>
+          }
+          findFirst: {
+            args: Prisma.BalanceFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BalancePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.BalanceFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BalancePayload>
+          }
+          findMany: {
+            args: Prisma.BalanceFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BalancePayload>[]
+          }
+          create: {
+            args: Prisma.BalanceCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BalancePayload>
+          }
+          createMany: {
+            args: Prisma.BalanceCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.BalanceCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BalancePayload>[]
+          }
+          delete: {
+            args: Prisma.BalanceDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BalancePayload>
+          }
+          update: {
+            args: Prisma.BalanceUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BalancePayload>
+          }
+          deleteMany: {
+            args: Prisma.BalanceDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.BalanceUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.BalanceUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BalancePayload>[]
+          }
+          upsert: {
+            args: Prisma.BalanceUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BalancePayload>
+          }
+          aggregate: {
+            args: Prisma.BalanceAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateBalance>
+          }
+          groupBy: {
+            args: Prisma.BalanceGroupByArgs<ExtArgs>
+            result: $Utils.Optional<BalanceGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.BalanceCountArgs<ExtArgs>
+            result: $Utils.Optional<BalanceCountAggregateOutputType> | number
           }
         }
       }
@@ -1135,6 +1333,8 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     user?: UserOmit
+    onRampTranscation?: OnRampTranscationOmit
+    balance?: BalanceOmit
     account?: AccountOmit
     session?: SessionOmit
     verificationToken?: VerificationTokenOmit
@@ -1233,12 +1433,16 @@ export namespace Prisma {
    */
 
   export type UserCountOutputType = {
+    OnRampTranscation: number
+    Balance: number
     accounts: number
     sessions: number
     Authenticator: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    OnRampTranscation?: boolean | UserCountOutputTypeCountOnRampTranscationArgs
+    Balance?: boolean | UserCountOutputTypeCountBalanceArgs
     accounts?: boolean | UserCountOutputTypeCountAccountsArgs
     sessions?: boolean | UserCountOutputTypeCountSessionsArgs
     Authenticator?: boolean | UserCountOutputTypeCountAuthenticatorArgs
@@ -1253,6 +1457,20 @@ export namespace Prisma {
      * Select specific fields to fetch from the UserCountOutputType
      */
     select?: UserCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountOnRampTranscationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OnRampTranscationWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountBalanceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BalanceWhereInput
   }
 
   /**
@@ -1461,6 +1679,8 @@ export namespace Prisma {
     image?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    OnRampTranscation?: boolean | User$OnRampTranscationArgs<ExtArgs>
+    Balance?: boolean | User$BalanceArgs<ExtArgs>
     accounts?: boolean | User$accountsArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     Authenticator?: boolean | User$AuthenticatorArgs<ExtArgs>
@@ -1499,6 +1719,8 @@ export namespace Prisma {
 
   export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    OnRampTranscation?: boolean | User$OnRampTranscationArgs<ExtArgs>
+    Balance?: boolean | User$BalanceArgs<ExtArgs>
     accounts?: boolean | User$accountsArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     Authenticator?: boolean | User$AuthenticatorArgs<ExtArgs>
@@ -1510,6 +1732,8 @@ export namespace Prisma {
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
     objects: {
+      OnRampTranscation: Prisma.$OnRampTranscationPayload<ExtArgs>[]
+      Balance: Prisma.$BalancePayload<ExtArgs>[]
       accounts: Prisma.$AccountPayload<ExtArgs>[]
       sessions: Prisma.$SessionPayload<ExtArgs>[]
       Authenticator: Prisma.$AuthenticatorPayload<ExtArgs>[]
@@ -1916,6 +2140,8 @@ export namespace Prisma {
    */
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    OnRampTranscation<T extends User$OnRampTranscationArgs<ExtArgs> = {}>(args?: Subset<T, User$OnRampTranscationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OnRampTranscationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    Balance<T extends User$BalanceArgs<ExtArgs> = {}>(args?: Subset<T, User$BalanceArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BalancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     accounts<T extends User$accountsArgs<ExtArgs> = {}>(args?: Subset<T, User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Authenticator<T extends User$AuthenticatorArgs<ExtArgs> = {}>(args?: Subset<T, User$AuthenticatorArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AuthenticatorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -2343,6 +2569,54 @@ export namespace Prisma {
   }
 
   /**
+   * User.OnRampTranscation
+   */
+  export type User$OnRampTranscationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OnRampTranscation
+     */
+    select?: OnRampTranscationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OnRampTranscation
+     */
+    omit?: OnRampTranscationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OnRampTranscationInclude<ExtArgs> | null
+    where?: OnRampTranscationWhereInput
+    orderBy?: OnRampTranscationOrderByWithRelationInput | OnRampTranscationOrderByWithRelationInput[]
+    cursor?: OnRampTranscationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: OnRampTranscationScalarFieldEnum | OnRampTranscationScalarFieldEnum[]
+  }
+
+  /**
+   * User.Balance
+   */
+  export type User$BalanceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Balance
+     */
+    select?: BalanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Balance
+     */
+    omit?: BalanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BalanceInclude<ExtArgs> | null
+    where?: BalanceWhereInput
+    orderBy?: BalanceOrderByWithRelationInput | BalanceOrderByWithRelationInput[]
+    cursor?: BalanceWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BalanceScalarFieldEnum | BalanceScalarFieldEnum[]
+  }
+
+  /**
    * User.accounts
    */
   export type User$accountsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2430,6 +2704,2207 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: UserInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model OnRampTranscation
+   */
+
+  export type AggregateOnRampTranscation = {
+    _count: OnRampTranscationCountAggregateOutputType | null
+    _avg: OnRampTranscationAvgAggregateOutputType | null
+    _sum: OnRampTranscationSumAggregateOutputType | null
+    _min: OnRampTranscationMinAggregateOutputType | null
+    _max: OnRampTranscationMaxAggregateOutputType | null
+  }
+
+  export type OnRampTranscationAvgAggregateOutputType = {
+    amount: number | null
+  }
+
+  export type OnRampTranscationSumAggregateOutputType = {
+    amount: number | null
+  }
+
+  export type OnRampTranscationMinAggregateOutputType = {
+    id: string | null
+    status: $Enums.OnRampStatus | null
+    token: string | null
+    provider: string | null
+    amount: number | null
+    startTime: Date | null
+    userId: string | null
+  }
+
+  export type OnRampTranscationMaxAggregateOutputType = {
+    id: string | null
+    status: $Enums.OnRampStatus | null
+    token: string | null
+    provider: string | null
+    amount: number | null
+    startTime: Date | null
+    userId: string | null
+  }
+
+  export type OnRampTranscationCountAggregateOutputType = {
+    id: number
+    status: number
+    token: number
+    provider: number
+    amount: number
+    startTime: number
+    userId: number
+    _all: number
+  }
+
+
+  export type OnRampTranscationAvgAggregateInputType = {
+    amount?: true
+  }
+
+  export type OnRampTranscationSumAggregateInputType = {
+    amount?: true
+  }
+
+  export type OnRampTranscationMinAggregateInputType = {
+    id?: true
+    status?: true
+    token?: true
+    provider?: true
+    amount?: true
+    startTime?: true
+    userId?: true
+  }
+
+  export type OnRampTranscationMaxAggregateInputType = {
+    id?: true
+    status?: true
+    token?: true
+    provider?: true
+    amount?: true
+    startTime?: true
+    userId?: true
+  }
+
+  export type OnRampTranscationCountAggregateInputType = {
+    id?: true
+    status?: true
+    token?: true
+    provider?: true
+    amount?: true
+    startTime?: true
+    userId?: true
+    _all?: true
+  }
+
+  export type OnRampTranscationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which OnRampTranscation to aggregate.
+     */
+    where?: OnRampTranscationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OnRampTranscations to fetch.
+     */
+    orderBy?: OnRampTranscationOrderByWithRelationInput | OnRampTranscationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: OnRampTranscationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OnRampTranscations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OnRampTranscations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned OnRampTranscations
+    **/
+    _count?: true | OnRampTranscationCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: OnRampTranscationAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: OnRampTranscationSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: OnRampTranscationMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: OnRampTranscationMaxAggregateInputType
+  }
+
+  export type GetOnRampTranscationAggregateType<T extends OnRampTranscationAggregateArgs> = {
+        [P in keyof T & keyof AggregateOnRampTranscation]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateOnRampTranscation[P]>
+      : GetScalarType<T[P], AggregateOnRampTranscation[P]>
+  }
+
+
+
+
+  export type OnRampTranscationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OnRampTranscationWhereInput
+    orderBy?: OnRampTranscationOrderByWithAggregationInput | OnRampTranscationOrderByWithAggregationInput[]
+    by: OnRampTranscationScalarFieldEnum[] | OnRampTranscationScalarFieldEnum
+    having?: OnRampTranscationScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: OnRampTranscationCountAggregateInputType | true
+    _avg?: OnRampTranscationAvgAggregateInputType
+    _sum?: OnRampTranscationSumAggregateInputType
+    _min?: OnRampTranscationMinAggregateInputType
+    _max?: OnRampTranscationMaxAggregateInputType
+  }
+
+  export type OnRampTranscationGroupByOutputType = {
+    id: string
+    status: $Enums.OnRampStatus
+    token: string
+    provider: string
+    amount: number
+    startTime: Date
+    userId: string
+    _count: OnRampTranscationCountAggregateOutputType | null
+    _avg: OnRampTranscationAvgAggregateOutputType | null
+    _sum: OnRampTranscationSumAggregateOutputType | null
+    _min: OnRampTranscationMinAggregateOutputType | null
+    _max: OnRampTranscationMaxAggregateOutputType | null
+  }
+
+  type GetOnRampTranscationGroupByPayload<T extends OnRampTranscationGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<OnRampTranscationGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof OnRampTranscationGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], OnRampTranscationGroupByOutputType[P]>
+            : GetScalarType<T[P], OnRampTranscationGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type OnRampTranscationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    status?: boolean
+    token?: boolean
+    provider?: boolean
+    amount?: boolean
+    startTime?: boolean
+    userId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["onRampTranscation"]>
+
+  export type OnRampTranscationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    status?: boolean
+    token?: boolean
+    provider?: boolean
+    amount?: boolean
+    startTime?: boolean
+    userId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["onRampTranscation"]>
+
+  export type OnRampTranscationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    status?: boolean
+    token?: boolean
+    provider?: boolean
+    amount?: boolean
+    startTime?: boolean
+    userId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["onRampTranscation"]>
+
+  export type OnRampTranscationSelectScalar = {
+    id?: boolean
+    status?: boolean
+    token?: boolean
+    provider?: boolean
+    amount?: boolean
+    startTime?: boolean
+    userId?: boolean
+  }
+
+  export type OnRampTranscationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "status" | "token" | "provider" | "amount" | "startTime" | "userId", ExtArgs["result"]["onRampTranscation"]>
+  export type OnRampTranscationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type OnRampTranscationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type OnRampTranscationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $OnRampTranscationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "OnRampTranscation"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      status: $Enums.OnRampStatus
+      token: string
+      provider: string
+      amount: number
+      startTime: Date
+      userId: string
+    }, ExtArgs["result"]["onRampTranscation"]>
+    composites: {}
+  }
+
+  type OnRampTranscationGetPayload<S extends boolean | null | undefined | OnRampTranscationDefaultArgs> = $Result.GetResult<Prisma.$OnRampTranscationPayload, S>
+
+  type OnRampTranscationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<OnRampTranscationFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: OnRampTranscationCountAggregateInputType | true
+    }
+
+  export interface OnRampTranscationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['OnRampTranscation'], meta: { name: 'OnRampTranscation' } }
+    /**
+     * Find zero or one OnRampTranscation that matches the filter.
+     * @param {OnRampTranscationFindUniqueArgs} args - Arguments to find a OnRampTranscation
+     * @example
+     * // Get one OnRampTranscation
+     * const onRampTranscation = await prisma.onRampTranscation.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends OnRampTranscationFindUniqueArgs>(args: SelectSubset<T, OnRampTranscationFindUniqueArgs<ExtArgs>>): Prisma__OnRampTranscationClient<$Result.GetResult<Prisma.$OnRampTranscationPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one OnRampTranscation that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {OnRampTranscationFindUniqueOrThrowArgs} args - Arguments to find a OnRampTranscation
+     * @example
+     * // Get one OnRampTranscation
+     * const onRampTranscation = await prisma.onRampTranscation.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends OnRampTranscationFindUniqueOrThrowArgs>(args: SelectSubset<T, OnRampTranscationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__OnRampTranscationClient<$Result.GetResult<Prisma.$OnRampTranscationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first OnRampTranscation that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OnRampTranscationFindFirstArgs} args - Arguments to find a OnRampTranscation
+     * @example
+     * // Get one OnRampTranscation
+     * const onRampTranscation = await prisma.onRampTranscation.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends OnRampTranscationFindFirstArgs>(args?: SelectSubset<T, OnRampTranscationFindFirstArgs<ExtArgs>>): Prisma__OnRampTranscationClient<$Result.GetResult<Prisma.$OnRampTranscationPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first OnRampTranscation that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OnRampTranscationFindFirstOrThrowArgs} args - Arguments to find a OnRampTranscation
+     * @example
+     * // Get one OnRampTranscation
+     * const onRampTranscation = await prisma.onRampTranscation.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends OnRampTranscationFindFirstOrThrowArgs>(args?: SelectSubset<T, OnRampTranscationFindFirstOrThrowArgs<ExtArgs>>): Prisma__OnRampTranscationClient<$Result.GetResult<Prisma.$OnRampTranscationPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more OnRampTranscations that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OnRampTranscationFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all OnRampTranscations
+     * const onRampTranscations = await prisma.onRampTranscation.findMany()
+     * 
+     * // Get first 10 OnRampTranscations
+     * const onRampTranscations = await prisma.onRampTranscation.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const onRampTranscationWithIdOnly = await prisma.onRampTranscation.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends OnRampTranscationFindManyArgs>(args?: SelectSubset<T, OnRampTranscationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OnRampTranscationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a OnRampTranscation.
+     * @param {OnRampTranscationCreateArgs} args - Arguments to create a OnRampTranscation.
+     * @example
+     * // Create one OnRampTranscation
+     * const OnRampTranscation = await prisma.onRampTranscation.create({
+     *   data: {
+     *     // ... data to create a OnRampTranscation
+     *   }
+     * })
+     * 
+     */
+    create<T extends OnRampTranscationCreateArgs>(args: SelectSubset<T, OnRampTranscationCreateArgs<ExtArgs>>): Prisma__OnRampTranscationClient<$Result.GetResult<Prisma.$OnRampTranscationPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many OnRampTranscations.
+     * @param {OnRampTranscationCreateManyArgs} args - Arguments to create many OnRampTranscations.
+     * @example
+     * // Create many OnRampTranscations
+     * const onRampTranscation = await prisma.onRampTranscation.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends OnRampTranscationCreateManyArgs>(args?: SelectSubset<T, OnRampTranscationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many OnRampTranscations and returns the data saved in the database.
+     * @param {OnRampTranscationCreateManyAndReturnArgs} args - Arguments to create many OnRampTranscations.
+     * @example
+     * // Create many OnRampTranscations
+     * const onRampTranscation = await prisma.onRampTranscation.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many OnRampTranscations and only return the `id`
+     * const onRampTranscationWithIdOnly = await prisma.onRampTranscation.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends OnRampTranscationCreateManyAndReturnArgs>(args?: SelectSubset<T, OnRampTranscationCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OnRampTranscationPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a OnRampTranscation.
+     * @param {OnRampTranscationDeleteArgs} args - Arguments to delete one OnRampTranscation.
+     * @example
+     * // Delete one OnRampTranscation
+     * const OnRampTranscation = await prisma.onRampTranscation.delete({
+     *   where: {
+     *     // ... filter to delete one OnRampTranscation
+     *   }
+     * })
+     * 
+     */
+    delete<T extends OnRampTranscationDeleteArgs>(args: SelectSubset<T, OnRampTranscationDeleteArgs<ExtArgs>>): Prisma__OnRampTranscationClient<$Result.GetResult<Prisma.$OnRampTranscationPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one OnRampTranscation.
+     * @param {OnRampTranscationUpdateArgs} args - Arguments to update one OnRampTranscation.
+     * @example
+     * // Update one OnRampTranscation
+     * const onRampTranscation = await prisma.onRampTranscation.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends OnRampTranscationUpdateArgs>(args: SelectSubset<T, OnRampTranscationUpdateArgs<ExtArgs>>): Prisma__OnRampTranscationClient<$Result.GetResult<Prisma.$OnRampTranscationPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more OnRampTranscations.
+     * @param {OnRampTranscationDeleteManyArgs} args - Arguments to filter OnRampTranscations to delete.
+     * @example
+     * // Delete a few OnRampTranscations
+     * const { count } = await prisma.onRampTranscation.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends OnRampTranscationDeleteManyArgs>(args?: SelectSubset<T, OnRampTranscationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more OnRampTranscations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OnRampTranscationUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many OnRampTranscations
+     * const onRampTranscation = await prisma.onRampTranscation.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends OnRampTranscationUpdateManyArgs>(args: SelectSubset<T, OnRampTranscationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more OnRampTranscations and returns the data updated in the database.
+     * @param {OnRampTranscationUpdateManyAndReturnArgs} args - Arguments to update many OnRampTranscations.
+     * @example
+     * // Update many OnRampTranscations
+     * const onRampTranscation = await prisma.onRampTranscation.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more OnRampTranscations and only return the `id`
+     * const onRampTranscationWithIdOnly = await prisma.onRampTranscation.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends OnRampTranscationUpdateManyAndReturnArgs>(args: SelectSubset<T, OnRampTranscationUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OnRampTranscationPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one OnRampTranscation.
+     * @param {OnRampTranscationUpsertArgs} args - Arguments to update or create a OnRampTranscation.
+     * @example
+     * // Update or create a OnRampTranscation
+     * const onRampTranscation = await prisma.onRampTranscation.upsert({
+     *   create: {
+     *     // ... data to create a OnRampTranscation
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the OnRampTranscation we want to update
+     *   }
+     * })
+     */
+    upsert<T extends OnRampTranscationUpsertArgs>(args: SelectSubset<T, OnRampTranscationUpsertArgs<ExtArgs>>): Prisma__OnRampTranscationClient<$Result.GetResult<Prisma.$OnRampTranscationPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of OnRampTranscations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OnRampTranscationCountArgs} args - Arguments to filter OnRampTranscations to count.
+     * @example
+     * // Count the number of OnRampTranscations
+     * const count = await prisma.onRampTranscation.count({
+     *   where: {
+     *     // ... the filter for the OnRampTranscations we want to count
+     *   }
+     * })
+    **/
+    count<T extends OnRampTranscationCountArgs>(
+      args?: Subset<T, OnRampTranscationCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], OnRampTranscationCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a OnRampTranscation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OnRampTranscationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends OnRampTranscationAggregateArgs>(args: Subset<T, OnRampTranscationAggregateArgs>): Prisma.PrismaPromise<GetOnRampTranscationAggregateType<T>>
+
+    /**
+     * Group by OnRampTranscation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OnRampTranscationGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends OnRampTranscationGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: OnRampTranscationGroupByArgs['orderBy'] }
+        : { orderBy?: OnRampTranscationGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, OnRampTranscationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetOnRampTranscationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the OnRampTranscation model
+   */
+  readonly fields: OnRampTranscationFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for OnRampTranscation.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__OnRampTranscationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the OnRampTranscation model
+   */
+  interface OnRampTranscationFieldRefs {
+    readonly id: FieldRef<"OnRampTranscation", 'String'>
+    readonly status: FieldRef<"OnRampTranscation", 'OnRampStatus'>
+    readonly token: FieldRef<"OnRampTranscation", 'String'>
+    readonly provider: FieldRef<"OnRampTranscation", 'String'>
+    readonly amount: FieldRef<"OnRampTranscation", 'Int'>
+    readonly startTime: FieldRef<"OnRampTranscation", 'DateTime'>
+    readonly userId: FieldRef<"OnRampTranscation", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * OnRampTranscation findUnique
+   */
+  export type OnRampTranscationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OnRampTranscation
+     */
+    select?: OnRampTranscationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OnRampTranscation
+     */
+    omit?: OnRampTranscationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OnRampTranscationInclude<ExtArgs> | null
+    /**
+     * Filter, which OnRampTranscation to fetch.
+     */
+    where: OnRampTranscationWhereUniqueInput
+  }
+
+  /**
+   * OnRampTranscation findUniqueOrThrow
+   */
+  export type OnRampTranscationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OnRampTranscation
+     */
+    select?: OnRampTranscationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OnRampTranscation
+     */
+    omit?: OnRampTranscationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OnRampTranscationInclude<ExtArgs> | null
+    /**
+     * Filter, which OnRampTranscation to fetch.
+     */
+    where: OnRampTranscationWhereUniqueInput
+  }
+
+  /**
+   * OnRampTranscation findFirst
+   */
+  export type OnRampTranscationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OnRampTranscation
+     */
+    select?: OnRampTranscationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OnRampTranscation
+     */
+    omit?: OnRampTranscationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OnRampTranscationInclude<ExtArgs> | null
+    /**
+     * Filter, which OnRampTranscation to fetch.
+     */
+    where?: OnRampTranscationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OnRampTranscations to fetch.
+     */
+    orderBy?: OnRampTranscationOrderByWithRelationInput | OnRampTranscationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for OnRampTranscations.
+     */
+    cursor?: OnRampTranscationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OnRampTranscations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OnRampTranscations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of OnRampTranscations.
+     */
+    distinct?: OnRampTranscationScalarFieldEnum | OnRampTranscationScalarFieldEnum[]
+  }
+
+  /**
+   * OnRampTranscation findFirstOrThrow
+   */
+  export type OnRampTranscationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OnRampTranscation
+     */
+    select?: OnRampTranscationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OnRampTranscation
+     */
+    omit?: OnRampTranscationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OnRampTranscationInclude<ExtArgs> | null
+    /**
+     * Filter, which OnRampTranscation to fetch.
+     */
+    where?: OnRampTranscationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OnRampTranscations to fetch.
+     */
+    orderBy?: OnRampTranscationOrderByWithRelationInput | OnRampTranscationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for OnRampTranscations.
+     */
+    cursor?: OnRampTranscationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OnRampTranscations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OnRampTranscations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of OnRampTranscations.
+     */
+    distinct?: OnRampTranscationScalarFieldEnum | OnRampTranscationScalarFieldEnum[]
+  }
+
+  /**
+   * OnRampTranscation findMany
+   */
+  export type OnRampTranscationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OnRampTranscation
+     */
+    select?: OnRampTranscationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OnRampTranscation
+     */
+    omit?: OnRampTranscationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OnRampTranscationInclude<ExtArgs> | null
+    /**
+     * Filter, which OnRampTranscations to fetch.
+     */
+    where?: OnRampTranscationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OnRampTranscations to fetch.
+     */
+    orderBy?: OnRampTranscationOrderByWithRelationInput | OnRampTranscationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing OnRampTranscations.
+     */
+    cursor?: OnRampTranscationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OnRampTranscations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OnRampTranscations.
+     */
+    skip?: number
+    distinct?: OnRampTranscationScalarFieldEnum | OnRampTranscationScalarFieldEnum[]
+  }
+
+  /**
+   * OnRampTranscation create
+   */
+  export type OnRampTranscationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OnRampTranscation
+     */
+    select?: OnRampTranscationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OnRampTranscation
+     */
+    omit?: OnRampTranscationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OnRampTranscationInclude<ExtArgs> | null
+    /**
+     * The data needed to create a OnRampTranscation.
+     */
+    data: XOR<OnRampTranscationCreateInput, OnRampTranscationUncheckedCreateInput>
+  }
+
+  /**
+   * OnRampTranscation createMany
+   */
+  export type OnRampTranscationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many OnRampTranscations.
+     */
+    data: OnRampTranscationCreateManyInput | OnRampTranscationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * OnRampTranscation createManyAndReturn
+   */
+  export type OnRampTranscationCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OnRampTranscation
+     */
+    select?: OnRampTranscationSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the OnRampTranscation
+     */
+    omit?: OnRampTranscationOmit<ExtArgs> | null
+    /**
+     * The data used to create many OnRampTranscations.
+     */
+    data: OnRampTranscationCreateManyInput | OnRampTranscationCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OnRampTranscationIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * OnRampTranscation update
+   */
+  export type OnRampTranscationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OnRampTranscation
+     */
+    select?: OnRampTranscationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OnRampTranscation
+     */
+    omit?: OnRampTranscationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OnRampTranscationInclude<ExtArgs> | null
+    /**
+     * The data needed to update a OnRampTranscation.
+     */
+    data: XOR<OnRampTranscationUpdateInput, OnRampTranscationUncheckedUpdateInput>
+    /**
+     * Choose, which OnRampTranscation to update.
+     */
+    where: OnRampTranscationWhereUniqueInput
+  }
+
+  /**
+   * OnRampTranscation updateMany
+   */
+  export type OnRampTranscationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update OnRampTranscations.
+     */
+    data: XOR<OnRampTranscationUpdateManyMutationInput, OnRampTranscationUncheckedUpdateManyInput>
+    /**
+     * Filter which OnRampTranscations to update
+     */
+    where?: OnRampTranscationWhereInput
+    /**
+     * Limit how many OnRampTranscations to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * OnRampTranscation updateManyAndReturn
+   */
+  export type OnRampTranscationUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OnRampTranscation
+     */
+    select?: OnRampTranscationSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the OnRampTranscation
+     */
+    omit?: OnRampTranscationOmit<ExtArgs> | null
+    /**
+     * The data used to update OnRampTranscations.
+     */
+    data: XOR<OnRampTranscationUpdateManyMutationInput, OnRampTranscationUncheckedUpdateManyInput>
+    /**
+     * Filter which OnRampTranscations to update
+     */
+    where?: OnRampTranscationWhereInput
+    /**
+     * Limit how many OnRampTranscations to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OnRampTranscationIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * OnRampTranscation upsert
+   */
+  export type OnRampTranscationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OnRampTranscation
+     */
+    select?: OnRampTranscationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OnRampTranscation
+     */
+    omit?: OnRampTranscationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OnRampTranscationInclude<ExtArgs> | null
+    /**
+     * The filter to search for the OnRampTranscation to update in case it exists.
+     */
+    where: OnRampTranscationWhereUniqueInput
+    /**
+     * In case the OnRampTranscation found by the `where` argument doesn't exist, create a new OnRampTranscation with this data.
+     */
+    create: XOR<OnRampTranscationCreateInput, OnRampTranscationUncheckedCreateInput>
+    /**
+     * In case the OnRampTranscation was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<OnRampTranscationUpdateInput, OnRampTranscationUncheckedUpdateInput>
+  }
+
+  /**
+   * OnRampTranscation delete
+   */
+  export type OnRampTranscationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OnRampTranscation
+     */
+    select?: OnRampTranscationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OnRampTranscation
+     */
+    omit?: OnRampTranscationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OnRampTranscationInclude<ExtArgs> | null
+    /**
+     * Filter which OnRampTranscation to delete.
+     */
+    where: OnRampTranscationWhereUniqueInput
+  }
+
+  /**
+   * OnRampTranscation deleteMany
+   */
+  export type OnRampTranscationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which OnRampTranscations to delete
+     */
+    where?: OnRampTranscationWhereInput
+    /**
+     * Limit how many OnRampTranscations to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * OnRampTranscation without action
+   */
+  export type OnRampTranscationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OnRampTranscation
+     */
+    select?: OnRampTranscationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OnRampTranscation
+     */
+    omit?: OnRampTranscationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OnRampTranscationInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Balance
+   */
+
+  export type AggregateBalance = {
+    _count: BalanceCountAggregateOutputType | null
+    _avg: BalanceAvgAggregateOutputType | null
+    _sum: BalanceSumAggregateOutputType | null
+    _min: BalanceMinAggregateOutputType | null
+    _max: BalanceMaxAggregateOutputType | null
+  }
+
+  export type BalanceAvgAggregateOutputType = {
+    amount: number | null
+    locked: number | null
+  }
+
+  export type BalanceSumAggregateOutputType = {
+    amount: number | null
+    locked: number | null
+  }
+
+  export type BalanceMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    amount: number | null
+    locked: number | null
+  }
+
+  export type BalanceMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    amount: number | null
+    locked: number | null
+  }
+
+  export type BalanceCountAggregateOutputType = {
+    id: number
+    userId: number
+    amount: number
+    locked: number
+    _all: number
+  }
+
+
+  export type BalanceAvgAggregateInputType = {
+    amount?: true
+    locked?: true
+  }
+
+  export type BalanceSumAggregateInputType = {
+    amount?: true
+    locked?: true
+  }
+
+  export type BalanceMinAggregateInputType = {
+    id?: true
+    userId?: true
+    amount?: true
+    locked?: true
+  }
+
+  export type BalanceMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    amount?: true
+    locked?: true
+  }
+
+  export type BalanceCountAggregateInputType = {
+    id?: true
+    userId?: true
+    amount?: true
+    locked?: true
+    _all?: true
+  }
+
+  export type BalanceAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Balance to aggregate.
+     */
+    where?: BalanceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Balances to fetch.
+     */
+    orderBy?: BalanceOrderByWithRelationInput | BalanceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: BalanceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Balances from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Balances.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Balances
+    **/
+    _count?: true | BalanceCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: BalanceAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: BalanceSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: BalanceMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: BalanceMaxAggregateInputType
+  }
+
+  export type GetBalanceAggregateType<T extends BalanceAggregateArgs> = {
+        [P in keyof T & keyof AggregateBalance]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateBalance[P]>
+      : GetScalarType<T[P], AggregateBalance[P]>
+  }
+
+
+
+
+  export type BalanceGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BalanceWhereInput
+    orderBy?: BalanceOrderByWithAggregationInput | BalanceOrderByWithAggregationInput[]
+    by: BalanceScalarFieldEnum[] | BalanceScalarFieldEnum
+    having?: BalanceScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: BalanceCountAggregateInputType | true
+    _avg?: BalanceAvgAggregateInputType
+    _sum?: BalanceSumAggregateInputType
+    _min?: BalanceMinAggregateInputType
+    _max?: BalanceMaxAggregateInputType
+  }
+
+  export type BalanceGroupByOutputType = {
+    id: string
+    userId: string
+    amount: number
+    locked: number
+    _count: BalanceCountAggregateOutputType | null
+    _avg: BalanceAvgAggregateOutputType | null
+    _sum: BalanceSumAggregateOutputType | null
+    _min: BalanceMinAggregateOutputType | null
+    _max: BalanceMaxAggregateOutputType | null
+  }
+
+  type GetBalanceGroupByPayload<T extends BalanceGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<BalanceGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof BalanceGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], BalanceGroupByOutputType[P]>
+            : GetScalarType<T[P], BalanceGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type BalanceSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    amount?: boolean
+    locked?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["balance"]>
+
+  export type BalanceSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    amount?: boolean
+    locked?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["balance"]>
+
+  export type BalanceSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    amount?: boolean
+    locked?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["balance"]>
+
+  export type BalanceSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    amount?: boolean
+    locked?: boolean
+  }
+
+  export type BalanceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "amount" | "locked", ExtArgs["result"]["balance"]>
+  export type BalanceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type BalanceIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type BalanceIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $BalancePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Balance"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      amount: number
+      locked: number
+    }, ExtArgs["result"]["balance"]>
+    composites: {}
+  }
+
+  type BalanceGetPayload<S extends boolean | null | undefined | BalanceDefaultArgs> = $Result.GetResult<Prisma.$BalancePayload, S>
+
+  type BalanceCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<BalanceFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: BalanceCountAggregateInputType | true
+    }
+
+  export interface BalanceDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Balance'], meta: { name: 'Balance' } }
+    /**
+     * Find zero or one Balance that matches the filter.
+     * @param {BalanceFindUniqueArgs} args - Arguments to find a Balance
+     * @example
+     * // Get one Balance
+     * const balance = await prisma.balance.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends BalanceFindUniqueArgs>(args: SelectSubset<T, BalanceFindUniqueArgs<ExtArgs>>): Prisma__BalanceClient<$Result.GetResult<Prisma.$BalancePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Balance that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {BalanceFindUniqueOrThrowArgs} args - Arguments to find a Balance
+     * @example
+     * // Get one Balance
+     * const balance = await prisma.balance.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends BalanceFindUniqueOrThrowArgs>(args: SelectSubset<T, BalanceFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BalanceClient<$Result.GetResult<Prisma.$BalancePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Balance that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BalanceFindFirstArgs} args - Arguments to find a Balance
+     * @example
+     * // Get one Balance
+     * const balance = await prisma.balance.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends BalanceFindFirstArgs>(args?: SelectSubset<T, BalanceFindFirstArgs<ExtArgs>>): Prisma__BalanceClient<$Result.GetResult<Prisma.$BalancePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Balance that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BalanceFindFirstOrThrowArgs} args - Arguments to find a Balance
+     * @example
+     * // Get one Balance
+     * const balance = await prisma.balance.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends BalanceFindFirstOrThrowArgs>(args?: SelectSubset<T, BalanceFindFirstOrThrowArgs<ExtArgs>>): Prisma__BalanceClient<$Result.GetResult<Prisma.$BalancePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Balances that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BalanceFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Balances
+     * const balances = await prisma.balance.findMany()
+     * 
+     * // Get first 10 Balances
+     * const balances = await prisma.balance.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const balanceWithIdOnly = await prisma.balance.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends BalanceFindManyArgs>(args?: SelectSubset<T, BalanceFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BalancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Balance.
+     * @param {BalanceCreateArgs} args - Arguments to create a Balance.
+     * @example
+     * // Create one Balance
+     * const Balance = await prisma.balance.create({
+     *   data: {
+     *     // ... data to create a Balance
+     *   }
+     * })
+     * 
+     */
+    create<T extends BalanceCreateArgs>(args: SelectSubset<T, BalanceCreateArgs<ExtArgs>>): Prisma__BalanceClient<$Result.GetResult<Prisma.$BalancePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Balances.
+     * @param {BalanceCreateManyArgs} args - Arguments to create many Balances.
+     * @example
+     * // Create many Balances
+     * const balance = await prisma.balance.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends BalanceCreateManyArgs>(args?: SelectSubset<T, BalanceCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Balances and returns the data saved in the database.
+     * @param {BalanceCreateManyAndReturnArgs} args - Arguments to create many Balances.
+     * @example
+     * // Create many Balances
+     * const balance = await prisma.balance.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Balances and only return the `id`
+     * const balanceWithIdOnly = await prisma.balance.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends BalanceCreateManyAndReturnArgs>(args?: SelectSubset<T, BalanceCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BalancePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Balance.
+     * @param {BalanceDeleteArgs} args - Arguments to delete one Balance.
+     * @example
+     * // Delete one Balance
+     * const Balance = await prisma.balance.delete({
+     *   where: {
+     *     // ... filter to delete one Balance
+     *   }
+     * })
+     * 
+     */
+    delete<T extends BalanceDeleteArgs>(args: SelectSubset<T, BalanceDeleteArgs<ExtArgs>>): Prisma__BalanceClient<$Result.GetResult<Prisma.$BalancePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Balance.
+     * @param {BalanceUpdateArgs} args - Arguments to update one Balance.
+     * @example
+     * // Update one Balance
+     * const balance = await prisma.balance.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends BalanceUpdateArgs>(args: SelectSubset<T, BalanceUpdateArgs<ExtArgs>>): Prisma__BalanceClient<$Result.GetResult<Prisma.$BalancePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Balances.
+     * @param {BalanceDeleteManyArgs} args - Arguments to filter Balances to delete.
+     * @example
+     * // Delete a few Balances
+     * const { count } = await prisma.balance.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends BalanceDeleteManyArgs>(args?: SelectSubset<T, BalanceDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Balances.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BalanceUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Balances
+     * const balance = await prisma.balance.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends BalanceUpdateManyArgs>(args: SelectSubset<T, BalanceUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Balances and returns the data updated in the database.
+     * @param {BalanceUpdateManyAndReturnArgs} args - Arguments to update many Balances.
+     * @example
+     * // Update many Balances
+     * const balance = await prisma.balance.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Balances and only return the `id`
+     * const balanceWithIdOnly = await prisma.balance.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends BalanceUpdateManyAndReturnArgs>(args: SelectSubset<T, BalanceUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BalancePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Balance.
+     * @param {BalanceUpsertArgs} args - Arguments to update or create a Balance.
+     * @example
+     * // Update or create a Balance
+     * const balance = await prisma.balance.upsert({
+     *   create: {
+     *     // ... data to create a Balance
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Balance we want to update
+     *   }
+     * })
+     */
+    upsert<T extends BalanceUpsertArgs>(args: SelectSubset<T, BalanceUpsertArgs<ExtArgs>>): Prisma__BalanceClient<$Result.GetResult<Prisma.$BalancePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Balances.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BalanceCountArgs} args - Arguments to filter Balances to count.
+     * @example
+     * // Count the number of Balances
+     * const count = await prisma.balance.count({
+     *   where: {
+     *     // ... the filter for the Balances we want to count
+     *   }
+     * })
+    **/
+    count<T extends BalanceCountArgs>(
+      args?: Subset<T, BalanceCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], BalanceCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Balance.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BalanceAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends BalanceAggregateArgs>(args: Subset<T, BalanceAggregateArgs>): Prisma.PrismaPromise<GetBalanceAggregateType<T>>
+
+    /**
+     * Group by Balance.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BalanceGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends BalanceGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: BalanceGroupByArgs['orderBy'] }
+        : { orderBy?: BalanceGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, BalanceGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBalanceGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Balance model
+   */
+  readonly fields: BalanceFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Balance.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__BalanceClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Balance model
+   */
+  interface BalanceFieldRefs {
+    readonly id: FieldRef<"Balance", 'String'>
+    readonly userId: FieldRef<"Balance", 'String'>
+    readonly amount: FieldRef<"Balance", 'Int'>
+    readonly locked: FieldRef<"Balance", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Balance findUnique
+   */
+  export type BalanceFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Balance
+     */
+    select?: BalanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Balance
+     */
+    omit?: BalanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BalanceInclude<ExtArgs> | null
+    /**
+     * Filter, which Balance to fetch.
+     */
+    where: BalanceWhereUniqueInput
+  }
+
+  /**
+   * Balance findUniqueOrThrow
+   */
+  export type BalanceFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Balance
+     */
+    select?: BalanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Balance
+     */
+    omit?: BalanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BalanceInclude<ExtArgs> | null
+    /**
+     * Filter, which Balance to fetch.
+     */
+    where: BalanceWhereUniqueInput
+  }
+
+  /**
+   * Balance findFirst
+   */
+  export type BalanceFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Balance
+     */
+    select?: BalanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Balance
+     */
+    omit?: BalanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BalanceInclude<ExtArgs> | null
+    /**
+     * Filter, which Balance to fetch.
+     */
+    where?: BalanceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Balances to fetch.
+     */
+    orderBy?: BalanceOrderByWithRelationInput | BalanceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Balances.
+     */
+    cursor?: BalanceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Balances from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Balances.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Balances.
+     */
+    distinct?: BalanceScalarFieldEnum | BalanceScalarFieldEnum[]
+  }
+
+  /**
+   * Balance findFirstOrThrow
+   */
+  export type BalanceFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Balance
+     */
+    select?: BalanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Balance
+     */
+    omit?: BalanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BalanceInclude<ExtArgs> | null
+    /**
+     * Filter, which Balance to fetch.
+     */
+    where?: BalanceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Balances to fetch.
+     */
+    orderBy?: BalanceOrderByWithRelationInput | BalanceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Balances.
+     */
+    cursor?: BalanceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Balances from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Balances.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Balances.
+     */
+    distinct?: BalanceScalarFieldEnum | BalanceScalarFieldEnum[]
+  }
+
+  /**
+   * Balance findMany
+   */
+  export type BalanceFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Balance
+     */
+    select?: BalanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Balance
+     */
+    omit?: BalanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BalanceInclude<ExtArgs> | null
+    /**
+     * Filter, which Balances to fetch.
+     */
+    where?: BalanceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Balances to fetch.
+     */
+    orderBy?: BalanceOrderByWithRelationInput | BalanceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Balances.
+     */
+    cursor?: BalanceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Balances from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Balances.
+     */
+    skip?: number
+    distinct?: BalanceScalarFieldEnum | BalanceScalarFieldEnum[]
+  }
+
+  /**
+   * Balance create
+   */
+  export type BalanceCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Balance
+     */
+    select?: BalanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Balance
+     */
+    omit?: BalanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BalanceInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Balance.
+     */
+    data: XOR<BalanceCreateInput, BalanceUncheckedCreateInput>
+  }
+
+  /**
+   * Balance createMany
+   */
+  export type BalanceCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Balances.
+     */
+    data: BalanceCreateManyInput | BalanceCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Balance createManyAndReturn
+   */
+  export type BalanceCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Balance
+     */
+    select?: BalanceSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Balance
+     */
+    omit?: BalanceOmit<ExtArgs> | null
+    /**
+     * The data used to create many Balances.
+     */
+    data: BalanceCreateManyInput | BalanceCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BalanceIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Balance update
+   */
+  export type BalanceUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Balance
+     */
+    select?: BalanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Balance
+     */
+    omit?: BalanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BalanceInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Balance.
+     */
+    data: XOR<BalanceUpdateInput, BalanceUncheckedUpdateInput>
+    /**
+     * Choose, which Balance to update.
+     */
+    where: BalanceWhereUniqueInput
+  }
+
+  /**
+   * Balance updateMany
+   */
+  export type BalanceUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Balances.
+     */
+    data: XOR<BalanceUpdateManyMutationInput, BalanceUncheckedUpdateManyInput>
+    /**
+     * Filter which Balances to update
+     */
+    where?: BalanceWhereInput
+    /**
+     * Limit how many Balances to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Balance updateManyAndReturn
+   */
+  export type BalanceUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Balance
+     */
+    select?: BalanceSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Balance
+     */
+    omit?: BalanceOmit<ExtArgs> | null
+    /**
+     * The data used to update Balances.
+     */
+    data: XOR<BalanceUpdateManyMutationInput, BalanceUncheckedUpdateManyInput>
+    /**
+     * Filter which Balances to update
+     */
+    where?: BalanceWhereInput
+    /**
+     * Limit how many Balances to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BalanceIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Balance upsert
+   */
+  export type BalanceUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Balance
+     */
+    select?: BalanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Balance
+     */
+    omit?: BalanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BalanceInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Balance to update in case it exists.
+     */
+    where: BalanceWhereUniqueInput
+    /**
+     * In case the Balance found by the `where` argument doesn't exist, create a new Balance with this data.
+     */
+    create: XOR<BalanceCreateInput, BalanceUncheckedCreateInput>
+    /**
+     * In case the Balance was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<BalanceUpdateInput, BalanceUncheckedUpdateInput>
+  }
+
+  /**
+   * Balance delete
+   */
+  export type BalanceDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Balance
+     */
+    select?: BalanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Balance
+     */
+    omit?: BalanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BalanceInclude<ExtArgs> | null
+    /**
+     * Filter which Balance to delete.
+     */
+    where: BalanceWhereUniqueInput
+  }
+
+  /**
+   * Balance deleteMany
+   */
+  export type BalanceDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Balances to delete
+     */
+    where?: BalanceWhereInput
+    /**
+     * Limit how many Balances to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Balance without action
+   */
+  export type BalanceDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Balance
+     */
+    select?: BalanceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Balance
+     */
+    omit?: BalanceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BalanceInclude<ExtArgs> | null
   }
 
 
@@ -6814,6 +9289,29 @@ export namespace Prisma {
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+  export const OnRampTranscationScalarFieldEnum: {
+    id: 'id',
+    status: 'status',
+    token: 'token',
+    provider: 'provider',
+    amount: 'amount',
+    startTime: 'startTime',
+    userId: 'userId'
+  };
+
+  export type OnRampTranscationScalarFieldEnum = (typeof OnRampTranscationScalarFieldEnum)[keyof typeof OnRampTranscationScalarFieldEnum]
+
+
+  export const BalanceScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    amount: 'amount',
+    locked: 'locked'
+  };
+
+  export type BalanceScalarFieldEnum = (typeof BalanceScalarFieldEnum)[keyof typeof BalanceScalarFieldEnum]
+
+
   export const AccountScalarFieldEnum: {
     userId: 'userId',
     type: 'type',
@@ -6925,6 +9423,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'OnRampStatus'
+   */
+  export type EnumOnRampStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OnRampStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'OnRampStatus[]'
+   */
+  export type ListEnumOnRampStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'OnRampStatus[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -6973,6 +9485,8 @@ export namespace Prisma {
     image?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
+    OnRampTranscation?: OnRampTranscationListRelationFilter
+    Balance?: BalanceListRelationFilter
     accounts?: AccountListRelationFilter
     sessions?: SessionListRelationFilter
     Authenticator?: AuthenticatorListRelationFilter
@@ -6986,6 +9500,8 @@ export namespace Prisma {
     image?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    OnRampTranscation?: OnRampTranscationOrderByRelationAggregateInput
+    Balance?: BalanceOrderByRelationAggregateInput
     accounts?: AccountOrderByRelationAggregateInput
     sessions?: SessionOrderByRelationAggregateInput
     Authenticator?: AuthenticatorOrderByRelationAggregateInput
@@ -7002,6 +9518,8 @@ export namespace Prisma {
     image?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
+    OnRampTranscation?: OnRampTranscationListRelationFilter
+    Balance?: BalanceListRelationFilter
     accounts?: AccountListRelationFilter
     sessions?: SessionListRelationFilter
     Authenticator?: AuthenticatorListRelationFilter
@@ -7031,6 +9549,125 @@ export namespace Prisma {
     image?: StringNullableWithAggregatesFilter<"User"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
+  }
+
+  export type OnRampTranscationWhereInput = {
+    AND?: OnRampTranscationWhereInput | OnRampTranscationWhereInput[]
+    OR?: OnRampTranscationWhereInput[]
+    NOT?: OnRampTranscationWhereInput | OnRampTranscationWhereInput[]
+    id?: StringFilter<"OnRampTranscation"> | string
+    status?: EnumOnRampStatusFilter<"OnRampTranscation"> | $Enums.OnRampStatus
+    token?: StringFilter<"OnRampTranscation"> | string
+    provider?: StringFilter<"OnRampTranscation"> | string
+    amount?: IntFilter<"OnRampTranscation"> | number
+    startTime?: DateTimeFilter<"OnRampTranscation"> | Date | string
+    userId?: StringFilter<"OnRampTranscation"> | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type OnRampTranscationOrderByWithRelationInput = {
+    id?: SortOrder
+    status?: SortOrder
+    token?: SortOrder
+    provider?: SortOrder
+    amount?: SortOrder
+    startTime?: SortOrder
+    userId?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type OnRampTranscationWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    token?: string
+    AND?: OnRampTranscationWhereInput | OnRampTranscationWhereInput[]
+    OR?: OnRampTranscationWhereInput[]
+    NOT?: OnRampTranscationWhereInput | OnRampTranscationWhereInput[]
+    status?: EnumOnRampStatusFilter<"OnRampTranscation"> | $Enums.OnRampStatus
+    provider?: StringFilter<"OnRampTranscation"> | string
+    amount?: IntFilter<"OnRampTranscation"> | number
+    startTime?: DateTimeFilter<"OnRampTranscation"> | Date | string
+    userId?: StringFilter<"OnRampTranscation"> | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "token">
+
+  export type OnRampTranscationOrderByWithAggregationInput = {
+    id?: SortOrder
+    status?: SortOrder
+    token?: SortOrder
+    provider?: SortOrder
+    amount?: SortOrder
+    startTime?: SortOrder
+    userId?: SortOrder
+    _count?: OnRampTranscationCountOrderByAggregateInput
+    _avg?: OnRampTranscationAvgOrderByAggregateInput
+    _max?: OnRampTranscationMaxOrderByAggregateInput
+    _min?: OnRampTranscationMinOrderByAggregateInput
+    _sum?: OnRampTranscationSumOrderByAggregateInput
+  }
+
+  export type OnRampTranscationScalarWhereWithAggregatesInput = {
+    AND?: OnRampTranscationScalarWhereWithAggregatesInput | OnRampTranscationScalarWhereWithAggregatesInput[]
+    OR?: OnRampTranscationScalarWhereWithAggregatesInput[]
+    NOT?: OnRampTranscationScalarWhereWithAggregatesInput | OnRampTranscationScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"OnRampTranscation"> | string
+    status?: EnumOnRampStatusWithAggregatesFilter<"OnRampTranscation"> | $Enums.OnRampStatus
+    token?: StringWithAggregatesFilter<"OnRampTranscation"> | string
+    provider?: StringWithAggregatesFilter<"OnRampTranscation"> | string
+    amount?: IntWithAggregatesFilter<"OnRampTranscation"> | number
+    startTime?: DateTimeWithAggregatesFilter<"OnRampTranscation"> | Date | string
+    userId?: StringWithAggregatesFilter<"OnRampTranscation"> | string
+  }
+
+  export type BalanceWhereInput = {
+    AND?: BalanceWhereInput | BalanceWhereInput[]
+    OR?: BalanceWhereInput[]
+    NOT?: BalanceWhereInput | BalanceWhereInput[]
+    id?: StringFilter<"Balance"> | string
+    userId?: StringFilter<"Balance"> | string
+    amount?: IntFilter<"Balance"> | number
+    locked?: IntFilter<"Balance"> | number
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type BalanceOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    amount?: SortOrder
+    locked?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type BalanceWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    userId?: string
+    AND?: BalanceWhereInput | BalanceWhereInput[]
+    OR?: BalanceWhereInput[]
+    NOT?: BalanceWhereInput | BalanceWhereInput[]
+    amount?: IntFilter<"Balance"> | number
+    locked?: IntFilter<"Balance"> | number
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "userId">
+
+  export type BalanceOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    amount?: SortOrder
+    locked?: SortOrder
+    _count?: BalanceCountOrderByAggregateInput
+    _avg?: BalanceAvgOrderByAggregateInput
+    _max?: BalanceMaxOrderByAggregateInput
+    _min?: BalanceMinOrderByAggregateInput
+    _sum?: BalanceSumOrderByAggregateInput
+  }
+
+  export type BalanceScalarWhereWithAggregatesInput = {
+    AND?: BalanceScalarWhereWithAggregatesInput | BalanceScalarWhereWithAggregatesInput[]
+    OR?: BalanceScalarWhereWithAggregatesInput[]
+    NOT?: BalanceScalarWhereWithAggregatesInput | BalanceScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Balance"> | string
+    userId?: StringWithAggregatesFilter<"Balance"> | string
+    amount?: IntWithAggregatesFilter<"Balance"> | number
+    locked?: IntWithAggregatesFilter<"Balance"> | number
   }
 
   export type AccountWhereInput = {
@@ -7310,6 +9947,8 @@ export namespace Prisma {
     image?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    OnRampTranscation?: OnRampTranscationCreateNestedManyWithoutUserInput
+    Balance?: BalanceCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     Authenticator?: AuthenticatorCreateNestedManyWithoutUserInput
@@ -7323,6 +9962,8 @@ export namespace Prisma {
     image?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    OnRampTranscation?: OnRampTranscationUncheckedCreateNestedManyWithoutUserInput
+    Balance?: BalanceUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     Authenticator?: AuthenticatorUncheckedCreateNestedManyWithoutUserInput
@@ -7336,6 +9977,8 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    OnRampTranscation?: OnRampTranscationUpdateManyWithoutUserNestedInput
+    Balance?: BalanceUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     Authenticator?: AuthenticatorUpdateManyWithoutUserNestedInput
@@ -7349,6 +9992,8 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    OnRampTranscation?: OnRampTranscationUncheckedUpdateManyWithoutUserNestedInput
+    Balance?: BalanceUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     Authenticator?: AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
@@ -7382,6 +10027,123 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OnRampTranscationCreateInput = {
+    id?: string
+    status: $Enums.OnRampStatus
+    token: string
+    provider: string
+    amount: number
+    startTime: Date | string
+    user: UserCreateNestedOneWithoutOnRampTranscationInput
+  }
+
+  export type OnRampTranscationUncheckedCreateInput = {
+    id?: string
+    status: $Enums.OnRampStatus
+    token: string
+    provider: string
+    amount: number
+    startTime: Date | string
+    userId: string
+  }
+
+  export type OnRampTranscationUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumOnRampStatusFieldUpdateOperationsInput | $Enums.OnRampStatus
+    token?: StringFieldUpdateOperationsInput | string
+    provider?: StringFieldUpdateOperationsInput | string
+    amount?: IntFieldUpdateOperationsInput | number
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutOnRampTranscationNestedInput
+  }
+
+  export type OnRampTranscationUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumOnRampStatusFieldUpdateOperationsInput | $Enums.OnRampStatus
+    token?: StringFieldUpdateOperationsInput | string
+    provider?: StringFieldUpdateOperationsInput | string
+    amount?: IntFieldUpdateOperationsInput | number
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type OnRampTranscationCreateManyInput = {
+    id?: string
+    status: $Enums.OnRampStatus
+    token: string
+    provider: string
+    amount: number
+    startTime: Date | string
+    userId: string
+  }
+
+  export type OnRampTranscationUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumOnRampStatusFieldUpdateOperationsInput | $Enums.OnRampStatus
+    token?: StringFieldUpdateOperationsInput | string
+    provider?: StringFieldUpdateOperationsInput | string
+    amount?: IntFieldUpdateOperationsInput | number
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OnRampTranscationUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumOnRampStatusFieldUpdateOperationsInput | $Enums.OnRampStatus
+    token?: StringFieldUpdateOperationsInput | string
+    provider?: StringFieldUpdateOperationsInput | string
+    amount?: IntFieldUpdateOperationsInput | number
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type BalanceCreateInput = {
+    id?: string
+    amount: number
+    locked: number
+    user: UserCreateNestedOneWithoutBalanceInput
+  }
+
+  export type BalanceUncheckedCreateInput = {
+    id?: string
+    userId: string
+    amount: number
+    locked: number
+  }
+
+  export type BalanceUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: IntFieldUpdateOperationsInput | number
+    locked?: IntFieldUpdateOperationsInput | number
+    user?: UserUpdateOneRequiredWithoutBalanceNestedInput
+  }
+
+  export type BalanceUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    amount?: IntFieldUpdateOperationsInput | number
+    locked?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type BalanceCreateManyInput = {
+    id?: string
+    userId: string
+    amount: number
+    locked: number
+  }
+
+  export type BalanceUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: IntFieldUpdateOperationsInput | number
+    locked?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type BalanceUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    amount?: IntFieldUpdateOperationsInput | number
+    locked?: IntFieldUpdateOperationsInput | number
   }
 
   export type AccountCreateInput = {
@@ -7720,6 +10482,18 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type OnRampTranscationListRelationFilter = {
+    every?: OnRampTranscationWhereInput
+    some?: OnRampTranscationWhereInput
+    none?: OnRampTranscationWhereInput
+  }
+
+  export type BalanceListRelationFilter = {
+    every?: BalanceWhereInput
+    some?: BalanceWhereInput
+    none?: BalanceWhereInput
+  }
+
   export type AccountListRelationFilter = {
     every?: AccountWhereInput
     some?: AccountWhereInput
@@ -7741,6 +10515,14 @@ export namespace Prisma {
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
+  }
+
+  export type OnRampTranscationOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type BalanceOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type AccountOrderByRelationAggregateInput = {
@@ -7849,6 +10631,124 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type EnumOnRampStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.OnRampStatus | EnumOnRampStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.OnRampStatus[] | ListEnumOnRampStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.OnRampStatus[] | ListEnumOnRampStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumOnRampStatusFilter<$PrismaModel> | $Enums.OnRampStatus
+  }
+
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type UserScalarRelationFilter = {
+    is?: UserWhereInput
+    isNot?: UserWhereInput
+  }
+
+  export type OnRampTranscationCountOrderByAggregateInput = {
+    id?: SortOrder
+    status?: SortOrder
+    token?: SortOrder
+    provider?: SortOrder
+    amount?: SortOrder
+    startTime?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type OnRampTranscationAvgOrderByAggregateInput = {
+    amount?: SortOrder
+  }
+
+  export type OnRampTranscationMaxOrderByAggregateInput = {
+    id?: SortOrder
+    status?: SortOrder
+    token?: SortOrder
+    provider?: SortOrder
+    amount?: SortOrder
+    startTime?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type OnRampTranscationMinOrderByAggregateInput = {
+    id?: SortOrder
+    status?: SortOrder
+    token?: SortOrder
+    provider?: SortOrder
+    amount?: SortOrder
+    startTime?: SortOrder
+    userId?: SortOrder
+  }
+
+  export type OnRampTranscationSumOrderByAggregateInput = {
+    amount?: SortOrder
+  }
+
+  export type EnumOnRampStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.OnRampStatus | EnumOnRampStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.OnRampStatus[] | ListEnumOnRampStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.OnRampStatus[] | ListEnumOnRampStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumOnRampStatusWithAggregatesFilter<$PrismaModel> | $Enums.OnRampStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumOnRampStatusFilter<$PrismaModel>
+    _max?: NestedEnumOnRampStatusFilter<$PrismaModel>
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type BalanceCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    amount?: SortOrder
+    locked?: SortOrder
+  }
+
+  export type BalanceAvgOrderByAggregateInput = {
+    amount?: SortOrder
+    locked?: SortOrder
+  }
+
+  export type BalanceMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    amount?: SortOrder
+    locked?: SortOrder
+  }
+
+  export type BalanceMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    amount?: SortOrder
+    locked?: SortOrder
+  }
+
+  export type BalanceSumOrderByAggregateInput = {
+    amount?: SortOrder
+    locked?: SortOrder
+  }
+
   export type IntNullableFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
@@ -7858,11 +10758,6 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type UserScalarRelationFilter = {
-    is?: UserWhereInput
-    isNot?: UserWhereInput
   }
 
   export type AccountProviderProviderAccountIdCompoundUniqueInput = {
@@ -7989,17 +10884,6 @@ export namespace Prisma {
     expires?: SortOrder
   }
 
-  export type IntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
-  }
-
   export type BoolFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolFilter<$PrismaModel> | boolean
@@ -8051,28 +10935,26 @@ export namespace Prisma {
     counter?: SortOrder
   }
 
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
-  }
-
   export type BoolWithAggregatesFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type OnRampTranscationCreateNestedManyWithoutUserInput = {
+    create?: XOR<OnRampTranscationCreateWithoutUserInput, OnRampTranscationUncheckedCreateWithoutUserInput> | OnRampTranscationCreateWithoutUserInput[] | OnRampTranscationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: OnRampTranscationCreateOrConnectWithoutUserInput | OnRampTranscationCreateOrConnectWithoutUserInput[]
+    createMany?: OnRampTranscationCreateManyUserInputEnvelope
+    connect?: OnRampTranscationWhereUniqueInput | OnRampTranscationWhereUniqueInput[]
+  }
+
+  export type BalanceCreateNestedManyWithoutUserInput = {
+    create?: XOR<BalanceCreateWithoutUserInput, BalanceUncheckedCreateWithoutUserInput> | BalanceCreateWithoutUserInput[] | BalanceUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: BalanceCreateOrConnectWithoutUserInput | BalanceCreateOrConnectWithoutUserInput[]
+    createMany?: BalanceCreateManyUserInputEnvelope
+    connect?: BalanceWhereUniqueInput | BalanceWhereUniqueInput[]
   }
 
   export type AccountCreateNestedManyWithoutUserInput = {
@@ -8094,6 +10976,20 @@ export namespace Prisma {
     connectOrCreate?: AuthenticatorCreateOrConnectWithoutUserInput | AuthenticatorCreateOrConnectWithoutUserInput[]
     createMany?: AuthenticatorCreateManyUserInputEnvelope
     connect?: AuthenticatorWhereUniqueInput | AuthenticatorWhereUniqueInput[]
+  }
+
+  export type OnRampTranscationUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<OnRampTranscationCreateWithoutUserInput, OnRampTranscationUncheckedCreateWithoutUserInput> | OnRampTranscationCreateWithoutUserInput[] | OnRampTranscationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: OnRampTranscationCreateOrConnectWithoutUserInput | OnRampTranscationCreateOrConnectWithoutUserInput[]
+    createMany?: OnRampTranscationCreateManyUserInputEnvelope
+    connect?: OnRampTranscationWhereUniqueInput | OnRampTranscationWhereUniqueInput[]
+  }
+
+  export type BalanceUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<BalanceCreateWithoutUserInput, BalanceUncheckedCreateWithoutUserInput> | BalanceCreateWithoutUserInput[] | BalanceUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: BalanceCreateOrConnectWithoutUserInput | BalanceCreateOrConnectWithoutUserInput[]
+    createMany?: BalanceCreateManyUserInputEnvelope
+    connect?: BalanceWhereUniqueInput | BalanceWhereUniqueInput[]
   }
 
   export type AccountUncheckedCreateNestedManyWithoutUserInput = {
@@ -8131,6 +11027,34 @@ export namespace Prisma {
 
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
+  }
+
+  export type OnRampTranscationUpdateManyWithoutUserNestedInput = {
+    create?: XOR<OnRampTranscationCreateWithoutUserInput, OnRampTranscationUncheckedCreateWithoutUserInput> | OnRampTranscationCreateWithoutUserInput[] | OnRampTranscationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: OnRampTranscationCreateOrConnectWithoutUserInput | OnRampTranscationCreateOrConnectWithoutUserInput[]
+    upsert?: OnRampTranscationUpsertWithWhereUniqueWithoutUserInput | OnRampTranscationUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: OnRampTranscationCreateManyUserInputEnvelope
+    set?: OnRampTranscationWhereUniqueInput | OnRampTranscationWhereUniqueInput[]
+    disconnect?: OnRampTranscationWhereUniqueInput | OnRampTranscationWhereUniqueInput[]
+    delete?: OnRampTranscationWhereUniqueInput | OnRampTranscationWhereUniqueInput[]
+    connect?: OnRampTranscationWhereUniqueInput | OnRampTranscationWhereUniqueInput[]
+    update?: OnRampTranscationUpdateWithWhereUniqueWithoutUserInput | OnRampTranscationUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: OnRampTranscationUpdateManyWithWhereWithoutUserInput | OnRampTranscationUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: OnRampTranscationScalarWhereInput | OnRampTranscationScalarWhereInput[]
+  }
+
+  export type BalanceUpdateManyWithoutUserNestedInput = {
+    create?: XOR<BalanceCreateWithoutUserInput, BalanceUncheckedCreateWithoutUserInput> | BalanceCreateWithoutUserInput[] | BalanceUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: BalanceCreateOrConnectWithoutUserInput | BalanceCreateOrConnectWithoutUserInput[]
+    upsert?: BalanceUpsertWithWhereUniqueWithoutUserInput | BalanceUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: BalanceCreateManyUserInputEnvelope
+    set?: BalanceWhereUniqueInput | BalanceWhereUniqueInput[]
+    disconnect?: BalanceWhereUniqueInput | BalanceWhereUniqueInput[]
+    delete?: BalanceWhereUniqueInput | BalanceWhereUniqueInput[]
+    connect?: BalanceWhereUniqueInput | BalanceWhereUniqueInput[]
+    update?: BalanceUpdateWithWhereUniqueWithoutUserInput | BalanceUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: BalanceUpdateManyWithWhereWithoutUserInput | BalanceUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: BalanceScalarWhereInput | BalanceScalarWhereInput[]
   }
 
   export type AccountUpdateManyWithoutUserNestedInput = {
@@ -8175,6 +11099,34 @@ export namespace Prisma {
     deleteMany?: AuthenticatorScalarWhereInput | AuthenticatorScalarWhereInput[]
   }
 
+  export type OnRampTranscationUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<OnRampTranscationCreateWithoutUserInput, OnRampTranscationUncheckedCreateWithoutUserInput> | OnRampTranscationCreateWithoutUserInput[] | OnRampTranscationUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: OnRampTranscationCreateOrConnectWithoutUserInput | OnRampTranscationCreateOrConnectWithoutUserInput[]
+    upsert?: OnRampTranscationUpsertWithWhereUniqueWithoutUserInput | OnRampTranscationUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: OnRampTranscationCreateManyUserInputEnvelope
+    set?: OnRampTranscationWhereUniqueInput | OnRampTranscationWhereUniqueInput[]
+    disconnect?: OnRampTranscationWhereUniqueInput | OnRampTranscationWhereUniqueInput[]
+    delete?: OnRampTranscationWhereUniqueInput | OnRampTranscationWhereUniqueInput[]
+    connect?: OnRampTranscationWhereUniqueInput | OnRampTranscationWhereUniqueInput[]
+    update?: OnRampTranscationUpdateWithWhereUniqueWithoutUserInput | OnRampTranscationUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: OnRampTranscationUpdateManyWithWhereWithoutUserInput | OnRampTranscationUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: OnRampTranscationScalarWhereInput | OnRampTranscationScalarWhereInput[]
+  }
+
+  export type BalanceUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<BalanceCreateWithoutUserInput, BalanceUncheckedCreateWithoutUserInput> | BalanceCreateWithoutUserInput[] | BalanceUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: BalanceCreateOrConnectWithoutUserInput | BalanceCreateOrConnectWithoutUserInput[]
+    upsert?: BalanceUpsertWithWhereUniqueWithoutUserInput | BalanceUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: BalanceCreateManyUserInputEnvelope
+    set?: BalanceWhereUniqueInput | BalanceWhereUniqueInput[]
+    disconnect?: BalanceWhereUniqueInput | BalanceWhereUniqueInput[]
+    delete?: BalanceWhereUniqueInput | BalanceWhereUniqueInput[]
+    connect?: BalanceWhereUniqueInput | BalanceWhereUniqueInput[]
+    update?: BalanceUpdateWithWhereUniqueWithoutUserInput | BalanceUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: BalanceUpdateManyWithWhereWithoutUserInput | BalanceUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: BalanceScalarWhereInput | BalanceScalarWhereInput[]
+  }
+
   export type AccountUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -8217,6 +11169,46 @@ export namespace Prisma {
     deleteMany?: AuthenticatorScalarWhereInput | AuthenticatorScalarWhereInput[]
   }
 
+  export type UserCreateNestedOneWithoutOnRampTranscationInput = {
+    create?: XOR<UserCreateWithoutOnRampTranscationInput, UserUncheckedCreateWithoutOnRampTranscationInput>
+    connectOrCreate?: UserCreateOrConnectWithoutOnRampTranscationInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type EnumOnRampStatusFieldUpdateOperationsInput = {
+    set?: $Enums.OnRampStatus
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type UserUpdateOneRequiredWithoutOnRampTranscationNestedInput = {
+    create?: XOR<UserCreateWithoutOnRampTranscationInput, UserUncheckedCreateWithoutOnRampTranscationInput>
+    connectOrCreate?: UserCreateOrConnectWithoutOnRampTranscationInput
+    upsert?: UserUpsertWithoutOnRampTranscationInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutOnRampTranscationInput, UserUpdateWithoutOnRampTranscationInput>, UserUncheckedUpdateWithoutOnRampTranscationInput>
+  }
+
+  export type UserCreateNestedOneWithoutBalanceInput = {
+    create?: XOR<UserCreateWithoutBalanceInput, UserUncheckedCreateWithoutBalanceInput>
+    connectOrCreate?: UserCreateOrConnectWithoutBalanceInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutBalanceNestedInput = {
+    create?: XOR<UserCreateWithoutBalanceInput, UserUncheckedCreateWithoutBalanceInput>
+    connectOrCreate?: UserCreateOrConnectWithoutBalanceInput
+    upsert?: UserUpsertWithoutBalanceInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutBalanceInput, UserUpdateWithoutBalanceInput>, UserUncheckedUpdateWithoutBalanceInput>
+  }
+
   export type UserCreateNestedOneWithoutAccountsInput = {
     create?: XOR<UserCreateWithoutAccountsInput, UserUncheckedCreateWithoutAccountsInput>
     connectOrCreate?: UserCreateOrConnectWithoutAccountsInput
@@ -8257,14 +11249,6 @@ export namespace Prisma {
     create?: XOR<UserCreateWithoutAuthenticatorInput, UserUncheckedCreateWithoutAuthenticatorInput>
     connectOrCreate?: UserCreateOrConnectWithoutAuthenticatorInput
     connect?: UserWhereUniqueInput
-  }
-
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
   }
 
   export type BoolFieldUpdateOperationsInput = {
@@ -8413,6 +11397,50 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedEnumOnRampStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.OnRampStatus | EnumOnRampStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.OnRampStatus[] | ListEnumOnRampStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.OnRampStatus[] | ListEnumOnRampStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumOnRampStatusFilter<$PrismaModel> | $Enums.OnRampStatus
+  }
+
+  export type NestedEnumOnRampStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.OnRampStatus | EnumOnRampStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.OnRampStatus[] | ListEnumOnRampStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.OnRampStatus[] | ListEnumOnRampStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumOnRampStatusWithAggregatesFilter<$PrismaModel> | $Enums.OnRampStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumOnRampStatusFilter<$PrismaModel>
+    _max?: NestedEnumOnRampStatusFilter<$PrismaModel>
+  }
+
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
   export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
@@ -8445,39 +11473,62 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
-  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type NestedFloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
-  }
-
   export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type OnRampTranscationCreateWithoutUserInput = {
+    id?: string
+    status: $Enums.OnRampStatus
+    token: string
+    provider: string
+    amount: number
+    startTime: Date | string
+  }
+
+  export type OnRampTranscationUncheckedCreateWithoutUserInput = {
+    id?: string
+    status: $Enums.OnRampStatus
+    token: string
+    provider: string
+    amount: number
+    startTime: Date | string
+  }
+
+  export type OnRampTranscationCreateOrConnectWithoutUserInput = {
+    where: OnRampTranscationWhereUniqueInput
+    create: XOR<OnRampTranscationCreateWithoutUserInput, OnRampTranscationUncheckedCreateWithoutUserInput>
+  }
+
+  export type OnRampTranscationCreateManyUserInputEnvelope = {
+    data: OnRampTranscationCreateManyUserInput | OnRampTranscationCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type BalanceCreateWithoutUserInput = {
+    id?: string
+    amount: number
+    locked: number
+  }
+
+  export type BalanceUncheckedCreateWithoutUserInput = {
+    id?: string
+    amount: number
+    locked: number
+  }
+
+  export type BalanceCreateOrConnectWithoutUserInput = {
+    where: BalanceWhereUniqueInput
+    create: XOR<BalanceCreateWithoutUserInput, BalanceUncheckedCreateWithoutUserInput>
+  }
+
+  export type BalanceCreateManyUserInputEnvelope = {
+    data: BalanceCreateManyUserInput | BalanceCreateManyUserInput[]
+    skipDuplicates?: boolean
   }
 
   export type AccountCreateWithoutUserInput = {
@@ -8574,6 +11625,61 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type OnRampTranscationUpsertWithWhereUniqueWithoutUserInput = {
+    where: OnRampTranscationWhereUniqueInput
+    update: XOR<OnRampTranscationUpdateWithoutUserInput, OnRampTranscationUncheckedUpdateWithoutUserInput>
+    create: XOR<OnRampTranscationCreateWithoutUserInput, OnRampTranscationUncheckedCreateWithoutUserInput>
+  }
+
+  export type OnRampTranscationUpdateWithWhereUniqueWithoutUserInput = {
+    where: OnRampTranscationWhereUniqueInput
+    data: XOR<OnRampTranscationUpdateWithoutUserInput, OnRampTranscationUncheckedUpdateWithoutUserInput>
+  }
+
+  export type OnRampTranscationUpdateManyWithWhereWithoutUserInput = {
+    where: OnRampTranscationScalarWhereInput
+    data: XOR<OnRampTranscationUpdateManyMutationInput, OnRampTranscationUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type OnRampTranscationScalarWhereInput = {
+    AND?: OnRampTranscationScalarWhereInput | OnRampTranscationScalarWhereInput[]
+    OR?: OnRampTranscationScalarWhereInput[]
+    NOT?: OnRampTranscationScalarWhereInput | OnRampTranscationScalarWhereInput[]
+    id?: StringFilter<"OnRampTranscation"> | string
+    status?: EnumOnRampStatusFilter<"OnRampTranscation"> | $Enums.OnRampStatus
+    token?: StringFilter<"OnRampTranscation"> | string
+    provider?: StringFilter<"OnRampTranscation"> | string
+    amount?: IntFilter<"OnRampTranscation"> | number
+    startTime?: DateTimeFilter<"OnRampTranscation"> | Date | string
+    userId?: StringFilter<"OnRampTranscation"> | string
+  }
+
+  export type BalanceUpsertWithWhereUniqueWithoutUserInput = {
+    where: BalanceWhereUniqueInput
+    update: XOR<BalanceUpdateWithoutUserInput, BalanceUncheckedUpdateWithoutUserInput>
+    create: XOR<BalanceCreateWithoutUserInput, BalanceUncheckedCreateWithoutUserInput>
+  }
+
+  export type BalanceUpdateWithWhereUniqueWithoutUserInput = {
+    where: BalanceWhereUniqueInput
+    data: XOR<BalanceUpdateWithoutUserInput, BalanceUncheckedUpdateWithoutUserInput>
+  }
+
+  export type BalanceUpdateManyWithWhereWithoutUserInput = {
+    where: BalanceScalarWhereInput
+    data: XOR<BalanceUpdateManyMutationInput, BalanceUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type BalanceScalarWhereInput = {
+    AND?: BalanceScalarWhereInput | BalanceScalarWhereInput[]
+    OR?: BalanceScalarWhereInput[]
+    NOT?: BalanceScalarWhereInput | BalanceScalarWhereInput[]
+    id?: StringFilter<"Balance"> | string
+    userId?: StringFilter<"Balance"> | string
+    amount?: IntFilter<"Balance"> | number
+    locked?: IntFilter<"Balance"> | number
+  }
+
   export type AccountUpsertWithWhereUniqueWithoutUserInput = {
     where: AccountWhereUniqueInput
     update: XOR<AccountUpdateWithoutUserInput, AccountUncheckedUpdateWithoutUserInput>
@@ -8666,6 +11772,150 @@ export namespace Prisma {
     transports?: StringNullableFilter<"Authenticator"> | string | null
   }
 
+  export type UserCreateWithoutOnRampTranscationInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    Balance?: BalanceCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    Authenticator?: AuthenticatorCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutOnRampTranscationInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    Balance?: BalanceUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    Authenticator?: AuthenticatorUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutOnRampTranscationInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutOnRampTranscationInput, UserUncheckedCreateWithoutOnRampTranscationInput>
+  }
+
+  export type UserUpsertWithoutOnRampTranscationInput = {
+    update: XOR<UserUpdateWithoutOnRampTranscationInput, UserUncheckedUpdateWithoutOnRampTranscationInput>
+    create: XOR<UserCreateWithoutOnRampTranscationInput, UserUncheckedCreateWithoutOnRampTranscationInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutOnRampTranscationInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutOnRampTranscationInput, UserUncheckedUpdateWithoutOnRampTranscationInput>
+  }
+
+  export type UserUpdateWithoutOnRampTranscationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Balance?: BalanceUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    Authenticator?: AuthenticatorUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutOnRampTranscationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Balance?: BalanceUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    Authenticator?: AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutBalanceInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    OnRampTranscation?: OnRampTranscationCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    Authenticator?: AuthenticatorCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutBalanceInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    OnRampTranscation?: OnRampTranscationUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    Authenticator?: AuthenticatorUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutBalanceInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutBalanceInput, UserUncheckedCreateWithoutBalanceInput>
+  }
+
+  export type UserUpsertWithoutBalanceInput = {
+    update: XOR<UserUpdateWithoutBalanceInput, UserUncheckedUpdateWithoutBalanceInput>
+    create: XOR<UserCreateWithoutBalanceInput, UserUncheckedCreateWithoutBalanceInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutBalanceInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutBalanceInput, UserUncheckedUpdateWithoutBalanceInput>
+  }
+
+  export type UserUpdateWithoutBalanceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    OnRampTranscation?: OnRampTranscationUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    Authenticator?: AuthenticatorUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutBalanceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    OnRampTranscation?: OnRampTranscationUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    Authenticator?: AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
+  }
+
   export type UserCreateWithoutAccountsInput = {
     id?: string
     name?: string | null
@@ -8674,6 +11924,8 @@ export namespace Prisma {
     image?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    OnRampTranscation?: OnRampTranscationCreateNestedManyWithoutUserInput
+    Balance?: BalanceCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     Authenticator?: AuthenticatorCreateNestedManyWithoutUserInput
   }
@@ -8686,6 +11938,8 @@ export namespace Prisma {
     image?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    OnRampTranscation?: OnRampTranscationUncheckedCreateNestedManyWithoutUserInput
+    Balance?: BalanceUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     Authenticator?: AuthenticatorUncheckedCreateNestedManyWithoutUserInput
   }
@@ -8714,6 +11968,8 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    OnRampTranscation?: OnRampTranscationUpdateManyWithoutUserNestedInput
+    Balance?: BalanceUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     Authenticator?: AuthenticatorUpdateManyWithoutUserNestedInput
   }
@@ -8726,6 +11982,8 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    OnRampTranscation?: OnRampTranscationUncheckedUpdateManyWithoutUserNestedInput
+    Balance?: BalanceUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     Authenticator?: AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -8738,6 +11996,8 @@ export namespace Prisma {
     image?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    OnRampTranscation?: OnRampTranscationCreateNestedManyWithoutUserInput
+    Balance?: BalanceCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     Authenticator?: AuthenticatorCreateNestedManyWithoutUserInput
   }
@@ -8750,6 +12010,8 @@ export namespace Prisma {
     image?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    OnRampTranscation?: OnRampTranscationUncheckedCreateNestedManyWithoutUserInput
+    Balance?: BalanceUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     Authenticator?: AuthenticatorUncheckedCreateNestedManyWithoutUserInput
   }
@@ -8778,6 +12040,8 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    OnRampTranscation?: OnRampTranscationUpdateManyWithoutUserNestedInput
+    Balance?: BalanceUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     Authenticator?: AuthenticatorUpdateManyWithoutUserNestedInput
   }
@@ -8790,6 +12054,8 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    OnRampTranscation?: OnRampTranscationUncheckedUpdateManyWithoutUserNestedInput
+    Balance?: BalanceUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     Authenticator?: AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -8802,6 +12068,8 @@ export namespace Prisma {
     image?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    OnRampTranscation?: OnRampTranscationCreateNestedManyWithoutUserInput
+    Balance?: BalanceCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
   }
@@ -8814,6 +12082,8 @@ export namespace Prisma {
     image?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    OnRampTranscation?: OnRampTranscationUncheckedCreateNestedManyWithoutUserInput
+    Balance?: BalanceUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
   }
@@ -8842,6 +12112,8 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    OnRampTranscation?: OnRampTranscationUpdateManyWithoutUserNestedInput
+    Balance?: BalanceUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
   }
@@ -8854,8 +12126,25 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    OnRampTranscation?: OnRampTranscationUncheckedUpdateManyWithoutUserNestedInput
+    Balance?: BalanceUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type OnRampTranscationCreateManyUserInput = {
+    id?: string
+    status: $Enums.OnRampStatus
+    token: string
+    provider: string
+    amount: number
+    startTime: Date | string
+  }
+
+  export type BalanceCreateManyUserInput = {
+    id?: string
+    amount: number
+    locked: number
   }
 
   export type AccountCreateManyUserInput = {
@@ -8888,6 +12177,51 @@ export namespace Prisma {
     credentialDeviceType: string
     credentialBackedUp: boolean
     transports?: string | null
+  }
+
+  export type OnRampTranscationUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumOnRampStatusFieldUpdateOperationsInput | $Enums.OnRampStatus
+    token?: StringFieldUpdateOperationsInput | string
+    provider?: StringFieldUpdateOperationsInput | string
+    amount?: IntFieldUpdateOperationsInput | number
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OnRampTranscationUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumOnRampStatusFieldUpdateOperationsInput | $Enums.OnRampStatus
+    token?: StringFieldUpdateOperationsInput | string
+    provider?: StringFieldUpdateOperationsInput | string
+    amount?: IntFieldUpdateOperationsInput | number
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OnRampTranscationUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    status?: EnumOnRampStatusFieldUpdateOperationsInput | $Enums.OnRampStatus
+    token?: StringFieldUpdateOperationsInput | string
+    provider?: StringFieldUpdateOperationsInput | string
+    amount?: IntFieldUpdateOperationsInput | number
+    startTime?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BalanceUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: IntFieldUpdateOperationsInput | number
+    locked?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type BalanceUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: IntFieldUpdateOperationsInput | number
+    locked?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type BalanceUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: IntFieldUpdateOperationsInput | number
+    locked?: IntFieldUpdateOperationsInput | number
   }
 
   export type AccountUpdateWithoutUserInput = {

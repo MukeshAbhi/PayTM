@@ -127,6 +127,23 @@ exports.Prisma.UserScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.OnRampTranscationScalarFieldEnum = {
+  id: 'id',
+  status: 'status',
+  token: 'token',
+  provider: 'provider',
+  amount: 'amount',
+  startTime: 'startTime',
+  userId: 'userId'
+};
+
+exports.Prisma.BalanceScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  amount: 'amount',
+  locked: 'locked'
+};
+
 exports.Prisma.AccountScalarFieldEnum = {
   userId: 'userId',
   type: 'type',
@@ -182,10 +199,16 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
-
+exports.OnRampStatus = exports.$Enums.OnRampStatus = {
+  Success: 'Success',
+  Failure: 'Failure',
+  Processing: 'Processing'
+};
 
 exports.Prisma.ModelName = {
   User: 'User',
+  OnRampTranscation: 'OnRampTranscation',
+  Balance: 'Balance',
   Account: 'Account',
   Session: 'Session',
   VerificationToken: 'VerificationToken',
