@@ -1,10 +1,12 @@
 import { adapter } from "@repo/db/prisma"
 import { NextAuthConfig } from "next-auth"
+import Google from "next-auth/providers/google";
 import Resend from "next-auth/providers/resend"
  
 export const authOptions : NextAuthConfig = ({
   adapter: adapter,
   providers: [
+    Google,
     Resend({
       from: "no-reply@updates.mukeshtech.site",
       sendVerificationRequest,

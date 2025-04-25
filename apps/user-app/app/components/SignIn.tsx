@@ -9,6 +9,7 @@ import {
 } from "@repo/ui/components/card"
 import { Input } from "@repo/ui/components/input"
 import { Label } from "@repo/ui/components/label"
+import { loginGoogle } from "../actions/auth"
 
 export function LoginForm({
     className,
@@ -50,7 +51,7 @@ export function LoginForm({
                 <Button type="submit" className="w-full">
                   Login
                 </Button>
-                <Button variant="outline" className="w-full">
+                <Button onClick={loginGoogle} variant="outline" className="w-full">
                   Login with Google
                 </Button>
               </div>

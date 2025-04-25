@@ -2,8 +2,12 @@
 
 import { signIn, signOut } from "@/authTypes"
 
-export const login = async (formDta: FormData) => {
+export const loginResend = async (formDta: FormData) => {
     await signIn("resend", formDta);
+}
+
+export const loginGoogle = async() => {
+    await signIn("google",{redirectTo: '/'});
 }
 
 export const logout = async () => {

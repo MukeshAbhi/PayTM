@@ -10,20 +10,13 @@ import {
 } from "@repo/ui/components/card"
 import { Input } from "@repo/ui/components/input"
 import { Label } from "@repo/ui/components/label"
-import { login } from "../actions/auth"
+import { loginGoogle, loginResend } from "../actions/auth"
 import { useState } from "react"
 
 export function SignUpForm({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<"div">) {
-  const [email, setEmail] = useState<string>();
-
-  const clickHandler = () => {
-    console.log("email: ", email);
-  
-
-  }
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
@@ -35,7 +28,7 @@ export function SignUpForm({
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form action={login}>
+          <form action={loginResend}>
             <div className="flex flex-col gap-6">
               <div className="grid gap-5">
                 <Label htmlFor="email">Email</Label>
@@ -45,13 +38,12 @@ export function SignUpForm({
                   type="email"
                   placeholder="johndoe@example.com"
                   required
-                  onChange={e => setEmail(e.target.value)}
                 />
               </div>
               <Button type="submit" className="w-full">
                 Sign Up
               </Button>
-              <Button variant="outline" className="w-full">
+              <Button onClick={loginGoogle} variant="outline" className="w-full">
                 Sign Up with Google
               </Button>
             </div>
