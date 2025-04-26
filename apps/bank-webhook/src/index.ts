@@ -1,40 +1,70 @@
 import express from "express";
-import {prisma }from "@repo/db/prisma"
+import {prisma }from "@repo/db/prisma";
+import z from "zod";
 
 const app = express();
+app.use(express.json());
 
+const zodSchema = z.object({
+    token: z.string(),
+    userId: z.string(),
+    amount: z.number()
+});
 
 app.post("/hdfcWebhook",async (req, res) => {
-    //TODO: Add Zod Validation
-    // Check if this request actually came from a bank , use a webhook secret here
+     //Zod Validation
 
-    const paymentInfo = {
-        token: req.body.token,
-        userId: req.body.user_identifier,
-        amount: req.body.amount
+    const parsedData = zodSchema.safeParse(req.body);
+
+    if(!parsedData.success)
+    {
+        console.error("Zod error");
+        res.status(411).json({
+            message:"Error while processing webhook"
+        });
+        return;
     }
+    
+
+    // Check if this request actually came from a bank , use a webhook secret here
+    
+    const paymentInfo = parsedData.data;
 
     // transcations
-    await prisma.balance.update({
-        where: {
-            userId: paymentInfo.userId,
-        },
-        data: {
-            amount: {
-                increment: paymentInfo.amount
+   try{
+    await prisma.$transaction([
+        prisma.balance.update({
+            where: {
+                userId: paymentInfo.userId,
+            },
+            data: {
+                amount: {
+                    increment: paymentInfo.amount
+                }
             }
-        }
-    });
+        }),
+        prisma.onRampTranscation.update({
+            where: {
+                token: paymentInfo.token
+            },
+            data: {
+                status: "Success"
+            }
+        })
+    ]);
 
-    await prisma.onRampTranscation.update({
-        where: {
-            token: paymentInfo.token
-        },
-        data: {
-            status: "Success"
-        }
-    });
     res.status(200).json({
         message:"captured"
     })
-})
+
+   } catch(error) {
+    console.error("Transaction error:", error);
+    res.status(411).json({
+        message:"Error while processing webhook"
+    })
+   }
+});
+
+app.listen(3003, () => {
+    console.log("Server running on port 3003");
+});
