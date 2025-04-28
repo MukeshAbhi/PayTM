@@ -3,7 +3,8 @@ import * as React from "react"
 import {
     Home,
     ArrowRightLeft,
-    Clock 
+    Clock,
+    TrendingUp
   } from "lucide-react"
 
 import {
@@ -45,6 +46,12 @@ const data = {
                 isActive: false,
                 icon:  Clock 
             },
+            {
+              title: "Investments",
+              url: "#",
+              isActive: false,
+              icon: TrendingUp
+            }
         ]
     }
     
