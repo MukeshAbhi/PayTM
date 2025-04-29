@@ -1,3 +1,4 @@
+"use client"
 import React from 'react';
 
 // Sample transactions with unique IDs and createdAt dates

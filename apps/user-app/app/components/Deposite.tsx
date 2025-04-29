@@ -113,6 +113,11 @@ function Deposite() {
       {/* Payment Form */}
       <div className="col-span-1 md:col-span-3 bg-card text-card-foreground p-6 rounded-2xl shadow-lg space-y-6">
         <h2 className="text-2xl font-bold">Enter Payment Details</h2>
+        <input
+          type="text"
+          placeholder="Amount"
+          className="w-full h-14 rounded-md border border-input font-bold pl-2 text-2xl bg-popover text-shadow-white"
+        />
         {renderForm()}
         <Button variant={"destructive"} className="w-full text-white">Proceed to Pay</Button>
       </div>

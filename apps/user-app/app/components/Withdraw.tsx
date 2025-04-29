@@ -55,8 +55,13 @@ function Withdraw() {
       {/* Withdrawal Form */}
       <div className="col-span-1 md:col-span-3 bg-card text-card-foreground p-6 rounded-2xl shadow-lg space-y-6">
         <h2 className="text-2xl font-bold">Enter Bank Details</h2>
+        <input
+          type="text"
+          placeholder="Amount"
+          className="w-full h-14 rounded-md border border-input font-bold pl-3 text-2xl bg-popover text-shadow-white"
+        />
         {renderForm()}
-        <Button variant={"default"}  className="w-full bg-primary text-white font-semibold py-2 rounded-lg hover:opacity-90 transition">
+        <Button variant={"destructive"}  className="w-full bg-primary text-white font-semibold py-2 rounded-lg hover:opacity-90 transition">
           Withdraw Funds
         </Button>
       </div>
