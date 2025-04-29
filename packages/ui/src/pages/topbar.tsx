@@ -15,7 +15,7 @@ export const Topbar: FC<TopbarProps> = ({user, loginHandler, logoutHandler}) => 
                 PayTM
             </div>
             <div className="px-8">
-                <Button className="text-xl w-24" onClick={user ? logoutHandler : loginHandler}>{user?"Logout":"Login"}</Button>
+                <Button className="text-xl text-white w-24" onClick={user ? logoutHandler : loginHandler}>{user?"Logout":"Login"}</Button>
             </div>
         </div>
     )
