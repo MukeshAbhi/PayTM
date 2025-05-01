@@ -15,6 +15,7 @@ import Investments from "../components/Investments"
 
 export default function Dashboard() {
   const [ selected, setSelected ] = useState("Home");
+  console.log(selected)
 
   const renderComponents = () => {
     switch (selected) {
@@ -22,7 +23,7 @@ export default function Dashboard() {
         return <Home />;
       case "Transfer":
         return <Transfer />;
-      case "Transcation":
+      case "Transcations":
         return <Transcations />;
       case "Investments":
         return <Investments />;
@@ -32,7 +33,7 @@ export default function Dashboard() {
   }
   return (
     <SidebarProvider>
-      <AppSidebar onItemSelect={setSelected}>
+      <AppSidebar onItemSelect={setSelected}/>
       <SidebarInset>
         <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
           <SidebarTrigger className="-ml-1" />
@@ -40,7 +41,7 @@ export default function Dashboard() {
         </header>
         {renderComponents()} 
       </SidebarInset>
-      </AppSidebar>
+      
     </SidebarProvider>
   )
 }
