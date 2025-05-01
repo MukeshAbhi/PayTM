@@ -20,6 +20,7 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "@repo/ui/components/sidebar"
+import Link from "next/link"
 
 
 // This is sample data.
@@ -31,26 +32,22 @@ const data = {
         items: [
             {
                 title: "Home",
-                url: "#",
-                isActive: true,
+                url: "/user-dashboard",
                 icon: Home
             },
             {
                 title: "Transfer",
                 url: "#",
-                isActive: false,
                 icon: ArrowRightLeft 
             },
             {
                 title: "Transcations",
                 url: "#",
-                isActive: false,
                 icon:  Clock 
             },
             {
               title: "Investments",
               url: "#",
-              isActive: false,
               icon: TrendingUp
             }
         ]
@@ -60,10 +57,16 @@ const data = {
   ],
 }
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+type AppSidebarProps = {
+  onItemSelect: (title: string) => void;
+  children?: React.ReactNode; // ✅ Accepts children
+};
+
+export function AppSidebar({ onItemSelect, children }: AppSidebarProps)  {
+
+  const [activeTitle, setActiveTitle] = React.useState("Home");
   return (
-    <Sidebar {...props} >
-      
+    <Sidebar  >
       <SidebarContent >
         {/* We create a SidebarGroup for each parent. */}
         {data.navMain.map((item) => (
@@ -73,11 +76,18 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               <SidebarMenu   >
                 {item.items.map((item) => (
                   <SidebarMenuItem key={item.title} >
-                    <SidebarMenuButton asChild isActive={item.isActive} className="text-2xl py-4 my-1">
-                    <a href={item.url} className="flex items-center">
+                    <SidebarMenuButton 
+                      asChild 
+                      isActive={activeTitle === item.title} 
+                      onClick={() => {
+                        setActiveTitle(item.title);
+                        onItemSelect(item.title);
+                      }} 
+                      className="text-2xl py-4 my-1">
+                    <Link href={item.url} className="flex items-center">
                         <div className="w-8 ">{item.icon && <item.icon />}</div>
                         <span>{item.title}</span>
-                    </a>
+                    </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 ))}
