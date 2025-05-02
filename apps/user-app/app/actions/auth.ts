@@ -12,7 +12,7 @@ export const loginGoogle = async() => {
 }
 
 export const logout = async () => {
-    await signOut({redirectTo: "/"});
+    await signOut({redirectTo: "/user-signin"});
 }
 
 export const homeRedirect = async () => {

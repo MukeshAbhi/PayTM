@@ -1,9 +1,8 @@
 import { Geist, Geist_Mono } from "next/font/google"
-
 import "@repo/ui/globals.css"
 import { Providers } from "@/app/components/providers"
 import { JotaiProvider } from "@/app/components/jotaiProviders"
-import AppbarClient from "./pages/AppbarClient"
+
 import { SessionProvider } from "next-auth/react"
 
 const fontSans = Geist({
@@ -23,19 +22,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <JotaiProvider>
-      <body
-        className={`${fontSans.variable} ${fontMono.variable} font-sans antialiased `}
-      >
-      <SessionProvider>
-        <Providers>
-          <AppbarClient />
-            {children}
-        </Providers>
-        </SessionProvider>
-      </body>
       
+            <body
+              className={`${fontSans.variable} ${fontMono.variable} font-sans antialiased `}
+            >
+              <JotaiProvider>
+                <SessionProvider>
+                  <Providers>
+            
+                {children}
+                </Providers>
+        </SessionProvider>
       </JotaiProvider> 
+            </body>
+          
     </html>
   )
 }
