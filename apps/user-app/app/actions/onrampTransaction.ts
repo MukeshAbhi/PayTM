@@ -6,7 +6,8 @@ import { prisma } from "@repo/db/prisma";
 export async function createOnrampTransaction(amount:number,provider:string) {
 
     const session = await auth();
-    const user = session?.user
+    console.log("here");
+    console.log("userid :", session?.user?.id)
 
     if(!session || !session.user?.id)
     {

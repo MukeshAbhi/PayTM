@@ -5,7 +5,6 @@ const protectedRoutes = ["/user-info"];
 
 export const middleware = async (request:NextRequest) =>  {
     const token = await getToken({req: request , secret: process.env.AUTH_SECRET});
-    console.log("token : ", token);
     
     const { pathname } = request.nextUrl;
 

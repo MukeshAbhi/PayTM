@@ -16,7 +16,16 @@ export const authOptions : NextAuthConfig = ({
   session: {
     strategy: "jwt"
   },
-  secret: process.env.AUTH_SECRET
+  secret: process.env.AUTH_SECRET,
+  callbacks:  {
+    async session({ session, token }) {
+      if (token && session.user) {
+        session.user.id = token.sub!;
+      }
+      return session;
+    },
+  },
+ 
 })
 
 export async function sendVerificationRequest(params: { identifier: string; provider: any; url: string; theme: any }) {
