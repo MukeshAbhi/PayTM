@@ -66,7 +66,7 @@ export function AppSidebar({ onItemSelect, children }: AppSidebarProps)  {
 
   const [activeTitle, setActiveTitle] = React.useState("Home");
   return (
-    <Sidebar  >
+    <Sidebar className="pt-20"  >
       <SidebarContent >
         {/* We create a SidebarGroup for each parent. */}
         {data.navMain.map((item) => (
@@ -96,7 +96,7 @@ export function AppSidebar({ onItemSelect, children }: AppSidebarProps)  {
           </SidebarGroup>
         ))}
       </SidebarContent>
-      <SidebarRail />
+      <SidebarRail className="fixed" />
     </Sidebar>
   )
 }

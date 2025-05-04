@@ -5,9 +5,11 @@ import { useSession } from "next-auth/react"
 
 function AppbarClient() {
   const { data: session } = useSession()
+
   return (
-    
-    <Topbar loginHandler={homeRedirect}  logoutHandler={logout} user={session?.user}/>
+    <div className="fixed top-0 left-0 w-full z-50 bg-fixed ">
+      <Topbar loginHandler={homeRedirect} logoutHandler={logout} user={session?.user} />
+    </div>
   )
 }
 

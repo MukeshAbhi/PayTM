@@ -1,6 +1,9 @@
 import Dashboard from "../../pages/Dashboard"
-export default function Page() {
+export default function () {
     return(
-       <Dashboard />
+        <div>
+            <Dashboard />
+        </div>
+       
     )
 }

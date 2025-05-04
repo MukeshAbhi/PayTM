@@ -10,7 +10,7 @@ interface TopbarProps {
 }
 export const Topbar: FC<TopbarProps> = ({user, loginHandler, logoutHandler}) => {
     return(
-        <div className="fixed bg-none flex items-center justify-between w-full  border-b p-5 ">
+        <div className="fixed bg-background flex items-center justify-between w-full  border-b p-5 ">
             <div className="px-8 text-2xl">
                 PayTM
             </div>
