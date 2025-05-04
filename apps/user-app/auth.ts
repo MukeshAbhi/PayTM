@@ -22,7 +22,7 @@ export const authOptions : NextAuthConfig = ({
 export async function sendVerificationRequest(params: { identifier: string; provider: any; url: string; theme: any }) {
   const { identifier: to, provider, url, theme } = params
   const { host } = new URL(url)
-  console.log("API KEY:", provider.apiKey);
+
   const res = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {

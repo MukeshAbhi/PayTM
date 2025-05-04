@@ -1,6 +1,8 @@
 "use client"
 import { Button } from "@repo/ui/components/button";
 import React, { useState } from "react";
+import axios from "axios"
+import { useSession } from "next-auth/react";
 
 const Card = () => (
   <div className="p-4 border border-border rounded-lg bg-background">
@@ -45,13 +47,20 @@ const UPI = () => (
   </div>
 );
 
-const NetBanking = () => (
+const NetBanking = () => {
+   const [selectedBank, setSelectedBank ] = useState("Select your Bank");
+
+  return(
   <div className="p-4 border border-border rounded-lg bg-background">
     <p className="font-medium text-lg">Net Banking</p>
     <div className="mt-4">
-      <select className="w-full p-2 rounded-md border border-input bg-popover text-popover-foreground">
-        <option disabled selected>
-          Select your Bank
+      <select className="w-full p-2 rounded-md border border-input bg-popover text-popover-foreground"
+              value={selectedBank}
+              onChange={(e) => setSelectedBank(e.target.value)}
+              
+      >
+        <option disabled value={selectedBank}>
+          {selectedBank}
         </option>
         <option>State Bank of India</option>
         <option>ICICI Bank</option>
@@ -61,10 +70,14 @@ const NetBanking = () => (
       </select>
     </div>
   </div>
-);
+  )
+}
 
 function Deposite() {
   const [selectedMethod, setSelectedMethod] = useState<"card" | "upi" | "netbanking">("card");
+  const [amount, setAmount] = useState<string>();
+  const { data: session } = useSession();
+  const WEB_HOOK_URL = process.env.BANK_WEBHOOK_URL;
 
   const renderForm = () => {
     switch (selectedMethod) {
@@ -78,6 +91,15 @@ function Deposite() {
         return null;
     }
   };
+
+  const sendRequest = async () => {
+    const user = session?.user;
+    const response = await axios.post(`${WEB_HOOK_URL}/toWebhook`,{
+      token:"",
+      userId: user?.id,
+      amount: amount
+    })
+  }
 
   return (
     <div className="max-w-5xl mx-auto p-6 grid grid-cols-1 md:grid-cols-4 gap-6">
@@ -114,12 +136,13 @@ function Deposite() {
       <div className="col-span-1 md:col-span-3 bg-card text-card-foreground p-6 rounded-2xl shadow-lg space-y-6">
         <h2 className="text-2xl font-bold">Enter Payment Details</h2>
         <input
-          type="text"
+          onChange={e => setAmount(e.target.value)}
+          type="number"
           placeholder="Amount"
           className="w-full h-14 rounded-md border border-input font-bold pl-2 text-2xl bg-popover text-shadow-white"
         />
         {renderForm()}
-        <Button variant={"destructive"} className="w-full text-white">Proceed to Pay</Button>
+        <Button variant={"destructive"} onClick={sendRequest} className="w-full text-white">Add Money</Button>
       </div>
     </div>
   );

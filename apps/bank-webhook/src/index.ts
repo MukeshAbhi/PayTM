@@ -11,7 +11,7 @@ const zodSchema = z.object({
     amount: z.number()
 });
 
-app.post("/hdfcWebhook",async (req, res) => {
+app.post("/toWebhook",async (req, res) => {
      //Zod Validation
 
     const parsedData = zodSchema.safeParse(req.body);

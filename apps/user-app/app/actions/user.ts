@@ -1,9 +1,22 @@
 "use server"
 
+import { auth } from "@/authTypes";
 import { prisma } from "@repo/db/prisma";
 
+
 export async function getData() {
-  const user = await prisma.user.findFirst({
+
+  const session = await auth();
+
+  if (!session || !session.user?.email) {
+    console.log("No valid session")
+    return null
+  }
+
+  const user = await prisma.user.findUnique({
+    where: {
+      email: session.user.email
+    },
     select: {
       name: true,
       id: true,
