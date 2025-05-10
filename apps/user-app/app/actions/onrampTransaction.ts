@@ -2,8 +2,11 @@
 
 import { auth } from "@/authTypes";
 import { prisma } from "@repo/db/prisma";
+import axios from "axios";
 
-export async function createOnrampTransaction(amount:number,provider:string) {
+const WEBHOOK_URL = process.env.BANK_WEBHOOK_URL;
+
+export async function createOnrampTransaction(amount: number, provider: string) {
 
     const session = await auth();
     console.log("here");
@@ -12,7 +15,9 @@ export async function createOnrampTransaction(amount:number,provider:string) {
     if(!session || !session.user?.id)
     {
         console.log("No valid session");
-        return null;
+        return {
+            message: "User not logged in"
+        };
     }
     const userId = session.user.id;
     //like the token is from banking provider(sbi/hdfc);
@@ -28,6 +33,8 @@ export async function createOnrampTransaction(amount:number,provider:string) {
                 userId:userId
             }
         });
+
+        await hitBankapi(amount, userId, token);
         return{
             message:"Done"
         }
@@ -35,6 +42,14 @@ export async function createOnrampTransaction(amount:number,provider:string) {
         console.log("Failed in create an Onramptranscation ", e);
         return null;
    }
+};
 
-    
+
+export async function hitBankapi(amount: number,userId: string, token: string){
+
+   
+    await axios.post(`${WEBHOOK_URL}/toWebhook`,{
+        amount,userId,token
+    })
+
 }

@@ -1,10 +1,12 @@
 import { PrismaAdapter } from "@auth/prisma-adapter";
-import { PrismaClient } from "./generated/prisma";
+import { PrismaClient } from "./generated/prisma/index.js";
 
-const globalForPrisma = globalThis as unknown as { prisma: PrismaClient }
- 
-export const prisma = globalForPrisma.prisma || new PrismaClient()
+const globalForPrisma = globalThis as unknown as { prisma: PrismaClient };
 
-if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
+export const prisma = globalForPrisma.prisma || new PrismaClient();
 
-export const adapter = PrismaAdapter(prisma);
+if (process.env.NODE_ENV !== "production") {
+  globalForPrisma.prisma = prisma;
+}
+
+export const adapter: any = PrismaAdapter(prisma);

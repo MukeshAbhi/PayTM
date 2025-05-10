@@ -101,7 +101,7 @@ const NetBanking = ({ onBankSelect }: NetBankingProps) => {
 };
 
 function Deposite() {
-  const [selectedMethod, setSelectedMethod] = useState<"card" | "upi" | "netbanking">("card");
+  const [selectedMethod, setSelectedMethod] = useState<"card" | "upi" | "netbanking">("netbanking");
   const [amount, setAmount] = useState<number>(0);
   const [bank, setBank] = useState<Bank>({
     name:"card",
@@ -124,7 +124,7 @@ function Deposite() {
 
   const sendRequest = async () => {
     await createOnrampTransaction(amount, bank?.name!);
-    window.location.href = bank?.redirectUrl || "";
+    window.open(bank?.redirectUrl || "")
   }
 
   return (
@@ -132,6 +132,14 @@ function Deposite() {
       {/* Sidebar */}
       <div className="col-span-1 bg-sidebar text-sidebar-foreground rounded-2xl p-4 space-y-4 shadow-md">
         <h3 className="font-bold text-lg mb-4">Payment Options</h3>
+        <button
+          className={`w-full text-left p-2 rounded-lg ${
+            selectedMethod === "netbanking" ? "bg-sidebar-accent text-sidebar-accent-foreground" : ""
+          }`}
+          onClick={() => setSelectedMethod("netbanking")}
+        >
+          Net Banking
+        </button>
         <button
           className={`w-full text-left p-2 rounded-lg ${
             selectedMethod === "card" ? "bg-sidebar-accent text-sidebar-accent-foreground" : ""
@@ -160,27 +168,25 @@ function Deposite() {
         >
           UPI
         </button>
-        <button
-          className={`w-full text-left p-2 rounded-lg ${
-            selectedMethod === "netbanking" ? "bg-sidebar-accent text-sidebar-accent-foreground" : ""
-          }`}
-          onClick={() => setSelectedMethod("netbanking")}
-        >
-          Net Banking
-        </button>
+        
       </div>
 
       {/* Payment Form */}
       <div className="col-span-1 md:col-span-3 bg-card text-card-foreground p-6 rounded-2xl shadow-lg space-y-6">
         <h2 className="text-2xl font-bold">Enter Payment Details</h2>
-        <input
-          onChange={e => setAmount(Number(e.target.value))}
-          type="number"
-          placeholder="Amount"
-          className="w-full h-14 rounded-md border border-input font-bold pl-2 text-2xl bg-popover text-shadow-white"
-        />
-        {renderForm()}
-        <Button variant={"destructive"} onClick={sendRequest} className="w-full text-white">Add Money</Button>
+        <form onSubmit={sendRequest}>
+          <input
+            required
+            onChange={e => setAmount(Number(e.target.value))}
+            type="number"
+            placeholder="Amount"
+            className="w-full h-14 rounded-md border border-input font-bold pl-2 text-2xl bg-popover text-shadow-white"
+          />
+          {renderForm()}
+          <Button variant={"destructive"} className="w-full text-white">
+            Add Money
+          </Button>
+        </form>
       </div>
     </div>
   );
