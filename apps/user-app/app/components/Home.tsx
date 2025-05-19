@@ -3,7 +3,7 @@ import { useState } from "react";
 import Deposite from "./Deposite";
 import Withdraw from "./Withdraw";
 import Balance from "./Balance";
-import RecentWithdrawals from "./RecentWithdrawls";
+import BankTransactions from "./BankTransactions";
 
 function Home() {
   const [activeTab, setActiveTab] = useState<"deposite" | "withdraw">("deposite");
@@ -47,7 +47,7 @@ function Home() {
             <Balance/>
           </div>
           <div className="flex flex-1 items-center justify-center rounded-lg bg-muted/50 p-6">
-            <RecentWithdrawals />
+            <BankTransactions />
           </div>
         </div>
       </div>

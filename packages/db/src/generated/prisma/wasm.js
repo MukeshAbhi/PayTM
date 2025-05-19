@@ -130,6 +130,7 @@ exports.Prisma.UserScalarFieldEnum = {
 exports.Prisma.OnRampTranscationScalarFieldEnum = {
   id: 'id',
   status: 'status',
+  type: 'type',
   token: 'token',
   provider: 'provider',
   amount: 'amount',
@@ -137,7 +138,24 @@ exports.Prisma.OnRampTranscationScalarFieldEnum = {
   userId: 'userId'
 };
 
-exports.Prisma.BalanceScalarFieldEnum = {
+exports.Prisma.WalletTranscationScalarFieldEnum = {
+  id: 'id',
+  status: 'status',
+  type: 'type',
+  token: 'token',
+  amount: 'amount',
+  startTime: 'startTime',
+  userId: 'userId'
+};
+
+exports.Prisma.BankBalanceScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  amount: 'amount',
+  locked: 'locked'
+};
+
+exports.Prisma.WalletBalanceScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
   amount: 'amount',
@@ -205,10 +223,17 @@ exports.OnRampStatus = exports.$Enums.OnRampStatus = {
   Processing: 'Processing'
 };
 
+exports.TranscationType = exports.$Enums.TranscationType = {
+  Credit: 'Credit',
+  Debit: 'Debit'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   OnRampTranscation: 'OnRampTranscation',
-  Balance: 'Balance',
+  WalletTranscation: 'WalletTranscation',
+  BankBalance: 'BankBalance',
+  WalletBalance: 'WalletBalance',
   Account: 'Account',
   Session: 'Session',
   VerificationToken: 'VerificationToken',

@@ -27,3 +27,7 @@ export async function getData() {
 
   return user;
 }
+
+export async function getUserBankTranscationHistory(userId: string) {
+  const data = await prisma.
+}

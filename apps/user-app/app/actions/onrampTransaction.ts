@@ -5,6 +5,8 @@ import { prisma } from "@repo/db/prisma";
 import axios from "axios";
 
 const WEBHOOK_URL = process.env.BANK_WEBHOOK_URL;
+const HMAC_KEY = process.env.HMAC_KEY;
+
 
 export async function createOnrampTransaction(amount: number, provider: string) {
 
@@ -20,7 +22,9 @@ export async function createOnrampTransaction(amount: number, provider: string) 
         };
     }
     const userId = session.user.id;
-    //like the token is from banking provider(sbi/hdfc);
+
+
+    //like the token is from banking provider(sbi/hdfc) => not true
     const token = (Math.random() * 1000).toString();
    try{
         await prisma.onRampTranscation.create({
@@ -30,11 +34,12 @@ export async function createOnrampTransaction(amount: number, provider: string) 
                 amount:amount * 100,
                 token,
                 startTime: new Date(),
-                userId:userId
+                userId:userId,
+                type:"Credit"
             }
         });
 
-        await hitBankapi(amount, userId, token);
+        await hitBankapi(amount, userId, token, HMAC_KEY as string);
         return{
             message:"Done"
         }
@@ -44,12 +49,11 @@ export async function createOnrampTransaction(amount: number, provider: string) 
    }
 };
 
+//mimicing a bank
+export async function hitBankapi(amount: number, userId: string, token: string ,key: string){
 
-export async function hitBankapi(amount: number,userId: string, token: string){
-
-   
     await axios.post(`${WEBHOOK_URL}/toWebhook`,{
-        amount,userId,token
+        amount, userId, token, key
     })
 
 }

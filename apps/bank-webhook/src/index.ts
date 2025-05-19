@@ -5,10 +5,13 @@ import z from "zod";
 const app = express();
 app.use(express.json());
 
+const HMAC_KEY="JNAFJSDJJK";
+
 const zodSchema = z.object({
     token: z.string(),
     userId: z.string(),
-    amount: z.number()
+    amount: z.number(),
+    key: z.string(),
 });
 
 app.post("/toWebhook",async (req, res) => {
@@ -25,15 +28,31 @@ app.post("/toWebhook",async (req, res) => {
         return;
     }
     
+    const paymentInfo = parsedData.data;
 
     // Check if this request actually came from a bank , use a webhook secret here
+    try{
+        const key = parsedData.data.key;
+
+        if(key != HMAC_KEY){
+            res.status(411).json({
+                message:"Bank not authorised"
+            })
+            return;
+        }
+
+    }catch(error) {
+        console.error("Transaction error:", error);
+        res.status(411).json({
+            message:"Error while processing webhook"
+        })
+    }
     
-    const paymentInfo = parsedData.data;
 
     // transcations
    try{
     await prisma.$transaction([
-        prisma.balance.update({
+        prisma.walletBalance.update({
             where: {
                 userId: paymentInfo.userId,
             },

@@ -22,7 +22,8 @@ model User {
   image         String?
 
   OnRampTranscation OnRampTranscation[]
-  Balance           Balance[]
+  WBalance          WalletBalance[]
+  BBalance          BankBalance[]
 
   accounts      Account[]
   sessions      Session[]
@@ -50,7 +51,15 @@ enum OnRampStatus {
   Processing
 }
 
-model Balance {
+model BankBalance {
+  id     String @id @default(cuid())
+  userId String @unique
+  amount Int
+  locked Int
+  user   User   @relation(fields: [userId], references: [id])
+}
+
+model WalletBalance {
   id     String @id @default(cuid())
   userId String @unique
   amount Int
