@@ -47,37 +47,47 @@ app.post("/toWebhook",async (req, res) => {
             message:"Error while processing webhook"
         })
     }
-    
 
     // transcations
    try{
-    await prisma.$transaction([
-        prisma.walletBalance.update({
-            where: {
-                userId: paymentInfo.userId,
-            },
-            data: {
-                amount: {
-                    increment: paymentInfo.amount
+        await prisma.$transaction([
+            prisma.walletBalance.upsert({
+                where: { userId: paymentInfo.userId },
+                    update: {
+                        amount: {
+                            increment: paymentInfo.amount
+                        }
+                },
+                create: {
+                    userId: paymentInfo.userId,
+                    amount: paymentInfo.amount,
+                    locked: 0
                 }
-            }
-        }),
-        prisma.onRampTranscation.update({
-            where: {
-                token: paymentInfo.token
-            },
-            data: {
-                status: "Success"
-            }
-        })
-    ]);
+            }),
+            prisma.onRampTranscation.update({
+                where: {
+                    token: paymentInfo.token
+                },
+                data: {
+                    status: "Success"
+                }
+            })
+        ]);
 
-    res.status(200).json({
-        message:"captured"
-    })
+    res.status(200).json({message:"captured"})
 
    } catch(error) {
+       await prisma.onRampTranscation.update({
+                where: {
+                    token: paymentInfo.token
+                },
+                data: {
+                    status: "Failure"
+                }
+            })
+
     console.error("Transaction error:", error);
+
     res.status(411).json({
         message:"Error while processing webhook"
     })
