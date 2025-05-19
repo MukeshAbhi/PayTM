@@ -1,10 +1,7 @@
 "use client"
 import { Button } from "@repo/ui/components/button";
 import React, { useState } from "react";
-import axios from "axios"
-import { useSession } from "next-auth/react";
 import { createOnrampTransaction } from "../actions/onrampTransaction";
-import { redirect } from "next/navigation";
 
 const Card = () => (
   <div className="p-4 border border-border rounded-lg bg-background">
@@ -174,7 +171,7 @@ function Deposite() {
       {/* Payment Form */}
       <div className="col-span-1 md:col-span-3 bg-card text-card-foreground p-6 rounded-2xl shadow-lg space-y-6">
         <h2 className="text-2xl font-bold">Enter Payment Details</h2>
-        <form onSubmit={sendRequest}>
+        <form onSubmit={sendRequest} className="flex flex-col gap-2">
           <input
             required
             onChange={e => setAmount(Number(e.target.value))}

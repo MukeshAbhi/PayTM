@@ -51,7 +51,7 @@ model WalletTransaction {
   status        OnRampStatus
   type          TransactionType
   token         String          @unique
-  amount        Int
+  amount        Int             
   startTime     DateTime
   userId        String
   user          User            @relation(fields: [userId], references: [id])

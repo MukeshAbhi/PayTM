@@ -13,3 +13,12 @@ export const BankTransactionSchema = z.object({
 });
 
 export type BankTransaction = z.infer<typeof BankTransactionSchema>;
+
+export const WalletBalanceSchema = z.object({
+  id: z.string(),
+  userId: z.string(),
+  amount: z.number(),
+  locked: z.number(),
+})
+
+export type WalletBalance = z.infer<typeof WalletBalanceSchema>;

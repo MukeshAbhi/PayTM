@@ -38,3 +38,17 @@ export async function getUserBankTranscations():Promise<any> {
   })
   return data;
 }
+
+export async function getUserWalletBalance():Promise<any> {
+  const user = await getData();
+  const userId = user?.id;
+  const data = await prisma.walletBalance.findUnique({
+    where:{
+      userId
+    },
+    select:{
+      amount:true
+    }
+  })
+  return data;
+}

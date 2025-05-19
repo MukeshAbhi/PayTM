@@ -46,7 +46,7 @@ function Home() {
           <div className="flex h-[50%] md:h-1/3 items-center justify-center rounded-lg bg-muted/50 p-6">
             <Balance/>
           </div>
-          <div className="flex flex-1 items-center justify-center rounded-lg bg-muted/50 p-6">
+          <div className="flex flex-1 items-center md:items-start justify-center rounded-lg bg-muted/50 p-6">
             <BankTransactions />
           </div>
         </div>

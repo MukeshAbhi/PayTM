@@ -12768,7 +12768,7 @@ export namespace Prisma {
     status: $Enums.OnRampStatus
     type: $Enums.TransactionType
     token: string
-    amount: number
+    amount?: number
     startTime: Date | string
     user: UserCreateNestedOneWithoutWalletTranscationInput
   }
@@ -12778,7 +12778,7 @@ export namespace Prisma {
     status: $Enums.OnRampStatus
     type: $Enums.TransactionType
     token: string
-    amount: number
+    amount?: number
     startTime: Date | string
     userId: string
   }
@@ -12808,7 +12808,7 @@ export namespace Prisma {
     status: $Enums.OnRampStatus
     type: $Enums.TransactionType
     token: string
-    amount: number
+    amount?: number
     startTime: Date | string
     userId: string
   }
@@ -14540,7 +14540,7 @@ export namespace Prisma {
     status: $Enums.OnRampStatus
     type: $Enums.TransactionType
     token: string
-    amount: number
+    amount?: number
     startTime: Date | string
   }
 
@@ -14549,7 +14549,7 @@ export namespace Prisma {
     status: $Enums.OnRampStatus
     type: $Enums.TransactionType
     token: string
-    amount: number
+    amount?: number
     startTime: Date | string
   }
 
@@ -15479,7 +15479,7 @@ export namespace Prisma {
     status: $Enums.OnRampStatus
     type: $Enums.TransactionType
     token: string
-    amount: number
+    amount?: number
     startTime: Date | string
   }
 

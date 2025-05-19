@@ -3,40 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { getUserBankTranscations } from '../actions/user';
 import { BankTransaction } from '@repo/types/zodtypes';
 
-// Sample transactions with unique IDs and createdAt dates
-// const transactions = [
-//   {
-//     id: 1,
-//     type: "Deposit",
-//     amount: 5000,
-//     createdAt: new Date("2024-04-15"),
-//   },
-//   {
-//     id: 2,
-//     type: "Withdrawal",
-//     amount: 2000,
-//     createdAt: new Date("2024-04-16"),
-//   },
-//   {
-//     id: 3,
-//     type: "Deposit",
-//     amount: 10000,
-//     createdAt: new Date("2024-04-17"),
-//   },
-//   {
-//     id: 4,
-//     type: "Withdrawal",
-//     amount: 1500,
-//     createdAt: new Date("2024-04-18"),
-//   },
-//   {
-//     id: 5,
-//     type: "Deposit",
-//     amount: 7500,
-//     createdAt: new Date("2024-04-19"),
-//   },
-// ];
-
 function BankTransactions() {
 const [ transactions, setTranscations ] = useState<BankTransaction[]>()
   useEffect(() => {
@@ -44,29 +10,36 @@ const [ transactions, setTranscations ] = useState<BankTransaction[]>()
       const data = await getUserBankTranscations();
       setTranscations(data);
     }
-  })
+    getData();
+  },[]);
 
-  const getAmountColor = (type: string) => {
-    if (type.toLowerCase() === "Credit || Success") return "text-green-600";
-    if (type.toLowerCase() === "Debit || Failure") return "text-red-600";
-    if (type.toLowerCase() === "Processsing") return "text-gray-600";
+const getAmountColor = (status: string) => {
+    const lower = status.toLowerCase();
+    if (lower === "credit" || lower === "success") return "text-green-600";
+    if (lower === "debit" || lower === "failure") return "text-red-600";
+    if (lower === "processing") return "text-white";
     return "text-yellow-600";
-  };
+};
+
+const getSign = (type: string) => {
+  const lower = type.toLowerCase();
+  return lower === "credit" || lower === "success" ? "+" : "-";
+};
 
   return (
-    <div className="w-full">
-      <h2 className="text-lg font-semibold mb-4">Recent Transactions</h2>
+    <div className="w-full max-h-[400px] overflow-y-auto scrollbar-hide relative p-0">
+      <h2 className="text-lg font-semibold mb-4 sticky top-0">Recent Transactions</h2>
       <ul className="space-y-4 text-sm">
-        {transactions?.map((txn) => (
+        {transactions?.slice(0,7).map((txn) => (
           <li key={txn.id} className="flex justify-between border-b pb-2">
             <div>
               <p className="font-medium capitalize">{txn.type}</p>
-              <p className={`${getAmountColor(txn.type)}`}>
+              <p className="text-muted-foreground">
                 {txn.status}
               </p>
             </div>
             <p className={`${getAmountColor(txn.type)} font-semibold`}>
-              {txn.type.toLowerCase() === "Credit" ? "+" : "-"}₹{txn.amount}
+              {getSign(txn.type)}₹{txn.amount / 100}
             </p>
           </li>
         ))}

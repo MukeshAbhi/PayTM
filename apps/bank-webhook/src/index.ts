@@ -50,29 +50,58 @@ app.post("/toWebhook",async (req, res) => {
 
     // transcations
    try{
-        await prisma.$transaction([
-            prisma.walletBalance.upsert({
-                where: { userId: paymentInfo.userId },
-                    update: {
+        const status = await prisma.onRampTransaction.findFirst({
+            where: { userId: parsedData.data.userId},
+            select: {
+                type: true
+            }
+        })
+
+        if(!status){
+            return;
+        }
+
+        const lower = String(status).toLowerCase();
+
+        if(lower === "debit")
+        {
+            await prisma.$transaction([
+                prisma.walletBalance.update({
+                    where: { userId: parsedData.data.userId},
+                    data: {
                         amount: {
-                            increment: paymentInfo.amount
+                            decrement: paymentInfo.amount
                         }
-                },
-                create: {
-                    userId: paymentInfo.userId,
-                    amount: paymentInfo.amount,
-                    locked: 0
-                }
-            }),
-            prisma.onRampTransaction.update({
-                where: {
-                    token: paymentInfo.token
-                },
-                data: {
-                    status: "Success"
-                }
-            })
-        ]);
+                    }
+                })
+            ])
+        } else {
+            await prisma.$transaction([
+             
+                prisma.walletBalance.upsert({
+                    where: { userId: paymentInfo.userId },
+                        update: {
+                            amount: {
+                                increment: paymentInfo.amount
+                            }
+                    },
+                    create: {
+                        userId: paymentInfo.userId,
+                        amount: paymentInfo.amount,
+                        locked: 0
+                    }
+                }),
+                prisma.onRampTransaction.update({
+                    where: {
+                        token: paymentInfo.token
+                    },
+                    data: {
+                        status: "Success"
+                    }
+                })
+            ]);
+        }
+        
 
     res.status(200).json({message:"captured"})
 
