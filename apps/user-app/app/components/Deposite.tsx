@@ -120,7 +120,7 @@ function Deposite() {
   };
 
   const sendRequest = async () => {
-    await createOnrampTransaction(amount, bank?.name!);
+    await createOnrampTransaction(amount, bank?.name!, "Credit");
     window.open(bank?.redirectUrl || "")
   }
 
@@ -174,7 +174,7 @@ function Deposite() {
         <form onSubmit={sendRequest} className="flex flex-col gap-2">
           <input
             required
-            onChange={e => setAmount(Number(e.target.value))}
+            onChange={e => setAmount(Number(e.target.value)*100)}
             type="number"
             placeholder="Amount"
             className="w-full h-14 rounded-md border border-input font-bold pl-2 text-2xl bg-popover text-shadow-white"

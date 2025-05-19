@@ -1,45 +1,45 @@
 "use server"
 
-import { auth } from "@/authTypes";
 import { prisma } from "@repo/db/prisma";
 import axios from "axios";
+import { getUserData, getUserWalletBalance } from "./user";
+import { TransactionType } from "@repo/types/zodtypes";
 
 const WEBHOOK_URL = process.env.BANK_WEBHOOK_URL;
 const HMAC_KEY = process.env.HMAC_KEY;
 
-
-export async function createOnrampTransaction(amount: number, provider: string) {
-
-    const session = await auth();
-    console.log("here");
-    console.log("userid :", session?.user?.id)
-
-    if(!session || !session.user?.id)
-    {
-        console.log("No valid session");
-        return {
-            message: "User not logged in"
-        };
+export async function checkUserBalance(amount: number, provider: string, type:TransactionType){
+    const data = await getUserWalletBalance();
+    const balance = data.amount;
+    if((balance - amount) >= 0){
+        createOnrampTransaction(amount,provider,type);
+    }else{
+        return{
+            message: "You Dont Have Enough Balance"
+        }
     }
-    const userId = session.user.id;
+}
+export async function createOnrampTransaction(amount: number, provider: string, type:TransactionType ){
 
+    const user = await getUserData();
+    const userId = (user?.id) as string;
 
     //like the token is from banking provider(sbi/hdfc) => not true
     const token = (Math.random() * 1000).toString();
-   try{
+    try{
         await prisma.onRampTransaction.create({
             data:{
                 provider,
                 status:"Processing",
-                amount:amount * 100,
+                amount,
                 token,
                 startTime: new Date(),
                 userId:userId,
-                type:"Credit"
+                type,
             }
         });
 
-        await hitBankapi(amount, userId, token, HMAC_KEY as string);
+        await hitBankapiCredit(amount, userId, token, HMAC_KEY as string);
         return{
             message:"Done"
         }
@@ -50,10 +50,11 @@ export async function createOnrampTransaction(amount: number, provider: string) 
 };
 
 //mimicing a bank
-export async function hitBankapi(amount: number, userId: string, token: string ,key: string){
+export async function hitBankapiCredit(amount: number, userId: string, token: string ,key: string){
 
     await axios.post(`${WEBHOOK_URL}/toWebhook`,{
         amount, userId, token, key
     })
 
 }
+

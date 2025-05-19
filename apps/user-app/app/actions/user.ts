@@ -2,9 +2,8 @@
 
 import { auth } from "@/authTypes";
 import { prisma } from "@repo/db/prisma";
-import { BankTransaction } from "@repo/types/zodtypes"
 
-export async function getData() {
+export async function getUserData() {
 
   const session = await auth();
 
@@ -29,7 +28,7 @@ export async function getData() {
 }
 
 export async function getUserBankTranscations():Promise<any> {
-  const user = await getData();
+  const user = await getUserData();
   const userId = user?.id
   const data = await prisma.onRampTransaction.findMany({
     where: {
@@ -40,7 +39,7 @@ export async function getUserBankTranscations():Promise<any> {
 }
 
 export async function getUserWalletBalance():Promise<any> {
-  const user = await getData();
+  const user = await getUserData();
   const userId = user?.id;
   const data = await prisma.walletBalance.findUnique({
     where:{

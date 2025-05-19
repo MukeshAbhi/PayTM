@@ -3,7 +3,8 @@ import React, { useEffect, useState } from 'react'
 import { getUserWalletBalance } from '../actions/user';
 
 function Balance() {
-  const [balance, setBalance] = useState<number | null>(null);
+  const [ balance, setBalance ] = useState<number | null>(null);
+  const [ date, setDate ] = useState<number | null>(null);
 
   useEffect(() => {
     const getData = async () => {
@@ -11,19 +12,22 @@ function Balance() {
       setBalance(data.amount);
     };
     getData();
+    setDate(Date.now());
   }, []);
-
-  useEffect(() => {
-    console.log("balance updated:", balance);
-  }, [balance]);
 
   return (
     <div className="w-full rounded-xl bg-card p-6 shadow-md text-card-foreground">
       <h2 className="text-xl font-semibold mb-2">Wallet Balance</h2>
       <p className="text-3xl font-bold text-primary">
-        {balance !== null ? `₹${balance / 100}` : "Loading..."}
+        {balance !== null
+          ? new Intl.NumberFormat("en-IN", {
+              style: "currency",
+              currency: "INR",
+              minimumFractionDigits: 2,
+            }).format(balance / 100)
+          : "Loading..."}
       </p>
-      <p className="text-muted-foreground mt-2 text-sm">As of April 29, 2025</p>
+      <p className="text-muted-foreground mt-2 text-sm">{date ? new Date(date).toLocaleString() : ""}</p>
     </div>
   );
 }

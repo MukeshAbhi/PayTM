@@ -1,6 +1,10 @@
 import z from 'zod';
 import { $Enums } from "@repo/db/prisma"
 
+export const TransactionTypeSchema = z.nativeEnum($Enums.TransactionType);
+
+export type TransactionType = z.infer<typeof TransactionTypeSchema>;
+
 export const BankTransactionSchema = z.object({
   id: z.string(),
   status: z.nativeEnum($Enums.OnRampStatus),

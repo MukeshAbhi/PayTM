@@ -1,5 +1,5 @@
 import express from "express";
-import {prisma }from "@repo/db/prisma";
+import { prisma }from "@repo/db/prisma";
 import z from "zod";
 
 const app = express();
@@ -15,13 +15,13 @@ const zodSchema = z.object({
 });
 
 app.post("/toWebhook",async (req, res) => {
-     //Zod Validation
-
+     
+    //Zod Validation
     const parsedData = zodSchema.safeParse(req.body);
 
     if(!parsedData.success)
     {
-        console.error("Zod error");
+        console.error("Zod error ", parsedData.error);
         res.status(411).json({
             message:"Error while processing webhook"
         });
@@ -31,43 +31,37 @@ app.post("/toWebhook",async (req, res) => {
     const paymentInfo = parsedData.data;
 
     // Check if this request actually came from a bank , use a webhook secret here
-    try{
-        const key = parsedData.data.key;
+    
+    const key = paymentInfo.key;
 
-        if(key != HMAC_KEY){
-            res.status(411).json({
-                message:"Bank not authorised"
-            })
-            return;
-        }
-
-    }catch(error) {
-        console.error("Transaction error:", error);
+    if(key != HMAC_KEY){
         res.status(411).json({
-            message:"Error while processing webhook"
+            message:"Bank not authorised"
         })
+        return;
     }
 
+    
     // transcations
    try{
         const status = await prisma.onRampTransaction.findFirst({
-            where: { userId: parsedData.data.userId},
-            select: {
-                type: true
-            }
-        })
+            where: { userId: paymentInfo.userId},
+            select: { type: true }
+        });
 
         if(!status){
+            res.status(404).json({ message: "Transaction not found" });
             return;
         }
 
-        const lower = String(status).toLowerCase();
-
+        const lower = status.type.toLowerCase();
+        console.log("type : ", lower);
+        
         if(lower === "debit")
         {
             await prisma.$transaction([
                 prisma.walletBalance.update({
-                    where: { userId: parsedData.data.userId},
+                    where: { userId: paymentInfo.userId},
                     data: {
                         amount: {
                             decrement: paymentInfo.amount
@@ -77,7 +71,6 @@ app.post("/toWebhook",async (req, res) => {
             ])
         } else {
             await prisma.$transaction([
-             
                 prisma.walletBalance.upsert({
                     where: { userId: paymentInfo.userId },
                         update: {
@@ -103,10 +96,12 @@ app.post("/toWebhook",async (req, res) => {
         }
         
 
-    res.status(200).json({message:"captured"})
+    res.status(200).json({message:"Captured"})
 
    } catch(error) {
-       await prisma.onRampTransaction.update({
+        console.error("Transaction error:", error);
+        
+        await prisma.onRampTransaction.update({
                 where: {
                     token: paymentInfo.token
                 },
@@ -115,7 +110,7 @@ app.post("/toWebhook",async (req, res) => {
                 }
             })
 
-    console.error("Transaction error:", error);
+    
 
     res.status(411).json({
         message:"Error while processing webhook"

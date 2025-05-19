@@ -1,11 +1,12 @@
 "use client"
 import { Button } from "@repo/ui/components/button";
 import React, { useState } from "react";
+import { checkUserBalance } from "../actions/onrampTransaction";
 
 const BankTransfer = () => (
   <div className="p-4 border border-border rounded-lg bg-background">
     <p className="font-medium text-lg">Bank Transfer</p>
-    <div className="mt-4 space-y-4">
+    <div className="mt-4 flex flex-col gap-4">
       <input
         type="text"
         placeholder="Account Number"
@@ -27,7 +28,11 @@ const BankTransfer = () => (
 
 function Withdraw() {
   const [selectedMethod, setSelectedMethod] = useState<"bank">("bank");
+  const [amount, setAmount] = useState<number | null>(null);
 
+  const clickHandler = async () => {
+    await checkUserBalance(amount!,"Bank","Debit");
+  }
   const renderForm = () => {
     switch (selectedMethod) {
       case "bank":
@@ -55,15 +60,19 @@ function Withdraw() {
       {/* Withdrawal Form */}
       <div className="col-span-1 md:col-span-3 bg-card text-card-foreground p-6 rounded-2xl shadow-lg space-y-6">
         <h2 className="text-2xl font-bold">Enter Bank Details</h2>
-        <input
-          type="text"
-          placeholder="Amount"
-          className="w-full h-14 rounded-md border border-input font-bold pl-3 text-2xl bg-popover text-shadow-white"
-        />
-        {renderForm()}
-        <Button variant={"destructive"}  className="w-full bg-primary text-white font-semibold py-2 rounded-lg hover:opacity-90 transition">
-          Withdraw Funds
-        </Button>
+        <form onClick={clickHandler} className="flex flex-col gap-2">
+          <input
+            required
+            onChange={(e) => setAmount(Number(e.target.value)*100)}
+            type="number"
+            placeholder="Amount"
+            className="w-full h-14 rounded-md border border-input font-bold pl-3 text-2xl bg-popover text-shadow-white"
+          />
+          {renderForm()}
+          <Button variant={"destructive"}  className="w-full bg-primary text-white font-semibold py-2 rounded-lg hover:opacity-90 transition">
+            Withdraw Funds
+          </Button>
+        </form>
       </div>
     </div>
   );
