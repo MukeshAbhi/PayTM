@@ -133,6 +133,9 @@ importers:
       '@repo/store':
         specifier: workspace:^
         version: link:../../packages/store
+      '@repo/types':
+        specifier: workspace:*
+        version: link:../../packages/types
       '@repo/ui':
         specifier: workspace:*
         version: link:../../packages/ui
@@ -258,6 +261,15 @@ importers:
       jotai:
         specifier: ^2.12.3
         version: 2.12.3(@types/react@19.1.0)(react@19.1.0)
+
+  packages/types:
+    dependencies:
+      '@repo/db':
+        specifier: workspace:*
+        version: link:../db
+      zod:
+        specifier: ^3.24.4
+        version: 3.24.4
 
   packages/typescript-config: {}
 
@@ -3573,6 +3585,9 @@ packages:
 
   zod@3.24.3:
     resolution: {integrity: sha512-HhY1oqzWCQWuUqvBFnsyrtZRhyPeR7SUGv+C4+MsisMuVfSPx8HpwWqH8tRahSlt6M3PiFAcoeFhZAqIXTxoSg==}
+
+  zod@3.24.4:
+    resolution: {integrity: sha512-OdqJE9UDRPwWsrHjLN2F8bPxvwJBK22EHLWtanu0LSYr5YqzsaaW3RMgmjwr8Rypg5k+meEJdSPXJZXE/yqOMg==}
 
 snapshots:
 
@@ -6977,3 +6992,5 @@ snapshots:
   yocto-queue@0.1.0: {}
 
   zod@3.24.3: {}
+
+  zod@3.24.4: {}

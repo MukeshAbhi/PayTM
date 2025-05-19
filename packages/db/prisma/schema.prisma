@@ -20,8 +20,8 @@ model User {
   emailVerified DateTime?
   image         String?
 
-  OnRampTranscation OnRampTranscation[]
-  WalletTranscation WalletTranscation[]
+  OnRampTranscation OnRampTransaction[]
+  WalletTranscation WalletTransaction[]
   WBalance      WalletBalance[]
   BBalance      BankBalance[]
 
@@ -34,10 +34,10 @@ model User {
   updatedAt DateTime @updatedAt
 }
 
-model OnRampTranscation {
+model OnRampTransaction {
   id            String          @id @default(cuid())
   status        OnRampStatus
-  type          TranscationType
+  type          TransactionType
   token         String          @unique
   provider      String
   amount        Int
@@ -46,10 +46,10 @@ model OnRampTranscation {
   user          User            @relation(fields: [userId], references: [id])
 }
 
-model WalletTranscation {
+model WalletTransaction {
   id            String          @id @default(cuid())
   status        OnRampStatus
-  type          TranscationType
+  type          TransactionType
   token         String          @unique
   amount        Int
   startTime     DateTime
@@ -63,7 +63,7 @@ enum OnRampStatus {
   Processing
 }
 
-enum TranscationType {
+enum TransactionType {
   Credit
   Debit
 }

@@ -27,7 +27,7 @@ export async function createOnrampTransaction(amount: number, provider: string) 
     //like the token is from banking provider(sbi/hdfc) => not true
     const token = (Math.random() * 1000).toString();
    try{
-        await prisma.onRampTranscation.create({
+        await prisma.onRampTransaction.create({
             data:{
                 provider,
                 status:"Processing",

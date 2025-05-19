@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@prisma/client": "6.6.0",
+    "@repo/types":"workspace:*",
     "@repo/db": "workspace:*",
     "@repo/store": "workspace:^",
     "@repo/ui": "workspace:*",

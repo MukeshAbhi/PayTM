@@ -64,7 +64,7 @@ app.post("/toWebhook",async (req, res) => {
                     locked: 0
                 }
             }),
-            prisma.onRampTranscation.update({
+            prisma.onRampTransaction.update({
                 where: {
                     token: paymentInfo.token
                 },
@@ -77,7 +77,7 @@ app.post("/toWebhook",async (req, res) => {
     res.status(200).json({message:"captured"})
 
    } catch(error) {
-       await prisma.onRampTranscation.update({
+       await prisma.onRampTransaction.update({
                 where: {
                     token: paymentInfo.token
                 },
