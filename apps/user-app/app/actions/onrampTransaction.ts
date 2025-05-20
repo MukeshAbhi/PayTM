@@ -15,7 +15,8 @@ export async function checkUserBalance(amount: number, provider: string, type:Tr
         createOnrampTransaction(amount,provider,type);
     }else{
         return{
-            message: "You Dont Have Enough Balance"
+            message: "You Dont Have Enough Balance",
+            status: "failed"
         }
     }
 }
@@ -23,7 +24,8 @@ export async function createOnrampTransaction(amount: number, provider: string, 
 
     const user = await getUserData();
     const userId = (user?.id) as string;
-
+    console.log("type : ", type);
+    
     //like the token is from banking provider(sbi/hdfc) => not true
     const token = (Math.random() * 1000).toString();
     try{
@@ -41,11 +43,15 @@ export async function createOnrampTransaction(amount: number, provider: string, 
 
         await hitBankapiCredit(amount, userId, token, HMAC_KEY as string);
         return{
-            message:"Done"
+            message:"Waiting For the Bank to Process Your Request",
+            status:"Success"
         }
    } catch(e) {
         console.log("Failed in create an Onramptranscation ", e);
-        return null;
+        return{
+            message:"Failed to connect with your bank",
+            status:"failed"
+        }
    }
 };
 

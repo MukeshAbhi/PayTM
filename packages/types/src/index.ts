@@ -1,28 +1,27 @@
 import z from 'zod';
 import { $Enums } from "@repo/db/prisma"
 
-export const TransactionTypeSchema = z.nativeEnum($Enums.TransactionType);
+export type TransactionType = $Enums.TransactionType;
 
-export type TransactionType = z.infer<typeof TransactionTypeSchema>;
+export interface BankTransaction {
+  id: string;
+  status: $Enums.OnRampStatus;
+  type: $Enums.TransactionType;
+  token: string;
+  amount: number;
+  startTime: Date;
+  userId: string;
+  provider: string;
+}
 
-export const BankTransactionSchema = z.object({
-  id: z.string(),
-  status: z.nativeEnum($Enums.OnRampStatus),
-  type: z.nativeEnum($Enums.TransactionType),
-  token: z.string(),
-  amount: z.number(),
-  startTime: z.date(),
-  userId: z.string(),
-  provider: z.string(),
-});
+export interface WalletBalance {
+  id: string;
+  userId: string;
+  amount: number;
+  locked: number;
+}
 
-export type BankTransaction = z.infer<typeof BankTransactionSchema>;
-
-export const WalletBalanceSchema = z.object({
-  id: z.string(),
-  userId: z.string(),
-  amount: z.number(),
-  locked: z.number(),
-})
-
-export type WalletBalance = z.infer<typeof WalletBalanceSchema>;
+export interface ErrMsg {
+    message: string;
+    status: string
+}

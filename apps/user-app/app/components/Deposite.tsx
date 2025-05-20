@@ -2,6 +2,8 @@
 import { Button } from "@repo/ui/components/button";
 import React, { useState } from "react";
 import { createOnrampTransaction } from "../actions/onrampTransaction";
+import { useForm } from "react-hook-form";
+import { ErrMsg } from "@repo/types/zodtypes";
 
 const Card = () => (
   <div className="p-4 border border-border rounded-lg bg-background">
@@ -99,11 +101,42 @@ const NetBanking = ({ onBankSelect }: NetBankingProps) => {
 
 function Deposite() {
   const [selectedMethod, setSelectedMethod] = useState<"card" | "upi" | "netbanking">("netbanking");
-  const [amount, setAmount] = useState<number>(0);
   const [bank, setBank] = useState<Bank>({
     name:"card",
     redirectUrl:""
   });
+  const [errMsg, setErrMsg] = useState<ErrMsg>({
+                                            message:"",
+                                            status:""
+                                        });
+  
+  const{register, handleSubmit, formState:{ errors}, reset} = useForm({mode: "onChange"});
+
+  const onClickHandler =  async (data: any ) => {
+    const { amount } = data;
+    try {
+          const res =  await createOnrampTransaction((Number(amount)*100), bank?.name!, "Credit");
+
+          if(!res){
+            setErrMsg({
+              message:"Something went wrong. Please try again..!",
+              status:"failed"
+            })
+            return;
+          }
+
+          if(res.status == "failed"){
+            setErrMsg(res);
+            reset();
+          }else{
+            setErrMsg(res);
+            window.open(bank?.redirectUrl || "")
+            reset();
+          }
+    }catch(error) {
+      console.log(error);
+    }
+  }
 
   const renderForm = () => {
     switch (selectedMethod) {
@@ -118,11 +151,6 @@ function Deposite() {
         return null;
     }
   };
-
-  const sendRequest = async () => {
-    await createOnrampTransaction(amount, bank?.name!, "Credit");
-    window.open(bank?.redirectUrl || "")
-  }
 
   return (
     <div className="max-w-5xl mx-auto p-6 grid grid-cols-1 md:grid-cols-4 gap-6">
@@ -171,18 +199,31 @@ function Deposite() {
       {/* Payment Form */}
       <div className="col-span-1 md:col-span-3 bg-card text-card-foreground p-6 rounded-2xl shadow-lg space-y-6">
         <h2 className="text-2xl font-bold">Enter Payment Details</h2>
-        <form onSubmit={sendRequest} className="flex flex-col gap-2">
+        <form onSubmit={handleSubmit(onClickHandler)} className="flex flex-col gap-2">
           <input
-            required
-            onChange={e => setAmount(Number(e.target.value)*100)}
+            {...register("amount", {
+              required: "Please enter Amount"
+            })}
             type="number"
             placeholder="Amount"
             className="w-full h-14 rounded-md border border-input font-bold pl-2 text-2xl bg-popover text-shadow-white"
           />
+          {errors.amount?.message && (
+                <span className="text-xs text-[#f64949fe] mt-0.5 ml-2">{String(errors.amount?.message)}</span>
+            )}
           {renderForm()}
           <Button variant={"destructive"} className="w-full text-white">
             Add Money
           </Button>
+          {errMsg?.message && (
+            <span className={`text-sm ${
+              errMsg.status == 'failed'
+              ? "text-[#f64949fe]"
+              : "text-[#2ba150fe]"
+            } mt-0.5`}>
+              {errMsg.message}
+            </span>
+          )}
         </form>
       </div>
     </div>

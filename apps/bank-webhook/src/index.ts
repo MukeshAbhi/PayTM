@@ -45,7 +45,7 @@ app.post("/toWebhook",async (req, res) => {
     // transcations
    try{
         const status = await prisma.onRampTransaction.findFirst({
-            where: { userId: paymentInfo.userId},
+            where: { token: paymentInfo.token},
             select: { type: true }
         });
 
