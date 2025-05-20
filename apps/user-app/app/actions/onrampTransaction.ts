@@ -11,8 +11,15 @@ const HMAC_KEY = process.env.HMAC_KEY;
 export async function checkUserBalance(amount: number, provider: string, type:TransactionType){
     const data = await getUserWalletBalance();
     const balance = data.amount;
+    console.log("balance ", balance);
+    console.log("amount ", amount );
+    
     if((balance - amount) >= 0){
         createOnrampTransaction(amount,provider,type);
+        return{
+            message: "Transcation Successful",
+            status: "success"
+        }
     }else{
         return{
             message: "You Dont Have Enough Balance",
@@ -43,7 +50,7 @@ export async function createOnrampTransaction(amount: number, provider: string, 
 
         await hitBankapiCredit(amount, userId, token, HMAC_KEY as string);
         return{
-            message:"Waiting For the Bank to Process Your Request",
+            message:"Transaction Successful",
             status:"Success"
         }
    } catch(e) {

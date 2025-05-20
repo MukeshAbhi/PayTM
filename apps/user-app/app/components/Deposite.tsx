@@ -3,7 +3,7 @@ import { Button } from "@repo/ui/components/button";
 import React, { useState } from "react";
 import { createOnrampTransaction } from "../actions/onrampTransaction";
 import { useForm } from "react-hook-form";
-import { ErrMsg } from "@repo/types/zodtypes";
+import { amountType, ErrMsg } from "@repo/types/zodtypes";
 
 const Card = () => (
   <div className="p-4 border border-border rounded-lg bg-background">
@@ -114,6 +114,17 @@ function Deposite() {
 
   const onClickHandler =  async (data: any ) => {
     const { amount } = data;
+    const parsedData = amountType.safeParse(amount);
+
+    if(parsedData.error || !parsedData)
+    {
+      setErrMsg({
+        message:"Amount must be a Positive Number",
+        status: "failed"
+      })
+      return;
+    }
+
     try {
           const res =  await createOnrampTransaction((Number(amount)*100), bank?.name!, "Credit");
 
@@ -199,12 +210,21 @@ function Deposite() {
       {/* Payment Form */}
       <div className="col-span-1 md:col-span-3 bg-card text-card-foreground p-6 rounded-2xl shadow-lg space-y-6">
         <h2 className="text-2xl font-bold">Enter Payment Details</h2>
+        {errMsg?.message && (
+            <span className={`text-sm ${
+              errMsg.status == 'failed'
+              ? "text-[#f64949fe]"
+              : "text-[#2ba150fe]"
+            } mt-0.5`}>
+              {errMsg.message}
+            </span>
+          )}
         <form onSubmit={handleSubmit(onClickHandler)} className="flex flex-col gap-2">
           <input
             {...register("amount", {
               required: "Please enter Amount"
             })}
-            type="number"
+            type="text"
             placeholder="Amount"
             className="w-full h-14 rounded-md border border-input font-bold pl-2 text-2xl bg-popover text-shadow-white"
           />
@@ -215,15 +235,7 @@ function Deposite() {
           <Button variant={"destructive"} className="w-full text-white">
             Add Money
           </Button>
-          {errMsg?.message && (
-            <span className={`text-sm ${
-              errMsg.status == 'failed'
-              ? "text-[#f64949fe]"
-              : "text-[#2ba150fe]"
-            } mt-0.5`}>
-              {errMsg.message}
-            </span>
-          )}
+          
         </form>
       </div>
     </div>

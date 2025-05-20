@@ -4,13 +4,22 @@ import { getUserBankTranscations } from '../actions/user';
 import { BankTransaction } from '@repo/types/zodtypes';
 
 function BankTransactions() {
-const [ transactions, setTranscations ] = useState<BankTransaction[]>()
+const [ transactions, setTransactions ] = useState<BankTransaction[]>()
+const [ newTransaction, setNewTransaction] = useState<BankTransaction[]>()
+
   useEffect(() => {
     const getData = async () => {
       const data = await getUserBankTranscations();
-      setTranscations(data);
+      const all = data?.OnRampTranscation || [];
+      
+      setTransactions(all);
+
+      const last6 = all.slice(-6).reverse();
+  
+      setNewTransaction(last6);
     }
     getData();
+
   },[]);
 
 const getAmountColor = (status: string) => {
@@ -30,7 +39,7 @@ const getSign = (type: string) => {
     <div className="w-full max-h-[400px] overflow-y-auto scrollbar-hide relative p-0">
       <h2 className="text-lg font-semibold mb-4 sticky top-0">Recent Transactions</h2>
       <ul className="space-y-4 text-sm">
-        {transactions?.slice(0,7).map((txn) => (
+        {newTransaction?.map((txn) => (
           <li key={txn.id} className="flex justify-between border-b pb-2">
             <div>
               <p className="font-medium capitalize">{txn.type}</p>

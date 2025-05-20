@@ -30,11 +30,16 @@ export async function getUserData() {
 export async function getUserBankTranscations():Promise<any> {
   const user = await getUserData();
   const userId = user?.id
-  const data = await prisma.onRampTransaction.findMany({
+  const data = await prisma.user.findFirst({
     where: {
-      userId
+      id: userId
+    },
+    select: {
+      OnRampTranscation: true
     }
+    
   })
+  
   return data;
 }
 

@@ -25,3 +25,5 @@ export interface ErrMsg {
     message: string;
     status: string
 }
+
+export const amountType =  z.string().regex(/^\d+$/, "Amount must be a number")

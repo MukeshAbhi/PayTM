@@ -13,7 +13,6 @@ function Balance() {
       setDate(Date.now());
     };
     
-    
   useEffect(() => {
     getData();
   }, []);
