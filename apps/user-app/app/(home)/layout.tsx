@@ -1,6 +1,5 @@
-import AppbarClient from "@/app/pages/AppbarClient";
+import AppbarClient from "@/ui/AppbarClient";
 import { JSX } from "react";
-
 
 export default function Layout({children} : {children: React.ReactNode}): JSX.Element {
     return(

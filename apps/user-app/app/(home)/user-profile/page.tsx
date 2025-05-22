@@ -1,9 +1,9 @@
-import Profile from "@/app/pages/Profile";
+import Profile from "@/ui/Profile";
 
 export default function () {
     return(
         <div>
-            <Profile />
+            <Profile/>
         </div>
        
     )
