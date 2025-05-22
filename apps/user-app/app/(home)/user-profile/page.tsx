@@ -1,9 +1,7 @@
-import Dashboard from "@/app/pages/Dashboard";
-
 export default function () {
     return(
         <div>
-            <Dashboard />
+            Prifile
         </div>
        
     )
