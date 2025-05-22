@@ -22,16 +22,39 @@ export function SignUpForm({
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
         <CardHeader>
-          <CardTitle className="text-2xl">SIGN UP</CardTitle>
-          <CardDescription>
-            Enter your email below
-          </CardDescription>
+          <CardTitle className="text-2xl">PAYMENTS</CardTitle>
+          <CardTitle className="text-xl">SIGN UP</CardTitle>
         </CardHeader>
         <CardContent>
           <form action={loginResend}>
-            <div className="flex flex-col gap-6">
-              <div className="grid gap-5">
-                <Label htmlFor="email">Email</Label>
+            <div className="grid gap-5">
+                <Label htmlFor="name">User Name</Label>
+                <Input
+                  name="name"
+                  id="name"
+                  type="text"
+                  placeholder="John"
+                  required
+                />
+              </div>
+            
+            <div className="grid gap-3 pt-2">
+                <Label htmlFor="password">Password</Label>
+                <Input
+                  name="password"
+                  id="password"
+                  type="password"
+                  placeholder="123456"
+                  required
+                />
+              </div>
+            
+            <div className="flex flex-col gap-3">
+              <div className="grid gap-3">
+                <Label className="pt-4 "  htmlFor="email">Email</Label>
+                <CardDescription>
+                  Enter your email below
+                </CardDescription>
                 <Input
                   name="email"
                   id="email"
@@ -43,17 +66,19 @@ export function SignUpForm({
               <Button type="submit" className="w-full">
                 Sign Up
               </Button>
-              <Button onClick={loginGoogle} variant="outline" className="w-full">
-                Sign Up with Google
-              </Button>
+              
             </div>
-            <div className="mt-4 text-center text-sm">
+            
+          </form>
+          <Button onClick={loginGoogle} variant="outline" className="w-full mt-4">
+                Sign Up with Google
+          </Button>
+          <div className="mt-4 text-center text-sm ">
               Already have an account?{" "}
               <a href="/user-signin" className="underline underline-offset-4">
                 Sign in
               </a>
             </div>
-          </form>
         </CardContent>
       </Card>
     </div>

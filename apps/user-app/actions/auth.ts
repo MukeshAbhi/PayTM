@@ -4,6 +4,7 @@ import { signIn, signOut } from "@/authTypes"
 import { redirect } from "next/navigation";
 
 export const loginResend = async (formDta: FormData) => {
+    console.log(formDta);
     await signIn("resend", formDta);
 }
 
