@@ -1,16 +1,15 @@
 "use client"
-import { AppSidebar } from "../components/DashboardSidebar"
+import { AppSidebar } from "../components/ProfileSidebar"
 import { Separator } from "@repo/ui/components/separator"
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
 } from "@repo/ui/components/sidebar"
-import Home from "../components/Home"
 import { useState } from "react"
-import Transfer from "../components/Transfer"
-import Transcations from "../components/Transcations"
-import Investments from "../components/Investments"
+import { UserProfile } from "../components/UserProfile"
+import { Passwords } from "../components/Passwords"
+import { WalletPin } from "../components/WalletPin"
 
 export default function Dashboard() {
   const [ selected, setSelected ] = useState("Home");
@@ -18,16 +17,14 @@ export default function Dashboard() {
 
   const renderComponents = () => {
     switch (selected) {
-      case "Home":
-        return <Home />;
-      case "Transfer":
-        return <Transfer />;
-      case "Transcations":
-        return <Transcations />;
-      case "Investments":
-        return <Investments />;
+      case "Profile":
+        return <UserProfile />;
+      case "Password":
+        return <Passwords />;
+      case "WalletPin":
+        return <WalletPin />;
       default: 
-        return <Home />;
+        return <UserProfile />;
     }
   }
   return (
