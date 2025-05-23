@@ -28,8 +28,10 @@ export interface ErrMsg {
 
 export const amountType =  z.string().regex(/^\d+$/, "Amount must be a number")
 
-export const registerSchema = z.object({
-    namae: z.string(),
+export const signUpSchema = z.object({
+    name: z.string(),
     email: z.string(),
     password: z.string().min(6)
 });
+
+export type SignUpSchema = z.infer<typeof signUpSchema>;
