@@ -35,3 +35,8 @@ export const signUpSchema = z.object({
 });
 
 export type SignUpSchema = z.infer<typeof signUpSchema>;
+
+export interface SignIn {
+  email: string;
+  password: string
+}

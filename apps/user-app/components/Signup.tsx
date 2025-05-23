@@ -15,7 +15,6 @@ import { ErrMsg, SignUpSchema } from "@repo/types/zodtypes"
 import { useState } from "react"
 import { axiosNew } from "@/lib"
 
-
 export function SignUpForm({
   className,
   ...props
@@ -40,12 +39,15 @@ export function SignUpForm({
       // Axios puts response data under `res.data`
       const resData = res.data;
 
-      if (res.status !== 200) {
+      if (res.status !== 201) {
         setErrMsg({
           message: resData.message ,
           status: "failed"
         });
       } else {
+        const formData = new FormData();
+        formData.append("email", email);
+        await loginResend(formData);
         setErrMsg({
           message: resData.message,
           status: "success"
@@ -59,6 +61,7 @@ export function SignUpForm({
         status: "failed"
       });
     }
+
   }
 
   return (
@@ -69,7 +72,8 @@ export function SignUpForm({
           <CardTitle className="text-xl">SIGN UP</CardTitle>
         </CardHeader>
         <CardContent>
-          {errMsg?.message && (
+          <div className="mb-2">
+            {errMsg?.message && (
             <span className={`text-sm ${
               errMsg.status == 'failed'
               ? "text-[#f64949fe]"
@@ -78,6 +82,7 @@ export function SignUpForm({
               {errMsg.message}
             </span>
           )}
+          </div>
           <form
               onSubmit={async (e) => {
                 e.preventDefault();
@@ -107,7 +112,7 @@ export function SignUpForm({
                   name="password"
                   id="password"
                   type="password"
-                  placeholder="123456"
+                  placeholder="*******"
                   required
                 />
               </div>
