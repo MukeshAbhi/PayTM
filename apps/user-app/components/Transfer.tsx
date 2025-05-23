@@ -4,8 +4,11 @@ import { Input } from "@repo/ui/components/input";
 import { Label } from "@repo/ui/components/label";
 import { Button } from "@repo/ui/components/button";
 import { InputForForm } from "./input";
+import { InputOTP, InputOTPGroup, InputOTPSlot } from "@repo/ui/components/input-otp";
+import { useState } from "react";
 
 function Transfer() {
+  const [value, setValue] = useState("")
   const {
     register,
     handleSubmit,
@@ -16,7 +19,7 @@ function Transfer() {
   return (
     <div className="min-h-screen w-full flex flex-col lg:flex-row p-4 gap-4">
       {/* Left Panel - Transfer Form */}
-      <div className="w-full md:w-1/2 bg-muted/50 rounded-2xl shadow-md p-6 flex flex-col justify-between">
+      <div className="w-full md:w-3/4 lg:w-1/2 bg-muted/50 rounded-2xl shadow-md p-6 flex flex-col justify-between">
         <div className="space-y-6">
           <div className="text-center space-y-2">
             <p className="text-3xl font-bold">Transfer</p>
@@ -85,6 +88,30 @@ function Transfer() {
               )}
             </div>
 
+            {/* Wallet Pin */}
+            <div className="flex flex-col gap-1">
+              <Label className="text-xl font-semibold">Wallet PIN</Label>
+              <div className="w-full max-w-md">
+                <div className="space-y-4">
+                  <InputOTP
+                      maxLength={6}
+                      value={value}
+                      onChange={(value) => setValue(value)}
+                  >
+                      <InputOTPGroup className="flex justify-center pl-20 gap-2 sm:gap-3">
+                      <InputOTPSlot index={0}  />
+                      <InputOTPSlot index={1} />
+                      <InputOTPSlot index={2} />
+                      <InputOTPSlot index={3} />
+                      <InputOTPSlot index={4} />
+                      <InputOTPSlot index={5} />
+                      </InputOTPGroup>
+                  </InputOTP>
+                </div>
+              </div>
+            </div>
+
+
             {/* Submit Button */}
             <Button
               type="submit"
@@ -97,7 +124,7 @@ function Transfer() {
       </div>
 
       {/* Right Panel - Recent Payments */}
-      <div className="w-full md:w-1/2 bg-muted/50 rounded-2xl shadow-md p-6">
+      <div className="w-full md:w-3/4 lg:w-1/2 bg-muted/50 rounded-2xl shadow-md p-6">
         <RecentPayments />
       </div>
     </div>

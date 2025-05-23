@@ -5,7 +5,6 @@ import { useState } from "react"
 export const WalletPin = () => {
     const [isPinPresent, setIsPinPresent] = useState<boolean>(true);
 
-
    return(
         isPinPresent  ? <ChangeWalletPin /> : <SetWalletPin/> 
    )
