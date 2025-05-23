@@ -6,7 +6,7 @@ export default async function Page() {
   if (session?.user) {
     redirect('/user-dashboard')
   } else {
-    redirect('/user-signin')
+    redirect('/signin')
   }
     
 }

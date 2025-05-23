@@ -24,6 +24,13 @@ export const authOptions : NextAuthConfig = ({
       }
       return session;
     },
+    async jwt({ token, user}) {
+      if(user) {
+        token.sub = user.id,
+        token.email = user.email
+      }
+      return token;
+    }
   },
  
 })

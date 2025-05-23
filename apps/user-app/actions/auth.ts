@@ -12,15 +12,15 @@ export const loginResend = async (formDta: FormData) => {
 }
 
 export const loginGoogle = async() => {
-    await signIn("google",{redirectTo: '/'});
+    await signIn("google",{redirectTo: '/user-dashboard'});
 }
 
 export const logout = async () => {
-    await signOut({redirectTo: "/user-signin"});
+    await signOut({redirectTo: "/signin"});
 }
 
 export const homeRedirect = async () => {
-    redirect("/user-signin");
+    redirect("/signin");
 }
 
 export const customSignUp = async (data: SignUpSchema) => {

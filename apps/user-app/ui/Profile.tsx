@@ -11,8 +11,8 @@ import { UserProfile } from "../components/UserProfile"
 import { Passwords } from "../components/Passwords"
 import { WalletPin } from "../components/WalletPin"
 
-export default function Dashboard() {
-  const [ selected, setSelected ] = useState("Home");
+export default function Profile() {
+  const [ selected, setSelected ] = useState("Profile");
   console.log(selected)
 
   const renderComponents = () => {
