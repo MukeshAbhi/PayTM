@@ -21,7 +21,7 @@ export default function Profile() {
         return <UserProfile />;
       case "Password":
         return <Passwords />;
-      case "WalletPin":
+      case "Wallet Pin":
         return <WalletPin />;
       default: 
         return <UserProfile />;
