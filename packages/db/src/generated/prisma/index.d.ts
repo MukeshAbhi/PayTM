@@ -1627,8 +1627,8 @@ export namespace Prisma {
    */
 
   export type UserCountOutputType = {
-    OnRampTranscation: number
-    WalletTranscation: number
+    OnRampTransaction: number
+    WalletTransaction: number
     WBalance: number
     BBalance: number
     accounts: number
@@ -1637,8 +1637,8 @@ export namespace Prisma {
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    OnRampTranscation?: boolean | UserCountOutputTypeCountOnRampTranscationArgs
-    WalletTranscation?: boolean | UserCountOutputTypeCountWalletTranscationArgs
+    OnRampTransaction?: boolean | UserCountOutputTypeCountOnRampTransactionArgs
+    WalletTransaction?: boolean | UserCountOutputTypeCountWalletTransactionArgs
     WBalance?: boolean | UserCountOutputTypeCountWBalanceArgs
     BBalance?: boolean | UserCountOutputTypeCountBBalanceArgs
     accounts?: boolean | UserCountOutputTypeCountAccountsArgs
@@ -1660,14 +1660,14 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountOnRampTranscationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserCountOutputTypeCountOnRampTransactionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: OnRampTransactionWhereInput
   }
 
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountWalletTranscationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserCountOutputTypeCountWalletTransactionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: WalletTransactionWhereInput
   }
 
@@ -1729,6 +1729,7 @@ export namespace Prisma {
     image: string | null
     paymentId: string | null
     walletPin: string | null
+    password: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1741,6 +1742,7 @@ export namespace Prisma {
     image: string | null
     paymentId: string | null
     walletPin: string | null
+    password: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1753,6 +1755,7 @@ export namespace Prisma {
     image: number
     paymentId: number
     walletPin: number
+    password: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -1767,6 +1770,7 @@ export namespace Prisma {
     image?: true
     paymentId?: true
     walletPin?: true
+    password?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1779,6 +1783,7 @@ export namespace Prisma {
     image?: true
     paymentId?: true
     walletPin?: true
+    password?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1791,6 +1796,7 @@ export namespace Prisma {
     image?: true
     paymentId?: true
     walletPin?: true
+    password?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -1876,6 +1882,7 @@ export namespace Prisma {
     image: string | null
     paymentId: string | null
     walletPin: string | null
+    password: string
     createdAt: Date
     updatedAt: Date
     _count: UserCountAggregateOutputType | null
@@ -1905,10 +1912,11 @@ export namespace Prisma {
     image?: boolean
     paymentId?: boolean
     walletPin?: boolean
+    password?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    OnRampTranscation?: boolean | User$OnRampTranscationArgs<ExtArgs>
-    WalletTranscation?: boolean | User$WalletTranscationArgs<ExtArgs>
+    OnRampTransaction?: boolean | User$OnRampTransactionArgs<ExtArgs>
+    WalletTransaction?: boolean | User$WalletTransactionArgs<ExtArgs>
     WBalance?: boolean | User$WBalanceArgs<ExtArgs>
     BBalance?: boolean | User$BBalanceArgs<ExtArgs>
     accounts?: boolean | User$accountsArgs<ExtArgs>
@@ -1925,6 +1933,7 @@ export namespace Prisma {
     image?: boolean
     paymentId?: boolean
     walletPin?: boolean
+    password?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
@@ -1937,6 +1946,7 @@ export namespace Prisma {
     image?: boolean
     paymentId?: boolean
     walletPin?: boolean
+    password?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
@@ -1949,14 +1959,15 @@ export namespace Prisma {
     image?: boolean
     paymentId?: boolean
     walletPin?: boolean
+    password?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "paymentId" | "walletPin" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "paymentId" | "walletPin" | "password" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    OnRampTranscation?: boolean | User$OnRampTranscationArgs<ExtArgs>
-    WalletTranscation?: boolean | User$WalletTranscationArgs<ExtArgs>
+    OnRampTransaction?: boolean | User$OnRampTransactionArgs<ExtArgs>
+    WalletTransaction?: boolean | User$WalletTransactionArgs<ExtArgs>
     WBalance?: boolean | User$WBalanceArgs<ExtArgs>
     BBalance?: boolean | User$BBalanceArgs<ExtArgs>
     accounts?: boolean | User$accountsArgs<ExtArgs>
@@ -1970,8 +1981,8 @@ export namespace Prisma {
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
     objects: {
-      OnRampTranscation: Prisma.$OnRampTransactionPayload<ExtArgs>[]
-      WalletTranscation: Prisma.$WalletTransactionPayload<ExtArgs>[]
+      OnRampTransaction: Prisma.$OnRampTransactionPayload<ExtArgs>[]
+      WalletTransaction: Prisma.$WalletTransactionPayload<ExtArgs>[]
       WBalance: Prisma.$WalletBalancePayload<ExtArgs>[]
       BBalance: Prisma.$BankBalancePayload<ExtArgs>[]
       accounts: Prisma.$AccountPayload<ExtArgs>[]
@@ -1986,6 +1997,7 @@ export namespace Prisma {
       image: string | null
       paymentId: string | null
       walletPin: string | null
+      password: string
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["user"]>
@@ -2382,8 +2394,8 @@ export namespace Prisma {
    */
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    OnRampTranscation<T extends User$OnRampTranscationArgs<ExtArgs> = {}>(args?: Subset<T, User$OnRampTranscationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OnRampTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    WalletTranscation<T extends User$WalletTranscationArgs<ExtArgs> = {}>(args?: Subset<T, User$WalletTranscationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WalletTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    OnRampTransaction<T extends User$OnRampTransactionArgs<ExtArgs> = {}>(args?: Subset<T, User$OnRampTransactionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OnRampTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    WalletTransaction<T extends User$WalletTransactionArgs<ExtArgs> = {}>(args?: Subset<T, User$WalletTransactionArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WalletTransactionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     WBalance<T extends User$WBalanceArgs<ExtArgs> = {}>(args?: Subset<T, User$WBalanceArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WalletBalancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     BBalance<T extends User$BBalanceArgs<ExtArgs> = {}>(args?: Subset<T, User$BBalanceArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BankBalancePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     accounts<T extends User$accountsArgs<ExtArgs> = {}>(args?: Subset<T, User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -2425,6 +2437,7 @@ export namespace Prisma {
     readonly image: FieldRef<"User", 'String'>
     readonly paymentId: FieldRef<"User", 'String'>
     readonly walletPin: FieldRef<"User", 'String'>
+    readonly password: FieldRef<"User", 'String'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
   }
@@ -2815,9 +2828,9 @@ export namespace Prisma {
   }
 
   /**
-   * User.OnRampTranscation
+   * User.OnRampTransaction
    */
-  export type User$OnRampTranscationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$OnRampTransactionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the OnRampTransaction
      */
@@ -2839,9 +2852,9 @@ export namespace Prisma {
   }
 
   /**
-   * User.WalletTranscation
+   * User.WalletTransaction
    */
-  export type User$WalletTranscationArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$WalletTransactionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the WalletTransaction
      */
@@ -11792,6 +11805,7 @@ export namespace Prisma {
     image: 'image',
     paymentId: 'paymentId',
     walletPin: 'walletPin',
+    password: 'password',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -12033,10 +12047,11 @@ export namespace Prisma {
     image?: StringNullableFilter<"User"> | string | null
     paymentId?: StringNullableFilter<"User"> | string | null
     walletPin?: StringNullableFilter<"User"> | string | null
+    password?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
-    OnRampTranscation?: OnRampTransactionListRelationFilter
-    WalletTranscation?: WalletTransactionListRelationFilter
+    OnRampTransaction?: OnRampTransactionListRelationFilter
+    WalletTransaction?: WalletTransactionListRelationFilter
     WBalance?: WalletBalanceListRelationFilter
     BBalance?: BankBalanceListRelationFilter
     accounts?: AccountListRelationFilter
@@ -12052,10 +12067,11 @@ export namespace Prisma {
     image?: SortOrderInput | SortOrder
     paymentId?: SortOrderInput | SortOrder
     walletPin?: SortOrderInput | SortOrder
+    password?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    OnRampTranscation?: OnRampTransactionOrderByRelationAggregateInput
-    WalletTranscation?: WalletTransactionOrderByRelationAggregateInput
+    OnRampTransaction?: OnRampTransactionOrderByRelationAggregateInput
+    WalletTransaction?: WalletTransactionOrderByRelationAggregateInput
     WBalance?: WalletBalanceOrderByRelationAggregateInput
     BBalance?: BankBalanceOrderByRelationAggregateInput
     accounts?: AccountOrderByRelationAggregateInput
@@ -12074,10 +12090,11 @@ export namespace Prisma {
     emailVerified?: DateTimeNullableFilter<"User"> | Date | string | null
     image?: StringNullableFilter<"User"> | string | null
     walletPin?: StringNullableFilter<"User"> | string | null
+    password?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
-    OnRampTranscation?: OnRampTransactionListRelationFilter
-    WalletTranscation?: WalletTransactionListRelationFilter
+    OnRampTransaction?: OnRampTransactionListRelationFilter
+    WalletTransaction?: WalletTransactionListRelationFilter
     WBalance?: WalletBalanceListRelationFilter
     BBalance?: BankBalanceListRelationFilter
     accounts?: AccountListRelationFilter
@@ -12093,6 +12110,7 @@ export namespace Prisma {
     image?: SortOrderInput | SortOrder
     paymentId?: SortOrderInput | SortOrder
     walletPin?: SortOrderInput | SortOrder
+    password?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: UserCountOrderByAggregateInput
@@ -12111,6 +12129,7 @@ export namespace Prisma {
     image?: StringNullableWithAggregatesFilter<"User"> | string | null
     paymentId?: StringNullableWithAggregatesFilter<"User"> | string | null
     walletPin?: StringNullableWithAggregatesFilter<"User"> | string | null
+    password?: StringWithAggregatesFilter<"User"> | string
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
@@ -12635,10 +12654,11 @@ export namespace Prisma {
     image?: string | null
     paymentId?: string | null
     walletPin?: string | null
+    password: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    OnRampTranscation?: OnRampTransactionCreateNestedManyWithoutUserInput
-    WalletTranscation?: WalletTransactionCreateNestedManyWithoutUserInput
+    OnRampTransaction?: OnRampTransactionCreateNestedManyWithoutUserInput
+    WalletTransaction?: WalletTransactionCreateNestedManyWithoutUserInput
     WBalance?: WalletBalanceCreateNestedManyWithoutUserInput
     BBalance?: BankBalanceCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -12654,10 +12674,11 @@ export namespace Prisma {
     image?: string | null
     paymentId?: string | null
     walletPin?: string | null
+    password: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    OnRampTranscation?: OnRampTransactionUncheckedCreateNestedManyWithoutUserInput
-    WalletTranscation?: WalletTransactionUncheckedCreateNestedManyWithoutUserInput
+    OnRampTransaction?: OnRampTransactionUncheckedCreateNestedManyWithoutUserInput
+    WalletTransaction?: WalletTransactionUncheckedCreateNestedManyWithoutUserInput
     WBalance?: WalletBalanceUncheckedCreateNestedManyWithoutUserInput
     BBalance?: BankBalanceUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -12673,10 +12694,11 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     paymentId?: NullableStringFieldUpdateOperationsInput | string | null
     walletPin?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    OnRampTranscation?: OnRampTransactionUpdateManyWithoutUserNestedInput
-    WalletTranscation?: WalletTransactionUpdateManyWithoutUserNestedInput
+    OnRampTransaction?: OnRampTransactionUpdateManyWithoutUserNestedInput
+    WalletTransaction?: WalletTransactionUpdateManyWithoutUserNestedInput
     WBalance?: WalletBalanceUpdateManyWithoutUserNestedInput
     BBalance?: BankBalanceUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -12692,10 +12714,11 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     paymentId?: NullableStringFieldUpdateOperationsInput | string | null
     walletPin?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    OnRampTranscation?: OnRampTransactionUncheckedUpdateManyWithoutUserNestedInput
-    WalletTranscation?: WalletTransactionUncheckedUpdateManyWithoutUserNestedInput
+    OnRampTransaction?: OnRampTransactionUncheckedUpdateManyWithoutUserNestedInput
+    WalletTransaction?: WalletTransactionUncheckedUpdateManyWithoutUserNestedInput
     WBalance?: WalletBalanceUncheckedUpdateManyWithoutUserNestedInput
     BBalance?: BankBalanceUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -12711,6 +12734,7 @@ export namespace Prisma {
     image?: string | null
     paymentId?: string | null
     walletPin?: string | null
+    password: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -12723,6 +12747,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     paymentId?: NullableStringFieldUpdateOperationsInput | string | null
     walletPin?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -12735,6 +12760,7 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     paymentId?: NullableStringFieldUpdateOperationsInput | string | null
     walletPin?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -12747,7 +12773,7 @@ export namespace Prisma {
     provider: string
     amount: number
     startTime: Date | string
-    user: UserCreateNestedOneWithoutOnRampTranscationInput
+    user: UserCreateNestedOneWithoutOnRampTransactionInput
   }
 
   export type OnRampTransactionUncheckedCreateInput = {
@@ -12769,7 +12795,7 @@ export namespace Prisma {
     provider?: StringFieldUpdateOperationsInput | string
     amount?: IntFieldUpdateOperationsInput | number
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutOnRampTranscationNestedInput
+    user?: UserUpdateOneRequiredWithoutOnRampTransactionNestedInput
   }
 
   export type OnRampTransactionUncheckedUpdateInput = {
@@ -12822,7 +12848,7 @@ export namespace Prisma {
     token: string
     amount: number
     startTime: Date | string
-    user: UserCreateNestedOneWithoutWalletTranscationInput
+    user: UserCreateNestedOneWithoutWalletTransactionInput
   }
 
   export type WalletTransactionUncheckedCreateInput = {
@@ -12842,7 +12868,7 @@ export namespace Prisma {
     token?: StringFieldUpdateOperationsInput | string
     amount?: IntFieldUpdateOperationsInput | number
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutWalletTranscationNestedInput
+    user?: UserUpdateOneRequiredWithoutWalletTransactionNestedInput
   }
 
   export type WalletTransactionUncheckedUpdateInput = {
@@ -13399,6 +13425,7 @@ export namespace Prisma {
     image?: SortOrder
     paymentId?: SortOrder
     walletPin?: SortOrder
+    password?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -13411,6 +13438,7 @@ export namespace Prisma {
     image?: SortOrder
     paymentId?: SortOrder
     walletPin?: SortOrder
+    password?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -13423,6 +13451,7 @@ export namespace Prisma {
     image?: SortOrder
     paymentId?: SortOrder
     walletPin?: SortOrder
+    password?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -14202,9 +14231,9 @@ export namespace Prisma {
     deleteMany?: AuthenticatorScalarWhereInput | AuthenticatorScalarWhereInput[]
   }
 
-  export type UserCreateNestedOneWithoutOnRampTranscationInput = {
-    create?: XOR<UserCreateWithoutOnRampTranscationInput, UserUncheckedCreateWithoutOnRampTranscationInput>
-    connectOrCreate?: UserCreateOrConnectWithoutOnRampTranscationInput
+  export type UserCreateNestedOneWithoutOnRampTransactionInput = {
+    create?: XOR<UserCreateWithoutOnRampTransactionInput, UserUncheckedCreateWithoutOnRampTransactionInput>
+    connectOrCreate?: UserCreateOrConnectWithoutOnRampTransactionInput
     connect?: UserWhereUniqueInput
   }
 
@@ -14224,26 +14253,26 @@ export namespace Prisma {
     divide?: number
   }
 
-  export type UserUpdateOneRequiredWithoutOnRampTranscationNestedInput = {
-    create?: XOR<UserCreateWithoutOnRampTranscationInput, UserUncheckedCreateWithoutOnRampTranscationInput>
-    connectOrCreate?: UserCreateOrConnectWithoutOnRampTranscationInput
-    upsert?: UserUpsertWithoutOnRampTranscationInput
+  export type UserUpdateOneRequiredWithoutOnRampTransactionNestedInput = {
+    create?: XOR<UserCreateWithoutOnRampTransactionInput, UserUncheckedCreateWithoutOnRampTransactionInput>
+    connectOrCreate?: UserCreateOrConnectWithoutOnRampTransactionInput
+    upsert?: UserUpsertWithoutOnRampTransactionInput
     connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutOnRampTranscationInput, UserUpdateWithoutOnRampTranscationInput>, UserUncheckedUpdateWithoutOnRampTranscationInput>
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutOnRampTransactionInput, UserUpdateWithoutOnRampTransactionInput>, UserUncheckedUpdateWithoutOnRampTransactionInput>
   }
 
-  export type UserCreateNestedOneWithoutWalletTranscationInput = {
-    create?: XOR<UserCreateWithoutWalletTranscationInput, UserUncheckedCreateWithoutWalletTranscationInput>
-    connectOrCreate?: UserCreateOrConnectWithoutWalletTranscationInput
+  export type UserCreateNestedOneWithoutWalletTransactionInput = {
+    create?: XOR<UserCreateWithoutWalletTransactionInput, UserUncheckedCreateWithoutWalletTransactionInput>
+    connectOrCreate?: UserCreateOrConnectWithoutWalletTransactionInput
     connect?: UserWhereUniqueInput
   }
 
-  export type UserUpdateOneRequiredWithoutWalletTranscationNestedInput = {
-    create?: XOR<UserCreateWithoutWalletTranscationInput, UserUncheckedCreateWithoutWalletTranscationInput>
-    connectOrCreate?: UserCreateOrConnectWithoutWalletTranscationInput
-    upsert?: UserUpsertWithoutWalletTranscationInput
+  export type UserUpdateOneRequiredWithoutWalletTransactionNestedInput = {
+    create?: XOR<UserCreateWithoutWalletTransactionInput, UserUncheckedCreateWithoutWalletTransactionInput>
+    connectOrCreate?: UserCreateOrConnectWithoutWalletTransactionInput
+    upsert?: UserUpsertWithoutWalletTransactionInput
     connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutWalletTranscationInput, UserUpdateWithoutWalletTranscationInput>, UserUncheckedUpdateWithoutWalletTranscationInput>
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutWalletTransactionInput, UserUpdateWithoutWalletTransactionInput>, UserUncheckedUpdateWithoutWalletTransactionInput>
   }
 
   export type UserCreateNestedOneWithoutBBalanceInput = {
@@ -14962,7 +14991,7 @@ export namespace Prisma {
     transports?: StringNullableFilter<"Authenticator"> | string | null
   }
 
-  export type UserCreateWithoutOnRampTranscationInput = {
+  export type UserCreateWithoutOnRampTransactionInput = {
     id?: string
     name?: string | null
     email: string
@@ -14970,9 +14999,10 @@ export namespace Prisma {
     image?: string | null
     paymentId?: string | null
     walletPin?: string | null
+    password: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    WalletTranscation?: WalletTransactionCreateNestedManyWithoutUserInput
+    WalletTransaction?: WalletTransactionCreateNestedManyWithoutUserInput
     WBalance?: WalletBalanceCreateNestedManyWithoutUserInput
     BBalance?: BankBalanceCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -14980,7 +15010,7 @@ export namespace Prisma {
     Authenticator?: AuthenticatorCreateNestedManyWithoutUserInput
   }
 
-  export type UserUncheckedCreateWithoutOnRampTranscationInput = {
+  export type UserUncheckedCreateWithoutOnRampTransactionInput = {
     id?: string
     name?: string | null
     email: string
@@ -14988,9 +15018,10 @@ export namespace Prisma {
     image?: string | null
     paymentId?: string | null
     walletPin?: string | null
+    password: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    WalletTranscation?: WalletTransactionUncheckedCreateNestedManyWithoutUserInput
+    WalletTransaction?: WalletTransactionUncheckedCreateNestedManyWithoutUserInput
     WBalance?: WalletBalanceUncheckedCreateNestedManyWithoutUserInput
     BBalance?: BankBalanceUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -14998,23 +15029,23 @@ export namespace Prisma {
     Authenticator?: AuthenticatorUncheckedCreateNestedManyWithoutUserInput
   }
 
-  export type UserCreateOrConnectWithoutOnRampTranscationInput = {
+  export type UserCreateOrConnectWithoutOnRampTransactionInput = {
     where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutOnRampTranscationInput, UserUncheckedCreateWithoutOnRampTranscationInput>
+    create: XOR<UserCreateWithoutOnRampTransactionInput, UserUncheckedCreateWithoutOnRampTransactionInput>
   }
 
-  export type UserUpsertWithoutOnRampTranscationInput = {
-    update: XOR<UserUpdateWithoutOnRampTranscationInput, UserUncheckedUpdateWithoutOnRampTranscationInput>
-    create: XOR<UserCreateWithoutOnRampTranscationInput, UserUncheckedCreateWithoutOnRampTranscationInput>
+  export type UserUpsertWithoutOnRampTransactionInput = {
+    update: XOR<UserUpdateWithoutOnRampTransactionInput, UserUncheckedUpdateWithoutOnRampTransactionInput>
+    create: XOR<UserCreateWithoutOnRampTransactionInput, UserUncheckedCreateWithoutOnRampTransactionInput>
     where?: UserWhereInput
   }
 
-  export type UserUpdateToOneWithWhereWithoutOnRampTranscationInput = {
+  export type UserUpdateToOneWithWhereWithoutOnRampTransactionInput = {
     where?: UserWhereInput
-    data: XOR<UserUpdateWithoutOnRampTranscationInput, UserUncheckedUpdateWithoutOnRampTranscationInput>
+    data: XOR<UserUpdateWithoutOnRampTransactionInput, UserUncheckedUpdateWithoutOnRampTransactionInput>
   }
 
-  export type UserUpdateWithoutOnRampTranscationInput = {
+  export type UserUpdateWithoutOnRampTransactionInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
@@ -15022,9 +15053,10 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     paymentId?: NullableStringFieldUpdateOperationsInput | string | null
     walletPin?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    WalletTranscation?: WalletTransactionUpdateManyWithoutUserNestedInput
+    WalletTransaction?: WalletTransactionUpdateManyWithoutUserNestedInput
     WBalance?: WalletBalanceUpdateManyWithoutUserNestedInput
     BBalance?: BankBalanceUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -15032,7 +15064,7 @@ export namespace Prisma {
     Authenticator?: AuthenticatorUpdateManyWithoutUserNestedInput
   }
 
-  export type UserUncheckedUpdateWithoutOnRampTranscationInput = {
+  export type UserUncheckedUpdateWithoutOnRampTransactionInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
@@ -15040,9 +15072,10 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     paymentId?: NullableStringFieldUpdateOperationsInput | string | null
     walletPin?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    WalletTranscation?: WalletTransactionUncheckedUpdateManyWithoutUserNestedInput
+    WalletTransaction?: WalletTransactionUncheckedUpdateManyWithoutUserNestedInput
     WBalance?: WalletBalanceUncheckedUpdateManyWithoutUserNestedInput
     BBalance?: BankBalanceUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -15050,7 +15083,7 @@ export namespace Prisma {
     Authenticator?: AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
   }
 
-  export type UserCreateWithoutWalletTranscationInput = {
+  export type UserCreateWithoutWalletTransactionInput = {
     id?: string
     name?: string | null
     email: string
@@ -15058,9 +15091,10 @@ export namespace Prisma {
     image?: string | null
     paymentId?: string | null
     walletPin?: string | null
+    password: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    OnRampTranscation?: OnRampTransactionCreateNestedManyWithoutUserInput
+    OnRampTransaction?: OnRampTransactionCreateNestedManyWithoutUserInput
     WBalance?: WalletBalanceCreateNestedManyWithoutUserInput
     BBalance?: BankBalanceCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -15068,7 +15102,7 @@ export namespace Prisma {
     Authenticator?: AuthenticatorCreateNestedManyWithoutUserInput
   }
 
-  export type UserUncheckedCreateWithoutWalletTranscationInput = {
+  export type UserUncheckedCreateWithoutWalletTransactionInput = {
     id?: string
     name?: string | null
     email: string
@@ -15076,9 +15110,10 @@ export namespace Prisma {
     image?: string | null
     paymentId?: string | null
     walletPin?: string | null
+    password: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    OnRampTranscation?: OnRampTransactionUncheckedCreateNestedManyWithoutUserInput
+    OnRampTransaction?: OnRampTransactionUncheckedCreateNestedManyWithoutUserInput
     WBalance?: WalletBalanceUncheckedCreateNestedManyWithoutUserInput
     BBalance?: BankBalanceUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -15086,23 +15121,23 @@ export namespace Prisma {
     Authenticator?: AuthenticatorUncheckedCreateNestedManyWithoutUserInput
   }
 
-  export type UserCreateOrConnectWithoutWalletTranscationInput = {
+  export type UserCreateOrConnectWithoutWalletTransactionInput = {
     where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutWalletTranscationInput, UserUncheckedCreateWithoutWalletTranscationInput>
+    create: XOR<UserCreateWithoutWalletTransactionInput, UserUncheckedCreateWithoutWalletTransactionInput>
   }
 
-  export type UserUpsertWithoutWalletTranscationInput = {
-    update: XOR<UserUpdateWithoutWalletTranscationInput, UserUncheckedUpdateWithoutWalletTranscationInput>
-    create: XOR<UserCreateWithoutWalletTranscationInput, UserUncheckedCreateWithoutWalletTranscationInput>
+  export type UserUpsertWithoutWalletTransactionInput = {
+    update: XOR<UserUpdateWithoutWalletTransactionInput, UserUncheckedUpdateWithoutWalletTransactionInput>
+    create: XOR<UserCreateWithoutWalletTransactionInput, UserUncheckedCreateWithoutWalletTransactionInput>
     where?: UserWhereInput
   }
 
-  export type UserUpdateToOneWithWhereWithoutWalletTranscationInput = {
+  export type UserUpdateToOneWithWhereWithoutWalletTransactionInput = {
     where?: UserWhereInput
-    data: XOR<UserUpdateWithoutWalletTranscationInput, UserUncheckedUpdateWithoutWalletTranscationInput>
+    data: XOR<UserUpdateWithoutWalletTransactionInput, UserUncheckedUpdateWithoutWalletTransactionInput>
   }
 
-  export type UserUpdateWithoutWalletTranscationInput = {
+  export type UserUpdateWithoutWalletTransactionInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
@@ -15110,9 +15145,10 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     paymentId?: NullableStringFieldUpdateOperationsInput | string | null
     walletPin?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    OnRampTranscation?: OnRampTransactionUpdateManyWithoutUserNestedInput
+    OnRampTransaction?: OnRampTransactionUpdateManyWithoutUserNestedInput
     WBalance?: WalletBalanceUpdateManyWithoutUserNestedInput
     BBalance?: BankBalanceUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -15120,7 +15156,7 @@ export namespace Prisma {
     Authenticator?: AuthenticatorUpdateManyWithoutUserNestedInput
   }
 
-  export type UserUncheckedUpdateWithoutWalletTranscationInput = {
+  export type UserUncheckedUpdateWithoutWalletTransactionInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
     email?: StringFieldUpdateOperationsInput | string
@@ -15128,9 +15164,10 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     paymentId?: NullableStringFieldUpdateOperationsInput | string | null
     walletPin?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    OnRampTranscation?: OnRampTransactionUncheckedUpdateManyWithoutUserNestedInput
+    OnRampTransaction?: OnRampTransactionUncheckedUpdateManyWithoutUserNestedInput
     WBalance?: WalletBalanceUncheckedUpdateManyWithoutUserNestedInput
     BBalance?: BankBalanceUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -15146,10 +15183,11 @@ export namespace Prisma {
     image?: string | null
     paymentId?: string | null
     walletPin?: string | null
+    password: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    OnRampTranscation?: OnRampTransactionCreateNestedManyWithoutUserInput
-    WalletTranscation?: WalletTransactionCreateNestedManyWithoutUserInput
+    OnRampTransaction?: OnRampTransactionCreateNestedManyWithoutUserInput
+    WalletTransaction?: WalletTransactionCreateNestedManyWithoutUserInput
     WBalance?: WalletBalanceCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
@@ -15164,10 +15202,11 @@ export namespace Prisma {
     image?: string | null
     paymentId?: string | null
     walletPin?: string | null
+    password: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    OnRampTranscation?: OnRampTransactionUncheckedCreateNestedManyWithoutUserInput
-    WalletTranscation?: WalletTransactionUncheckedCreateNestedManyWithoutUserInput
+    OnRampTransaction?: OnRampTransactionUncheckedCreateNestedManyWithoutUserInput
+    WalletTransaction?: WalletTransactionUncheckedCreateNestedManyWithoutUserInput
     WBalance?: WalletBalanceUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
@@ -15198,10 +15237,11 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     paymentId?: NullableStringFieldUpdateOperationsInput | string | null
     walletPin?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    OnRampTranscation?: OnRampTransactionUpdateManyWithoutUserNestedInput
-    WalletTranscation?: WalletTransactionUpdateManyWithoutUserNestedInput
+    OnRampTransaction?: OnRampTransactionUpdateManyWithoutUserNestedInput
+    WalletTransaction?: WalletTransactionUpdateManyWithoutUserNestedInput
     WBalance?: WalletBalanceUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
@@ -15216,10 +15256,11 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     paymentId?: NullableStringFieldUpdateOperationsInput | string | null
     walletPin?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    OnRampTranscation?: OnRampTransactionUncheckedUpdateManyWithoutUserNestedInput
-    WalletTranscation?: WalletTransactionUncheckedUpdateManyWithoutUserNestedInput
+    OnRampTransaction?: OnRampTransactionUncheckedUpdateManyWithoutUserNestedInput
+    WalletTransaction?: WalletTransactionUncheckedUpdateManyWithoutUserNestedInput
     WBalance?: WalletBalanceUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -15234,10 +15275,11 @@ export namespace Prisma {
     image?: string | null
     paymentId?: string | null
     walletPin?: string | null
+    password: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    OnRampTranscation?: OnRampTransactionCreateNestedManyWithoutUserInput
-    WalletTranscation?: WalletTransactionCreateNestedManyWithoutUserInput
+    OnRampTransaction?: OnRampTransactionCreateNestedManyWithoutUserInput
+    WalletTransaction?: WalletTransactionCreateNestedManyWithoutUserInput
     BBalance?: BankBalanceCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
@@ -15252,10 +15294,11 @@ export namespace Prisma {
     image?: string | null
     paymentId?: string | null
     walletPin?: string | null
+    password: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    OnRampTranscation?: OnRampTransactionUncheckedCreateNestedManyWithoutUserInput
-    WalletTranscation?: WalletTransactionUncheckedCreateNestedManyWithoutUserInput
+    OnRampTransaction?: OnRampTransactionUncheckedCreateNestedManyWithoutUserInput
+    WalletTransaction?: WalletTransactionUncheckedCreateNestedManyWithoutUserInput
     BBalance?: BankBalanceUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
@@ -15286,10 +15329,11 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     paymentId?: NullableStringFieldUpdateOperationsInput | string | null
     walletPin?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    OnRampTranscation?: OnRampTransactionUpdateManyWithoutUserNestedInput
-    WalletTranscation?: WalletTransactionUpdateManyWithoutUserNestedInput
+    OnRampTransaction?: OnRampTransactionUpdateManyWithoutUserNestedInput
+    WalletTransaction?: WalletTransactionUpdateManyWithoutUserNestedInput
     BBalance?: BankBalanceUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
@@ -15304,10 +15348,11 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     paymentId?: NullableStringFieldUpdateOperationsInput | string | null
     walletPin?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    OnRampTranscation?: OnRampTransactionUncheckedUpdateManyWithoutUserNestedInput
-    WalletTranscation?: WalletTransactionUncheckedUpdateManyWithoutUserNestedInput
+    OnRampTransaction?: OnRampTransactionUncheckedUpdateManyWithoutUserNestedInput
+    WalletTransaction?: WalletTransactionUncheckedUpdateManyWithoutUserNestedInput
     BBalance?: BankBalanceUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -15322,10 +15367,11 @@ export namespace Prisma {
     image?: string | null
     paymentId?: string | null
     walletPin?: string | null
+    password: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    OnRampTranscation?: OnRampTransactionCreateNestedManyWithoutUserInput
-    WalletTranscation?: WalletTransactionCreateNestedManyWithoutUserInput
+    OnRampTransaction?: OnRampTransactionCreateNestedManyWithoutUserInput
+    WalletTransaction?: WalletTransactionCreateNestedManyWithoutUserInput
     WBalance?: WalletBalanceCreateNestedManyWithoutUserInput
     BBalance?: BankBalanceCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
@@ -15340,10 +15386,11 @@ export namespace Prisma {
     image?: string | null
     paymentId?: string | null
     walletPin?: string | null
+    password: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    OnRampTranscation?: OnRampTransactionUncheckedCreateNestedManyWithoutUserInput
-    WalletTranscation?: WalletTransactionUncheckedCreateNestedManyWithoutUserInput
+    OnRampTransaction?: OnRampTransactionUncheckedCreateNestedManyWithoutUserInput
+    WalletTransaction?: WalletTransactionUncheckedCreateNestedManyWithoutUserInput
     WBalance?: WalletBalanceUncheckedCreateNestedManyWithoutUserInput
     BBalance?: BankBalanceUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
@@ -15374,10 +15421,11 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     paymentId?: NullableStringFieldUpdateOperationsInput | string | null
     walletPin?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    OnRampTranscation?: OnRampTransactionUpdateManyWithoutUserNestedInput
-    WalletTranscation?: WalletTransactionUpdateManyWithoutUserNestedInput
+    OnRampTransaction?: OnRampTransactionUpdateManyWithoutUserNestedInput
+    WalletTransaction?: WalletTransactionUpdateManyWithoutUserNestedInput
     WBalance?: WalletBalanceUpdateManyWithoutUserNestedInput
     BBalance?: BankBalanceUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
@@ -15392,10 +15440,11 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     paymentId?: NullableStringFieldUpdateOperationsInput | string | null
     walletPin?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    OnRampTranscation?: OnRampTransactionUncheckedUpdateManyWithoutUserNestedInput
-    WalletTranscation?: WalletTransactionUncheckedUpdateManyWithoutUserNestedInput
+    OnRampTransaction?: OnRampTransactionUncheckedUpdateManyWithoutUserNestedInput
+    WalletTransaction?: WalletTransactionUncheckedUpdateManyWithoutUserNestedInput
     WBalance?: WalletBalanceUncheckedUpdateManyWithoutUserNestedInput
     BBalance?: BankBalanceUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -15410,10 +15459,11 @@ export namespace Prisma {
     image?: string | null
     paymentId?: string | null
     walletPin?: string | null
+    password: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    OnRampTranscation?: OnRampTransactionCreateNestedManyWithoutUserInput
-    WalletTranscation?: WalletTransactionCreateNestedManyWithoutUserInput
+    OnRampTransaction?: OnRampTransactionCreateNestedManyWithoutUserInput
+    WalletTransaction?: WalletTransactionCreateNestedManyWithoutUserInput
     WBalance?: WalletBalanceCreateNestedManyWithoutUserInput
     BBalance?: BankBalanceCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -15428,10 +15478,11 @@ export namespace Prisma {
     image?: string | null
     paymentId?: string | null
     walletPin?: string | null
+    password: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    OnRampTranscation?: OnRampTransactionUncheckedCreateNestedManyWithoutUserInput
-    WalletTranscation?: WalletTransactionUncheckedCreateNestedManyWithoutUserInput
+    OnRampTransaction?: OnRampTransactionUncheckedCreateNestedManyWithoutUserInput
+    WalletTransaction?: WalletTransactionUncheckedCreateNestedManyWithoutUserInput
     WBalance?: WalletBalanceUncheckedCreateNestedManyWithoutUserInput
     BBalance?: BankBalanceUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -15462,10 +15513,11 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     paymentId?: NullableStringFieldUpdateOperationsInput | string | null
     walletPin?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    OnRampTranscation?: OnRampTransactionUpdateManyWithoutUserNestedInput
-    WalletTranscation?: WalletTransactionUpdateManyWithoutUserNestedInput
+    OnRampTransaction?: OnRampTransactionUpdateManyWithoutUserNestedInput
+    WalletTransaction?: WalletTransactionUpdateManyWithoutUserNestedInput
     WBalance?: WalletBalanceUpdateManyWithoutUserNestedInput
     BBalance?: BankBalanceUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -15480,10 +15532,11 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     paymentId?: NullableStringFieldUpdateOperationsInput | string | null
     walletPin?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    OnRampTranscation?: OnRampTransactionUncheckedUpdateManyWithoutUserNestedInput
-    WalletTranscation?: WalletTransactionUncheckedUpdateManyWithoutUserNestedInput
+    OnRampTransaction?: OnRampTransactionUncheckedUpdateManyWithoutUserNestedInput
+    WalletTransaction?: WalletTransactionUncheckedUpdateManyWithoutUserNestedInput
     WBalance?: WalletBalanceUncheckedUpdateManyWithoutUserNestedInput
     BBalance?: BankBalanceUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -15498,10 +15551,11 @@ export namespace Prisma {
     image?: string | null
     paymentId?: string | null
     walletPin?: string | null
+    password: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    OnRampTranscation?: OnRampTransactionCreateNestedManyWithoutUserInput
-    WalletTranscation?: WalletTransactionCreateNestedManyWithoutUserInput
+    OnRampTransaction?: OnRampTransactionCreateNestedManyWithoutUserInput
+    WalletTransaction?: WalletTransactionCreateNestedManyWithoutUserInput
     WBalance?: WalletBalanceCreateNestedManyWithoutUserInput
     BBalance?: BankBalanceCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -15516,10 +15570,11 @@ export namespace Prisma {
     image?: string | null
     paymentId?: string | null
     walletPin?: string | null
+    password: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    OnRampTranscation?: OnRampTransactionUncheckedCreateNestedManyWithoutUserInput
-    WalletTranscation?: WalletTransactionUncheckedCreateNestedManyWithoutUserInput
+    OnRampTransaction?: OnRampTransactionUncheckedCreateNestedManyWithoutUserInput
+    WalletTransaction?: WalletTransactionUncheckedCreateNestedManyWithoutUserInput
     WBalance?: WalletBalanceUncheckedCreateNestedManyWithoutUserInput
     BBalance?: BankBalanceUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -15550,10 +15605,11 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     paymentId?: NullableStringFieldUpdateOperationsInput | string | null
     walletPin?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    OnRampTranscation?: OnRampTransactionUpdateManyWithoutUserNestedInput
-    WalletTranscation?: WalletTransactionUpdateManyWithoutUserNestedInput
+    OnRampTransaction?: OnRampTransactionUpdateManyWithoutUserNestedInput
+    WalletTransaction?: WalletTransactionUpdateManyWithoutUserNestedInput
     WBalance?: WalletBalanceUpdateManyWithoutUserNestedInput
     BBalance?: BankBalanceUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -15568,10 +15624,11 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     paymentId?: NullableStringFieldUpdateOperationsInput | string | null
     walletPin?: NullableStringFieldUpdateOperationsInput | string | null
+    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    OnRampTranscation?: OnRampTransactionUncheckedUpdateManyWithoutUserNestedInput
-    WalletTranscation?: WalletTransactionUncheckedUpdateManyWithoutUserNestedInput
+    OnRampTransaction?: OnRampTransactionUncheckedUpdateManyWithoutUserNestedInput
+    WalletTransaction?: WalletTransactionUncheckedUpdateManyWithoutUserNestedInput
     WBalance?: WalletBalanceUncheckedUpdateManyWithoutUserNestedInput
     BBalance?: BankBalanceUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput

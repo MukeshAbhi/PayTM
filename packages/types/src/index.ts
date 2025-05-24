@@ -1,5 +1,6 @@
 import z from 'zod';
 import { $Enums } from "@repo/db/prisma"
+import { Account, Authenticator, BankBalance, OnRampTransaction, Session, WalletTransaction } from '../../db/src/generated/prisma/index.js';
 
 export type TransactionType = $Enums.TransactionType;
 
@@ -40,3 +41,15 @@ export interface SignIn {
   email: string;
   password: string
 }
+
+export type BasicUser = {
+  id: string;
+  name: string | null;
+  email: string;
+  emailVerified: Date | null;
+  image: string | null;
+  paymentId: string | null;
+  walletPin: string | null;
+  createdAt: Date;
+  updatedAt: Date;
+};

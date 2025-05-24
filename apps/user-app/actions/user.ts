@@ -3,7 +3,7 @@
 import { auth } from "@/authTypes";
 import { prisma } from "@repo/db/prisma";
 import { compare, hash } from "bcrypt";
-import { Wallet } from "lucide-react";
+
 
 export async function getUserData() {
 
@@ -17,41 +17,96 @@ export async function getUserData() {
   const user = await prisma.user.findUnique({
     where: {
       email: session.user.email
+    },
+     select: {
+      id: true,
+      name: true,
+      email: true,
+      emailVerified: true,
+      image: true,
+      paymentId: true,
+      walletPin: false,
+      createdAt: true,
+      updatedAt: true,
     }
   });
 
   return user;
 }
 
-export async function getUserBankTranscations():Promise<any> {
-  const user = await getUserData();
-  const userId = user?.id
-  const data = await prisma.user.findFirst({
-    where: {
-      id: userId
-    },
-    select: {
-      OnRampTranscation: true
+export async function getUserBankTransactions(): Promise<any> {
+  try {
+    const user = await getUserData();
+
+    if (!user || !user.id) {
+      return {
+        message: "User not authenticated",
+        status: 401,
+      };
     }
-    
-  })
-  
-  return data;
+
+    const data = await prisma.user.findUnique({
+      where: { id: user.id },
+      select: {
+        OnRampTransaction: true, 
+      },
+    });
+
+    if (!data || !data.OnRampTransaction) {
+      return {
+        message: "No transactions found",
+        status: 404,
+      };
+    }
+
+    return data.OnRampTransaction;
+  } catch (err) {
+    console.error("Error fetching bank transactions:", err);
+    return {
+      message: "Something went wrong. Please try again later.",
+      status: 500,
+    };
+  }
 }
 
-export async function getUserWalletBalance():Promise<any> {
-  const user = await getUserData();
-  const userId = user?.id;
-  const data = await prisma.walletBalance.findUnique({
-    where:{
-      userId
-    },
-    select:{
-      amount:true
+
+export async function getUserWalletBalance(): Promise<{ amount: number } | { message: string; status: number }> {
+  try {
+    const user = await getUserData();
+
+    if (!user || !user.id) {
+      return {
+        message: "User not authenticated",
+        status: 401,
+      };
     }
-  })
-  return data;
+
+    const data = await prisma.walletBalance.findUnique({
+      where: {
+        userId: user.id,
+      },
+      select: {
+        amount: true,
+      },
+    });
+
+    if (!data) {
+      return {
+        message: "Wallet balance not found",
+        status: 404,
+      };
+    }
+
+    return data; // { amount: number }
+  } catch (err) {
+    console.error("Error fetching wallet balance:", err);
+    return {
+      message: "Something went wrong. Please try again later.",
+      status: 500,
+    };
+  }
 }
+
 
 export async function getUserWalletPin(id: string): Promise<string | null | { message: string; status: number }>{
 
@@ -66,7 +121,7 @@ export async function getUserWalletPin(id: string): Promise<string | null | { me
     })
     return userPin?.walletPin ?? null;
   }catch(err){
-    console.log("error while getting PIN: ", err);
+    console.error("error while getting PIN: ", err);
     return{
         message: "Something went wrong.! Please try again later",
         status: 500
@@ -97,7 +152,7 @@ export async function setWalletPin(id:string, pin:string): Promise<{ message: st
       status: 200
     }
   } catch(err) {
-    console.log("Error in creating PIN :", err);
+    console.error("Error in creating PIN :", err);
     return{
         message: "Something went wrong.! Please try again later",
         status: 500
@@ -139,7 +194,7 @@ export async function changeUserPin(id:string, currentPin:string, newPin:string)
         status: 200
       }
     }catch(err){
-      console.log("Error while updating PIN ", err)
+      console.error("Error while updating PIN ", err)
       return{
         message: "Something went wrong.! Please try again later",
         status: 500

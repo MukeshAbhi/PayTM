@@ -1,6 +1,6 @@
 "use client"
 import React, { useEffect, useState } from 'react';
-import { getUserBankTranscations } from '../actions/user';
+import { getUserBankTransactions } from '../actions/user';
 import { BankTransaction } from '@repo/types/zodtypes';
 
 function BankTransactions() {
@@ -9,7 +9,7 @@ const [ newTransaction, setNewTransaction] = useState<BankTransaction[]>()
 
   useEffect(() => {
     const getData = async () => {
-      const data = await getUserBankTranscations();
+      const data = await getUserBankTransactions();
       const all = data?.OnRampTranscation || [];
       
       setTransactions(all);
