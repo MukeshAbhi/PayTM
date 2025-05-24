@@ -9,7 +9,12 @@ function Balance() {
 
   const getData = async () => {
       const data = await getUserWalletBalance();
-      setBalance(data.amount);
+    
+      if ('amount' in data ) {
+        setBalance(data.amount);
+      } else {
+        setBalance(0);
+      }
       setDate(Date.now());
     };
     

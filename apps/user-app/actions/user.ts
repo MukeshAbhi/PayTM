@@ -51,15 +51,16 @@ export async function getUserBankTransactions(): Promise<any> {
         OnRampTransaction: true, 
       },
     });
-
+    
     if (!data || !data.OnRampTransaction) {
       return {
         message: "No transactions found",
         status: 404,
       };
     }
-
+    
     return data.OnRampTransaction;
+
   } catch (err) {
     console.error("Error fetching bank transactions:", err);
     return {
@@ -92,6 +93,7 @@ export async function getUserWalletBalance(): Promise<{ amount: number } | { mes
 
     if (!data) {
       return {
+        amount: 0,
         message: "Wallet balance not found",
         status: 404,
       };

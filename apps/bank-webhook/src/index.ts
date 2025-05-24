@@ -16,6 +16,8 @@ const zodSchema = z.object({
 
 app.post("/toWebhook",async (req, res) => {
      
+    const FIVE_MINUTES = 5 * 60 * 1000;
+    const now = Date.now();
     //Zod Validation
     const parsedData = zodSchema.safeParse(req.body);
 
@@ -46,7 +48,9 @@ app.post("/toWebhook",async (req, res) => {
    try{
         const status = await prisma.onRampTransaction.findFirst({
             where: { token: paymentInfo.token},
-            select: { type: true }
+            select: { 
+                type: true
+            }
         });
 
         if(!status){
@@ -54,11 +58,40 @@ app.post("/toWebhook",async (req, res) => {
             return;
         }
 
+        // Check if transaction is older than 5 minutes and mark as failed if yes
+        const allTransactions = await prisma.onRampTransaction.findMany({
+            where: {
+                userId: paymentInfo.userId,
+                status: "Processing"
+            },
+            select: {
+                id: true,
+                startTime: true
+            }
+        });
+                //Filtter and get the ids of expired transactions 
+        const expiredTransactionIds = allTransactions.filter(txn => now - txn.startTime.getTime() > FIVE_MINUTES)
+                                                     .map(txn => txn.id);
+        
+        if(expiredTransactionIds.length > 0){
+            await prisma.onRampTransaction.updateMany({
+                where:{
+                    id: {
+                        in: expiredTransactionIds
+                    }
+                },
+                data: {
+                    status: "Failure"
+                }
+            })
+            console.log(`Marked ${expiredTransactionIds.length} transactions as "Failure"`);
+        }
+
         const lower = status.type.toLowerCase();
         console.log("type : ", lower);
         
         if(lower === "debit")
-        {
+        {// Debit: decrement wallet balance
             await prisma.$transaction([
                 prisma.walletBalance.update({
                     where: { userId: paymentInfo.userId},
@@ -67,9 +100,17 @@ app.post("/toWebhook",async (req, res) => {
                             decrement: paymentInfo.amount
                         }
                     }
+                }),
+                prisma.onRampTransaction.update({
+                    where: {
+                        token: paymentInfo.token
+                    },
+                    data: {
+                        status: "Success"
+                    }
                 })
             ])
-        } else {
+        } else {// Credit : upsert wallet balance and update transaction status
             await prisma.$transaction([
                 prisma.walletBalance.upsert({
                     where: { userId: paymentInfo.userId },
