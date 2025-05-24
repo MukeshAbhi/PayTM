@@ -11,9 +11,8 @@ import {
 import { Input } from "@repo/ui/components/input"
 import { Label } from "@repo/ui/components/label"
 import { loginGoogle, loginResend } from "../actions/auth"
-import { ErrMsg, SignUpSchema } from "@repo/types/zodtypes"
+import { ErrMsg } from "@repo/types/zodtypes"
 import { useState } from "react"
-import { axiosNew } from "@/lib"
 
 export function SignUpForm({
   className,
@@ -26,43 +25,6 @@ export function SignUpForm({
   })
 
 
-  const sendRequest = async (data: SignUpSchema) => {
-    const { name, email, password } = data;
-
-    try {
-      const res = await axiosNew.post("/api/user/signup", {
-        name,
-        email,
-        password
-      });
-
-      // Axios puts response data under `res.data`
-      const resData = res.data;
-
-      if (res.status !== 201) {
-        setErrMsg({
-          message: resData.message ,
-          status: "failed"
-        });
-      } else {
-        const formData = new FormData();
-        formData.append("email", email);
-        await loginResend(formData);
-        setErrMsg({
-          message: resData.message,
-          status: "success"
-        });
-      }
-
-    } catch (err: any) {
-      console.log(err);
-      setErrMsg({
-        message: "Failed to sign you up",
-        status: "failed"
-      });
-    }
-
-  }
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
@@ -84,16 +46,7 @@ export function SignUpForm({
           )}
           </div>
           <form
-              onSubmit={async (e) => {
-                e.preventDefault();
-                const formData = new FormData(e.currentTarget);
-                const data = {
-                  name: formData.get("name") as string,
-                  email: formData.get("email") as string,
-                  password: formData.get("password") as string,
-                };
-                await sendRequest(data);
-              }}
+             action={loginResend}
             >
             <div className="grid gap-5">
                 <Label htmlFor="name">User Name</Label>
@@ -102,17 +55,6 @@ export function SignUpForm({
                   id="name"
                   type="text"
                   placeholder="John"
-                  required
-                />
-              </div>
-            
-            <div className="grid gap-3 pt-2">
-                <Label htmlFor="password">Password</Label>
-                <Input
-                  name="password"
-                  id="password"
-                  type="password"
-                  placeholder="*******"
                   required
                 />
               </div>
@@ -141,7 +83,7 @@ export function SignUpForm({
           </Button>
           <div className="mt-4 text-center text-sm ">
               Already have an account?{" "}
-              <a href="/user-signin" className="underline underline-offset-4">
+              <a href="/signin" className="underline underline-offset-4">
                 Sign in
               </a>
             </div>

@@ -17,6 +17,9 @@ export const authOptions : NextAuthConfig = ({
     strategy: "jwt"
   },
   secret: process.env.AUTH_SECRET,
+  pages: {
+    signIn: "/signin"
+  },
   callbacks:  {
     async session({ session, token }) {
       if (token && session.user) {
@@ -30,6 +33,9 @@ export const authOptions : NextAuthConfig = ({
         token.email = user.email
       }
       return token;
+    },
+    async redirect({url, baseUrl}){
+      return `${baseUrl}/user-dashboard`;
     }
   },
  

@@ -21,7 +21,7 @@ model User {
   image         String?
   paymentId     String?         @unique
   walletPin     String?         
-  password      String
+  
   OnRampTransaction OnRampTransaction[]
   WalletTransaction WalletTransaction[]
   WBalance      WalletBalance[]

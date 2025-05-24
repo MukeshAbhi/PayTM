@@ -1729,7 +1729,6 @@ export namespace Prisma {
     image: string | null
     paymentId: string | null
     walletPin: string | null
-    password: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1742,7 +1741,6 @@ export namespace Prisma {
     image: string | null
     paymentId: string | null
     walletPin: string | null
-    password: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1755,7 +1753,6 @@ export namespace Prisma {
     image: number
     paymentId: number
     walletPin: number
-    password: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -1770,7 +1767,6 @@ export namespace Prisma {
     image?: true
     paymentId?: true
     walletPin?: true
-    password?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1783,7 +1779,6 @@ export namespace Prisma {
     image?: true
     paymentId?: true
     walletPin?: true
-    password?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1796,7 +1791,6 @@ export namespace Prisma {
     image?: true
     paymentId?: true
     walletPin?: true
-    password?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -1882,7 +1876,6 @@ export namespace Prisma {
     image: string | null
     paymentId: string | null
     walletPin: string | null
-    password: string
     createdAt: Date
     updatedAt: Date
     _count: UserCountAggregateOutputType | null
@@ -1912,7 +1905,6 @@ export namespace Prisma {
     image?: boolean
     paymentId?: boolean
     walletPin?: boolean
-    password?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     OnRampTransaction?: boolean | User$OnRampTransactionArgs<ExtArgs>
@@ -1933,7 +1925,6 @@ export namespace Prisma {
     image?: boolean
     paymentId?: boolean
     walletPin?: boolean
-    password?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
@@ -1946,7 +1937,6 @@ export namespace Prisma {
     image?: boolean
     paymentId?: boolean
     walletPin?: boolean
-    password?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
@@ -1959,12 +1949,11 @@ export namespace Prisma {
     image?: boolean
     paymentId?: boolean
     walletPin?: boolean
-    password?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "paymentId" | "walletPin" | "password" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "paymentId" | "walletPin" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     OnRampTransaction?: boolean | User$OnRampTransactionArgs<ExtArgs>
     WalletTransaction?: boolean | User$WalletTransactionArgs<ExtArgs>
@@ -1997,7 +1986,6 @@ export namespace Prisma {
       image: string | null
       paymentId: string | null
       walletPin: string | null
-      password: string
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["user"]>
@@ -2437,7 +2425,6 @@ export namespace Prisma {
     readonly image: FieldRef<"User", 'String'>
     readonly paymentId: FieldRef<"User", 'String'>
     readonly walletPin: FieldRef<"User", 'String'>
-    readonly password: FieldRef<"User", 'String'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
   }
@@ -11805,7 +11792,6 @@ export namespace Prisma {
     image: 'image',
     paymentId: 'paymentId',
     walletPin: 'walletPin',
-    password: 'password',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -12047,7 +12033,6 @@ export namespace Prisma {
     image?: StringNullableFilter<"User"> | string | null
     paymentId?: StringNullableFilter<"User"> | string | null
     walletPin?: StringNullableFilter<"User"> | string | null
-    password?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     OnRampTransaction?: OnRampTransactionListRelationFilter
@@ -12067,7 +12052,6 @@ export namespace Prisma {
     image?: SortOrderInput | SortOrder
     paymentId?: SortOrderInput | SortOrder
     walletPin?: SortOrderInput | SortOrder
-    password?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     OnRampTransaction?: OnRampTransactionOrderByRelationAggregateInput
@@ -12090,7 +12074,6 @@ export namespace Prisma {
     emailVerified?: DateTimeNullableFilter<"User"> | Date | string | null
     image?: StringNullableFilter<"User"> | string | null
     walletPin?: StringNullableFilter<"User"> | string | null
-    password?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     OnRampTransaction?: OnRampTransactionListRelationFilter
@@ -12110,7 +12093,6 @@ export namespace Prisma {
     image?: SortOrderInput | SortOrder
     paymentId?: SortOrderInput | SortOrder
     walletPin?: SortOrderInput | SortOrder
-    password?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: UserCountOrderByAggregateInput
@@ -12129,7 +12111,6 @@ export namespace Prisma {
     image?: StringNullableWithAggregatesFilter<"User"> | string | null
     paymentId?: StringNullableWithAggregatesFilter<"User"> | string | null
     walletPin?: StringNullableWithAggregatesFilter<"User"> | string | null
-    password?: StringWithAggregatesFilter<"User"> | string
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
@@ -12654,7 +12635,6 @@ export namespace Prisma {
     image?: string | null
     paymentId?: string | null
     walletPin?: string | null
-    password: string
     createdAt?: Date | string
     updatedAt?: Date | string
     OnRampTransaction?: OnRampTransactionCreateNestedManyWithoutUserInput
@@ -12674,7 +12654,6 @@ export namespace Prisma {
     image?: string | null
     paymentId?: string | null
     walletPin?: string | null
-    password: string
     createdAt?: Date | string
     updatedAt?: Date | string
     OnRampTransaction?: OnRampTransactionUncheckedCreateNestedManyWithoutUserInput
@@ -12694,7 +12673,6 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     paymentId?: NullableStringFieldUpdateOperationsInput | string | null
     walletPin?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     OnRampTransaction?: OnRampTransactionUpdateManyWithoutUserNestedInput
@@ -12714,7 +12692,6 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     paymentId?: NullableStringFieldUpdateOperationsInput | string | null
     walletPin?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     OnRampTransaction?: OnRampTransactionUncheckedUpdateManyWithoutUserNestedInput
@@ -12734,7 +12711,6 @@ export namespace Prisma {
     image?: string | null
     paymentId?: string | null
     walletPin?: string | null
-    password: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -12747,7 +12723,6 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     paymentId?: NullableStringFieldUpdateOperationsInput | string | null
     walletPin?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -12760,7 +12735,6 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     paymentId?: NullableStringFieldUpdateOperationsInput | string | null
     walletPin?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -13425,7 +13399,6 @@ export namespace Prisma {
     image?: SortOrder
     paymentId?: SortOrder
     walletPin?: SortOrder
-    password?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -13438,7 +13411,6 @@ export namespace Prisma {
     image?: SortOrder
     paymentId?: SortOrder
     walletPin?: SortOrder
-    password?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -13451,7 +13423,6 @@ export namespace Prisma {
     image?: SortOrder
     paymentId?: SortOrder
     walletPin?: SortOrder
-    password?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -14999,7 +14970,6 @@ export namespace Prisma {
     image?: string | null
     paymentId?: string | null
     walletPin?: string | null
-    password: string
     createdAt?: Date | string
     updatedAt?: Date | string
     WalletTransaction?: WalletTransactionCreateNestedManyWithoutUserInput
@@ -15018,7 +14988,6 @@ export namespace Prisma {
     image?: string | null
     paymentId?: string | null
     walletPin?: string | null
-    password: string
     createdAt?: Date | string
     updatedAt?: Date | string
     WalletTransaction?: WalletTransactionUncheckedCreateNestedManyWithoutUserInput
@@ -15053,7 +15022,6 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     paymentId?: NullableStringFieldUpdateOperationsInput | string | null
     walletPin?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     WalletTransaction?: WalletTransactionUpdateManyWithoutUserNestedInput
@@ -15072,7 +15040,6 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     paymentId?: NullableStringFieldUpdateOperationsInput | string | null
     walletPin?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     WalletTransaction?: WalletTransactionUncheckedUpdateManyWithoutUserNestedInput
@@ -15091,7 +15058,6 @@ export namespace Prisma {
     image?: string | null
     paymentId?: string | null
     walletPin?: string | null
-    password: string
     createdAt?: Date | string
     updatedAt?: Date | string
     OnRampTransaction?: OnRampTransactionCreateNestedManyWithoutUserInput
@@ -15110,7 +15076,6 @@ export namespace Prisma {
     image?: string | null
     paymentId?: string | null
     walletPin?: string | null
-    password: string
     createdAt?: Date | string
     updatedAt?: Date | string
     OnRampTransaction?: OnRampTransactionUncheckedCreateNestedManyWithoutUserInput
@@ -15145,7 +15110,6 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     paymentId?: NullableStringFieldUpdateOperationsInput | string | null
     walletPin?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     OnRampTransaction?: OnRampTransactionUpdateManyWithoutUserNestedInput
@@ -15164,7 +15128,6 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     paymentId?: NullableStringFieldUpdateOperationsInput | string | null
     walletPin?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     OnRampTransaction?: OnRampTransactionUncheckedUpdateManyWithoutUserNestedInput
@@ -15183,7 +15146,6 @@ export namespace Prisma {
     image?: string | null
     paymentId?: string | null
     walletPin?: string | null
-    password: string
     createdAt?: Date | string
     updatedAt?: Date | string
     OnRampTransaction?: OnRampTransactionCreateNestedManyWithoutUserInput
@@ -15202,7 +15164,6 @@ export namespace Prisma {
     image?: string | null
     paymentId?: string | null
     walletPin?: string | null
-    password: string
     createdAt?: Date | string
     updatedAt?: Date | string
     OnRampTransaction?: OnRampTransactionUncheckedCreateNestedManyWithoutUserInput
@@ -15237,7 +15198,6 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     paymentId?: NullableStringFieldUpdateOperationsInput | string | null
     walletPin?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     OnRampTransaction?: OnRampTransactionUpdateManyWithoutUserNestedInput
@@ -15256,7 +15216,6 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     paymentId?: NullableStringFieldUpdateOperationsInput | string | null
     walletPin?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     OnRampTransaction?: OnRampTransactionUncheckedUpdateManyWithoutUserNestedInput
@@ -15275,7 +15234,6 @@ export namespace Prisma {
     image?: string | null
     paymentId?: string | null
     walletPin?: string | null
-    password: string
     createdAt?: Date | string
     updatedAt?: Date | string
     OnRampTransaction?: OnRampTransactionCreateNestedManyWithoutUserInput
@@ -15294,7 +15252,6 @@ export namespace Prisma {
     image?: string | null
     paymentId?: string | null
     walletPin?: string | null
-    password: string
     createdAt?: Date | string
     updatedAt?: Date | string
     OnRampTransaction?: OnRampTransactionUncheckedCreateNestedManyWithoutUserInput
@@ -15329,7 +15286,6 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     paymentId?: NullableStringFieldUpdateOperationsInput | string | null
     walletPin?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     OnRampTransaction?: OnRampTransactionUpdateManyWithoutUserNestedInput
@@ -15348,7 +15304,6 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     paymentId?: NullableStringFieldUpdateOperationsInput | string | null
     walletPin?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     OnRampTransaction?: OnRampTransactionUncheckedUpdateManyWithoutUserNestedInput
@@ -15367,7 +15322,6 @@ export namespace Prisma {
     image?: string | null
     paymentId?: string | null
     walletPin?: string | null
-    password: string
     createdAt?: Date | string
     updatedAt?: Date | string
     OnRampTransaction?: OnRampTransactionCreateNestedManyWithoutUserInput
@@ -15386,7 +15340,6 @@ export namespace Prisma {
     image?: string | null
     paymentId?: string | null
     walletPin?: string | null
-    password: string
     createdAt?: Date | string
     updatedAt?: Date | string
     OnRampTransaction?: OnRampTransactionUncheckedCreateNestedManyWithoutUserInput
@@ -15421,7 +15374,6 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     paymentId?: NullableStringFieldUpdateOperationsInput | string | null
     walletPin?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     OnRampTransaction?: OnRampTransactionUpdateManyWithoutUserNestedInput
@@ -15440,7 +15392,6 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     paymentId?: NullableStringFieldUpdateOperationsInput | string | null
     walletPin?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     OnRampTransaction?: OnRampTransactionUncheckedUpdateManyWithoutUserNestedInput
@@ -15459,7 +15410,6 @@ export namespace Prisma {
     image?: string | null
     paymentId?: string | null
     walletPin?: string | null
-    password: string
     createdAt?: Date | string
     updatedAt?: Date | string
     OnRampTransaction?: OnRampTransactionCreateNestedManyWithoutUserInput
@@ -15478,7 +15428,6 @@ export namespace Prisma {
     image?: string | null
     paymentId?: string | null
     walletPin?: string | null
-    password: string
     createdAt?: Date | string
     updatedAt?: Date | string
     OnRampTransaction?: OnRampTransactionUncheckedCreateNestedManyWithoutUserInput
@@ -15513,7 +15462,6 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     paymentId?: NullableStringFieldUpdateOperationsInput | string | null
     walletPin?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     OnRampTransaction?: OnRampTransactionUpdateManyWithoutUserNestedInput
@@ -15532,7 +15480,6 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     paymentId?: NullableStringFieldUpdateOperationsInput | string | null
     walletPin?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     OnRampTransaction?: OnRampTransactionUncheckedUpdateManyWithoutUserNestedInput
@@ -15551,7 +15498,6 @@ export namespace Prisma {
     image?: string | null
     paymentId?: string | null
     walletPin?: string | null
-    password: string
     createdAt?: Date | string
     updatedAt?: Date | string
     OnRampTransaction?: OnRampTransactionCreateNestedManyWithoutUserInput
@@ -15570,7 +15516,6 @@ export namespace Prisma {
     image?: string | null
     paymentId?: string | null
     walletPin?: string | null
-    password: string
     createdAt?: Date | string
     updatedAt?: Date | string
     OnRampTransaction?: OnRampTransactionUncheckedCreateNestedManyWithoutUserInput
@@ -15605,7 +15550,6 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     paymentId?: NullableStringFieldUpdateOperationsInput | string | null
     walletPin?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     OnRampTransaction?: OnRampTransactionUpdateManyWithoutUserNestedInput
@@ -15624,7 +15568,6 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     paymentId?: NullableStringFieldUpdateOperationsInput | string | null
     walletPin?: NullableStringFieldUpdateOperationsInput | string | null
-    password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     OnRampTransaction?: OnRampTransactionUncheckedUpdateManyWithoutUserNestedInput
