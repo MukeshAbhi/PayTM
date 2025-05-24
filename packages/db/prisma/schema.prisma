@@ -19,9 +19,8 @@ model User {
   email         String          @unique
   emailVerified DateTime?
   image         String?
-  password      String?
   paymentId     String?         @unique
-  walletPin     Int?
+  walletPin     String?         
 
   OnRampTranscation OnRampTransaction[]
   WalletTranscation WalletTransaction[]

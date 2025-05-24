@@ -1,8 +1,11 @@
 import { Button } from "@repo/ui/components/button"
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@repo/ui/components/input-otp"
+import { useSession } from "next-auth/react"
 import { useState } from "react"
 
 export const WalletPin = () => {
+    const { data: session } = useSession()
+    const userId = session?.user?.id;
     const [isPinPresent, setIsPinPresent] = useState<boolean>(true);
 
    return(
