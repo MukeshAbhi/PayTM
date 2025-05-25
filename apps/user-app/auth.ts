@@ -28,7 +28,6 @@ export const authOptions : NextAuthConfig = ({
       return session;
     },
     async jwt({ token, user}) {
-      console.log("User from here: ", user)
       if(user) {
         token.sub = user.id,
         token.email = user.email,

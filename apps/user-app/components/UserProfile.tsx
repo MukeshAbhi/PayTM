@@ -1,51 +1,68 @@
-"use client"
+"use client";
 
-import { getUserData } from "@/actions/user";
-import { BasicUser} from "@repo/types/zodtypes";
+import { createPaymentKey, getUserData } from "@/actions/user";
+import { BasicUser } from "@repo/types/zodtypes";
+import { Button } from "@repo/ui/components/button";
 import { useEffect, useState } from "react";
 
 export const UserProfile = () => {
-    const [user, setUser ] = useState<BasicUser | null>()
-    useEffect(() => {
-        const userData = async () => {
-           const data = await getUserData();
-           if (data) {
-            setUser(data);
+  const [user, setUser] = useState<BasicUser | null>(null);
+  const [isPresent, setIsPresent] = useState(false);
+
+  const fetchUser = async () => {
+    const data = await getUserData();
+    if (data) {
+      setUser(data);
+      setIsPresent(!!data.paymentId);
     }
-        }
-        userData();
-    },[])
+  };
 
-    return (
-    <div className=" w-3/5 h-screen  mt-4  p-4 bg-card text-card-foreground rounded-lg shadow-md space-y-4">
-        <div className="space-y-5 ">
-            <div className="flex  sm:text-2xl ">
-                <span className="font-medium">User Name:</span>
-                <h2 className="text-2xl font-semibold text-center pl-32">{user?.name}</h2>
-            </div>
+  useEffect(() => {
+    fetchUser();
+  }, []);
 
-            <div className="flex text-sm sm:text-2xl">
-                <span className="font-medium">Created On:</span>
-                <span className="pl-30">{(user?.createdAt)?.getDate()}</span>
-            </div>
+  const createKey = async () => {
+    if (!user) return;
+      console.log("From here hi");
+      
+      await createPaymentKey(user.id);
+      await fetchUser();
+  }
+  
 
-            <div className="space-y-2">
-                <div className="flex  text-sm sm:text-2xl">
-                    <span className="font-medium">Email:</span>
-                    <span className="pl-46">{user?.email}</span>
-                </div>
-                <div className="flex  text-sm sm:text-2xl">
-                    <span className="font-medium">Verification:</span>
-                    <span className="text-primary font-semibold pl-30">Verified</span>
-                
-                </div>
-            </div>
-
-            <div className="flex  text-sm sm:text-2xl">
-                <span className="font-medium">Paytm ID:</span>
-                <span className="break-all pl-36">{user?.paymentId}</span>
-            </div>
+  return (
+    <div className="w-full   h-auto mt-4 p-6 bg-card text-card-foreground rounded-lg shadow-md space-y-6">
+      <div className="space-y-6">
+        <div className="flex  flex-row sm:items-center justify-between">
+          <span className="text-base sm:text-xl font-medium">User Name:</span>
+          <h2 className="text-lg sm:text-2xl  font-semibold text-right">{user?.name}</h2>
         </div>
+
+        <div className="flex flex-row sm:items-center justify-between">
+          <span className="text-base sm:text-xl font-medium">Created On:</span>
+          <span className="text-right">{user?.createdAt ? new Date(user.createdAt).toDateString() : "-"}</span>
+        </div>
+
+        <div className="flex flex-col gap-4">
+          <div className="flex flex-row sm:items-center justify-between">
+            <span className="text-base sm:text-xl font-medium">Email:</span>
+            <span className="text-right break-all">{user?.email}</span>
+          </div>
+
+          <div className="flex flex-row sm:items-center justify-between">
+            <span className="text-base sm:text-xl font-medium">Verification:</span>
+            <span className="text-primary font-semibold text-right">Verified</span>
+          </div>
+        </div>
+
+        <div className="flex flex-row sm:items-center justify-between">
+          <span className="text-base sm:text-xl font-medium">Paytm ID:</span>
+          {
+            isPresent == false ? (<span className="text-right break-all">{"-"}<Button onClick={createKey} className="ml-2 text-white">Create Id</Button></span>) 
+                               : (<span className="text-right break-all">{user?.paymentId}</span>)
+          }
+        </div>
+      </div>
     </div>
   );
 };

@@ -164,6 +164,12 @@ exports.Prisma.WalletBalanceScalarFieldEnum = {
   locked: 'locked'
 };
 
+exports.Prisma.WalletKeyScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  key: 'key'
+};
+
 exports.Prisma.AccountScalarFieldEnum = {
   userId: 'userId',
   type: 'type',
@@ -236,6 +242,7 @@ exports.Prisma.ModelName = {
   WalletTransaction: 'WalletTransaction',
   BankBalance: 'BankBalance',
   WalletBalance: 'WalletBalance',
+  WalletKey: 'WalletKey',
   Account: 'Account',
   Session: 'Session',
   VerificationToken: 'VerificationToken',

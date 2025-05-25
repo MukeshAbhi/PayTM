@@ -4,6 +4,10 @@ import { auth } from "@/authTypes";
 import { prisma } from "@repo/db/prisma";
 import { compare, hash } from "bcrypt";
 
+function generateFormattedKey() {
+  const getRandom = () => Math.random().toString(36).substring(2, 6).toUpperCase();
+  return `${getRandom()}-${getRandom()}-${getRandom()}`;
+}
 
 export async function getUserData() {
 
@@ -201,6 +205,48 @@ export async function changeUserPin(id:string, currentPin:string, newPin:string)
         message: "Something went wrong.! Please try again later",
         status: 500
       }
+    }
+  
+}
+
+export async function createPaymentKey(id:string) {
+  let uniqueKey: string;
+    console.log("From here id: ", id);
+    
+    try{
+      while(true){
+        const key = generateFormattedKey();
+        console.log("From here key: ", key);
+        console.log("Prisma keys:", Object.keys(prisma));
+        const existing = await prisma.walletKey.findUnique({
+          where: {key}
+        });
+
+        if (!existing) {
+          uniqueKey = key
+          break;
+        }
+      }
+      console.log("From here 1");
+      const walletKey = await prisma.user.update({
+        where: {
+          id,
+        },
+        data: {
+          walletKey: {
+            create: {
+              key: uniqueKey,
+            }
+          }
+        }
+      })
+
+      if(walletKey){
+        console.log("From here 2");
+        return uniqueKey;
+      }
+    }catch(err){
+      console.log("error while creating key ", err)
     }
   
 }
