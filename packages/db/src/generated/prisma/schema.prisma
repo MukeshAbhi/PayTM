@@ -24,7 +24,8 @@ model User {
   walletPin         String?
   walletKey         String?
   OnRampTransaction OnRampTransaction[]
-  WalletTransaction WalletTransaction[]
+  sentTransfers     WalletTransaction[] @relation(name: "FromUserRelation")
+  receivedTransfers WalletTransaction[] @relation(name: "ToUserRelation")
   WBalance          WalletBalance[]
   BBalance          BankBalance[]
 
@@ -50,14 +51,13 @@ model OnRampTransaction {
 }
 
 model WalletTransaction {
-  id        String          @id @default(cuid())
-  status    OnRampStatus
-  type      TransactionType
-  token     String          @unique
-  amount    Int
-  startTime DateTime
-  userId    String
-  user      User            @relation(fields: [userId], references: [id])
+  id         String   @id @default(cuid())
+  amount     Int
+  createdAt  DateTime @default(now())
+  fromUserId String
+  fromUser   User     @relation(name: "FromUserRelation", fields: [fromUserId], references: [id])
+  toUserId   String
+  toUser     User     @relation(name: "ToUserRelation", fields: [toUserId], references: [id])
 }
 
 enum OnRampStatus {

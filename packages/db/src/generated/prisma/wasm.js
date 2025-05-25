@@ -143,12 +143,10 @@ exports.Prisma.OnRampTransactionScalarFieldEnum = {
 
 exports.Prisma.WalletTransactionScalarFieldEnum = {
   id: 'id',
-  status: 'status',
-  type: 'type',
-  token: 'token',
   amount: 'amount',
-  startTime: 'startTime',
-  userId: 'userId'
+  createdAt: 'createdAt',
+  fromUserId: 'fromUserId',
+  toUserId: 'toUserId'
 };
 
 exports.Prisma.BankBalanceScalarFieldEnum = {

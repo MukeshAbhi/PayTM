@@ -98,8 +98,11 @@ app.post("/toWebhook",async (req, res) => {
         
         if(lower === "debit")
         {// Debit: decrement wallet balance
-            await prisma.$transaction([
-                prisma.walletBalance.update({
+            await prisma.$transaction(async (tx) => {
+
+                await tx.$queryRaw`SELECT * FROM "WalletBalance" WHERE "userId" = ${paymentInfo?.userId} FOR UPDATE`;
+                
+                await tx.walletBalance.update({
                     where: { userId: paymentInfo.userId},
                     data: {
                         amount: {
@@ -107,7 +110,7 @@ app.post("/toWebhook",async (req, res) => {
                         }
                     }
                 }),
-                prisma.onRampTransaction.update({
+                await tx.onRampTransaction.update({
                     where: {
                         token: paymentInfo.token
                     },
@@ -115,7 +118,7 @@ app.post("/toWebhook",async (req, res) => {
                         status: "Success"
                     }
                 })
-            ])
+        })
         } else {// Credit : upsert wallet balance and update transaction status
             await prisma.$transaction([
                 prisma.walletBalance.upsert({
