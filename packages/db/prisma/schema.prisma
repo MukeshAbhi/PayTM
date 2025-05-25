@@ -21,7 +21,7 @@ model User {
   image         String?
   paymentId     String?         @unique
   walletPin     String?         
-  walletKey     WalletKey?
+  walletKey     String?
   OnRampTransaction OnRampTransaction[]
   WalletTransaction WalletTransaction[]
   WBalance      WalletBalance[]
@@ -89,10 +89,7 @@ model WalletBalance {
 }
 
 model WalletKey {
-  id            String          @id @default(cuid())
-  userId        String          @unique
   key           String          @unique
-  user          User            @relation(fields: [userId], references: [id])
 }
  
 model Account {

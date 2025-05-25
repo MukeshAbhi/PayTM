@@ -15,13 +15,16 @@ generator client {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String    @unique
-  emailVerified DateTime?
-  image         String?
-
-  OnRampTranscation OnRampTranscation[]
+  id                String              @id @default(cuid())
+  name              String?
+  email             String              @unique
+  emailVerified     DateTime?
+  image             String?
+  paymentId         String?             @unique
+  walletPin         String?
+  walletKey         String?
+  OnRampTransaction OnRampTransaction[]
+  WalletTransaction WalletTransaction[]
   WBalance          WalletBalance[]
   BBalance          BankBalance[]
 
@@ -34,21 +37,38 @@ model User {
   updatedAt DateTime @updatedAt
 }
 
-model OnRampTranscation {
-  id        String       @id @default(cuid())
+model OnRampTransaction {
+  id        String          @id @default(cuid())
   status    OnRampStatus
-  token     String       @unique
+  type      TransactionType
+  token     String          @unique
   provider  String
   amount    Int
   startTime DateTime
   userId    String
-  user      User         @relation(fields: [userId], references: [id])
+  user      User            @relation(fields: [userId], references: [id])
+}
+
+model WalletTransaction {
+  id        String          @id @default(cuid())
+  status    OnRampStatus
+  type      TransactionType
+  token     String          @unique
+  amount    Int
+  startTime DateTime
+  userId    String
+  user      User            @relation(fields: [userId], references: [id])
 }
 
 enum OnRampStatus {
   Success
   Failure
   Processing
+}
+
+enum TransactionType {
+  Credit
+  Debit
 }
 
 model BankBalance {
@@ -65,6 +85,10 @@ model WalletBalance {
   amount Int
   locked Int
   user   User   @relation(fields: [userId], references: [id])
+}
+
+model WalletKey {
+  key String @unique
 }
 
 model Account {

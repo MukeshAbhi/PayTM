@@ -48,7 +48,7 @@ export type BasicUser = {
   email: string;
   emailVerified: Date | null;
   image: string | null;
-  paymentId: string | null;
   createdAt: Date;
   updatedAt: Date;
+  walletKey: string | null;
 };

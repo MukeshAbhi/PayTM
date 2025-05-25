@@ -13,7 +13,7 @@ export const UserProfile = () => {
     const data = await getUserData();
     if (data) {
       setUser(data);
-      setIsPresent(!!data.paymentId);
+      setIsPresent(!!data.walletKey);
     }
   };
 
@@ -59,7 +59,7 @@ export const UserProfile = () => {
           <span className="text-base sm:text-xl font-medium">Paytm ID:</span>
           {
             isPresent == false ? (<span className="text-right break-all">{"-"}<Button onClick={createKey} className="ml-2 text-white">Create Id</Button></span>) 
-                               : (<span className="text-right break-all">{user?.paymentId}</span>)
+                               : (<span className="text-right break-all">{user?.walletKey}</span>)
           }
         </div>
       </div>

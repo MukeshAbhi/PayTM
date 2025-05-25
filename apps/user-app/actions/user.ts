@@ -28,7 +28,7 @@ export async function getUserData() {
       email: true,
       emailVerified: true,
       image: true,
-      paymentId: true,
+      walletKey: true,
       walletPin: false,
       createdAt: true,
       updatedAt: true,
@@ -218,7 +218,7 @@ export async function createPaymentKey(id:string) {
         const key = generateFormattedKey();
         console.log("From here key: ", key);
         console.log("Prisma keys:", Object.keys(prisma));
-        const existing = await prisma.walletKey.findUnique({
+        const existing = await prisma.walletKey.findFirst({
           where: {key}
         });
 
@@ -228,20 +228,22 @@ export async function createPaymentKey(id:string) {
         }
       }
       console.log("From here 1");
-      const walletKey = await prisma.user.update({
+      await prisma.walletKey.create({
+        data: {
+          key: uniqueKey
+        }
+      })
+      const wKey = await prisma.user.update({
         where: {
           id,
         },
         data: {
-          walletKey: {
-            create: {
-              key: uniqueKey,
-            }
-          }
+          walletKey: uniqueKey
+          
         }
       })
 
-      if(walletKey){
+      if(wKey){
         console.log("From here 2");
         return uniqueKey;
       }

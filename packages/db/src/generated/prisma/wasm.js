@@ -125,6 +125,7 @@ exports.Prisma.UserScalarFieldEnum = {
   image: 'image',
   paymentId: 'paymentId',
   walletPin: 'walletPin',
+  walletKey: 'walletKey',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -165,8 +166,6 @@ exports.Prisma.WalletBalanceScalarFieldEnum = {
 };
 
 exports.Prisma.WalletKeyScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
   key: 'key'
 };
 
