@@ -6,9 +6,10 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   register?: UseFormRegisterReturn
 }
 
-function InputForForm({ register, className, type = "text", ...props }: InputProps) {
+function InputForForm({ register, className, type = "text", name, ...props }: InputProps) {
   return (
     <input
+      name={name}
       type={type}
       data-slot="input"
       {...register}

@@ -1,4 +1,4 @@
-import { adapter } from "@repo/db/prisma"
+import { adapter, prisma } from "@repo/db/prisma"
 import { NextAuthConfig } from "next-auth"
 import Google from "next-auth/providers/google";
 import Resend from "next-auth/providers/resend"
@@ -28,12 +28,15 @@ export const authOptions : NextAuthConfig = ({
       return session;
     },
     async jwt({ token, user}) {
+      console.log("User from here: ", user)
       if(user) {
         token.sub = user.id,
-        token.email = user.email
+        token.email = user.email,
+        token.name = user.name
       }
       return token;
     },
+    
     async redirect({url, baseUrl}){
       return `${baseUrl}/user-dashboard`;
     }

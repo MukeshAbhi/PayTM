@@ -7,7 +7,10 @@ import { hash, compare } from "bcrypt";
 import { redirect } from "next/navigation";
 
 export const loginResend = async (formDta: FormData) => {
-    console.log(formDta);
+    const email = formDta.get("email") as string;
+    const name = formDta.get("name") as string;
+
+    await customSignUp(name, email);
     await signIn("resend", formDta);
 }
 
@@ -23,3 +26,22 @@ export const homeRedirect = async () => {
     redirect("/");
 }
 
+const customSignUp = async (name: string, email: string) => {
+        
+    console.log("Fo=r==")
+    const user = await prisma.user.findFirst({
+        where: {
+            email
+        }
+    })
+
+    if(!user){
+        await prisma.user.create({
+            data: {
+                email,
+                name
+            }
+        })
+    } 
+    return;
+}

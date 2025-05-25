@@ -47,6 +47,7 @@ export function SignUpForm({
           </div>
           <form
              action={loginResend}
+             method="post"
             >
             <div className="grid gap-5">
                 <Label htmlFor="name">User Name</Label>
