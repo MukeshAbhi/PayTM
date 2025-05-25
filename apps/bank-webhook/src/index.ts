@@ -46,15 +46,21 @@ app.post("/toWebhook",async (req, res) => {
     
     // transcations
    try{
-        const status = await prisma.onRampTransaction.findFirst({
+        const newAction = await prisma.onRampTransaction.findFirst({
             where: { token: paymentInfo.token},
             select: { 
-                type: true
+                type: true,
+                status:true
             }
         });
 
-        if(!status){
+        if(!newAction){
             res.status(404).json({ message: "Transaction not found" });
+            return;
+        }
+
+        //Check if the transaction is 
+        if(newAction.status != "Processing"){
             return;
         }
 
@@ -87,7 +93,7 @@ app.post("/toWebhook",async (req, res) => {
             console.log(`Marked ${expiredTransactionIds.length} transactions as "Failure"`);
         }
 
-        const lower = status.type.toLowerCase();
+        const lower = newAction.type.toLowerCase();
         console.log("type : ", lower);
         
         if(lower === "debit")
