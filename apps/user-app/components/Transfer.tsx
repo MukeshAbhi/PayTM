@@ -1,5 +1,5 @@
 "use client";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { Input } from "@repo/ui/components/input";
 import { Label } from "@repo/ui/components/label";
 import { Button } from "@repo/ui/components/button";
@@ -7,14 +7,25 @@ import { InputForForm } from "./input";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@repo/ui/components/input-otp";
 import { useState } from "react";
 
+type FormData = {
+        paytmid: string;
+        confirmpaytmid: string;
+        amount: number;
+        pin: string;
+    };
+
 function Transfer() {
-  const [value, setValue] = useState("")
+
   const {
     register,
     handleSubmit,
     formState: { errors },
     getValues,
-  } = useForm({ mode: "onChange" });
+    control,
+    watch
+  } = useForm<FormData>({ mode: "onChange" });
+
+  const pinValue = watch("pin")
 
   return (
     <div className="min-h-screen w-full flex flex-col lg:flex-row p-4 gap-4">
@@ -93,26 +104,36 @@ function Transfer() {
               <Label className="text-xl font-semibold">Wallet PIN</Label>
               <div className="w-full max-w-md">
                 <div className="space-y-4">
-                  <InputOTP
-                      maxLength={6}
-                      value={value}
-                      onChange={(value) => setValue(value)}
-                  >
-                      <InputOTPGroup className="flex justify-center pl-20 gap-2 sm:gap-3">
-                      <InputOTPSlot index={0}  />
-                      <InputOTPSlot index={1} />
-                      <InputOTPSlot index={2} />
-                      <InputOTPSlot index={3} />
-                      <InputOTPSlot index={4} />
-                      <InputOTPSlot index={5} />
-                      </InputOTPGroup>
-                  </InputOTP>
+                  <Controller 
+                        name="pin"
+                        control={control}
+                        rules={{
+                            required: 'Wallet PIN is required',
+                            minLength: { value: 6, message: "Must be 6 Digits"}
+                        }}
+                        render={({ field }) => (
+                            <InputOTP
+                                maxLength={6}
+                                value={field.value || ""}
+                                onChange={(value) => field.onChange(value)}
+                            >
+                                <InputOTPGroup className="flex justify-center pl-20 gap-2 sm:gap-3">
+                                <InputOTPSlot index={0}  />
+                                <InputOTPSlot index={1} />
+                                <InputOTPSlot index={2} />
+                                <InputOTPSlot index={3} />
+                                <InputOTPSlot index={4} />
+                                <InputOTPSlot index={5} />
+                                </InputOTPGroup>
+                            </InputOTP>
+                        )}
+                    />
+                    {errors.pin && (
+                        <p className="text-red-500 text-sm text-center">{errors.pin.message}</p>
+                    )}
                 </div>
               </div>
             </div>
-
-
-            {/* Submit Button */}
             <Button
               type="submit"
               className="w-full text-white text-lg py-3 rounded-lg hover:scale-[1.01] transition-transform duration-150"

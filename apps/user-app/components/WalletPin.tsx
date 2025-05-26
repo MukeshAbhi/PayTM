@@ -2,14 +2,14 @@ import { Button } from "@repo/ui/components/button"
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@repo/ui/components/input-otp"
 import { useSession } from "next-auth/react"
 import { useEffect, useState } from "react"
-import { useForm } from "react-hook-form"
+import { Controller, useForm } from "react-hook-form"
 
 
 
 export const WalletPin = () => {
     const { data: session } = useSession()
     const userId = session?.user?.id;
-    const [isPinPresent, setIsPinPresent] = useState<boolean>(true);
+    const [isPinPresent, setIsPinPresent] = useState<boolean>(false);
 
    return(
         isPinPresent  ? <ChangeWalletPin /> : <SetWalletPin/> 
@@ -18,24 +18,14 @@ export const WalletPin = () => {
 
 const SetWalletPin = () => {
     type FormData = {
-        otp: string;
+        pin: string;
     };
-    const {register, handleSubmit, setValue, watch, formState:{ errors}} = useForm<FormData>();
+    const { handleSubmit, watch, control, formState:{ errors} } = useForm<FormData>({mode: "onChange"});
 
-    const otpValue = watch("otp");
-
-    useEffect(() => {
-        register("otp", {
-            required: "OTP is required",
-            minLength: {
-            value: 6,
-            message: "OTP must be 6 digits",
-            },
-        });
-    }, [register]);
-
+    const pinValue = watch("pin");
+        
     const onSubmit = (data: FormData) => {
-        console.log("Submitted OTP:", data.otp);
+        console.log("Submitted OTP:", data.pin);
     };
 
     return(
@@ -46,32 +36,45 @@ const SetWalletPin = () => {
 
             <div className="w-full max-w-md">
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-                    <InputOTP
-                        maxLength={6}
-                        value={otpValue}
-                        onChange={(value) => setValue("otp", value)}
-                    >
-                        <InputOTPGroup className="flex justify-center pl-20 gap-2 sm:gap-3">
-                        <InputOTPSlot index={0}  />
-                        <InputOTPSlot index={1} />
-                        <InputOTPSlot index={2} />
-                        <InputOTPSlot index={3} />
-                        <InputOTPSlot index={4} />
-                        <InputOTPSlot index={5} />
-                        </InputOTPGroup>
-                    </InputOTP>
+                    <Controller 
+                        name="pin"
+                        control={control}
+                        rules={{
+                            required: 'Current PIN is required',
+                            minLength: { value: 6, message: "Must be 6 Digits"}
+                        }}
+                        render={({ field }) => (
+                            <InputOTP
+                                maxLength={6}
+                                value={field.value || ""}
+                                onChange={(value) => field.onChange(value)}
+                            >
+                                <InputOTPGroup className="flex justify-center pl-20 gap-2 sm:gap-3">
+                                <InputOTPSlot index={0}  />
+                                <InputOTPSlot index={1} />
+                                <InputOTPSlot index={2} />
+                                <InputOTPSlot index={3} />
+                                <InputOTPSlot index={4} />
+                                <InputOTPSlot index={5} />
+                                </InputOTPGroup>
+                            </InputOTP>
+                        )}
+                    />
 
                     <div className="text-center text-sm sm:text-base text-muted-foreground">
-                        {otpValue === "" ? (
+                        {pinValue === "" ? (
                         <>Enter your Wallet PIN.</>
                         ) : (
-                        <>You entered: {otpValue}</>
+                        <>You entered: {pinValue}</>
                         )}
                     </div>
-                        {errors.otp && (
-                            <p className="text-red-500 text-sm">{errors.otp.message}</p>
-                        )}
-                    <Button className="text-white w-20 ml-40">Set</Button>
+
+                    {errors.pin && (
+                        <p className="text-red-500 text-sm text-center">{errors.pin.message}</p>
+                    )}
+                    <div className="ml-5">
+                        <Button className="text-white w-20 ml-40 ">Set</Button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -84,21 +87,10 @@ const ChangeWalletPin = () => {
         currentPin: string;
         newPin: string;
     };
-    const {register, handleSubmit, setValue, watch, formState:{ errors}} = useForm<FormData>({mode: "onChange"});
+    const { handleSubmit, watch, control, formState:{ errors} } = useForm<FormData>({mode: "onChange"});
 
     const currentPin = watch("currentPin");
     const newPin = watch("newPin");
-
-    useEffect(() => {
-        register("currentPin", {
-            required: "Current PIN is required",
-            minLength: { value: 6, message: "Must be 6 digits" },
-        });
-        register("newPin", {
-            required: "New PIN is required",
-            minLength: { value: 6, message: "Must be 6 digits" },
-        });
-    }, [register]);
 
     const onSubmit = (data: FormData) => {
         console.log("Changing PIN with values:", data);
@@ -115,21 +107,34 @@ const ChangeWalletPin = () => {
 
             <div className="w-full max-w-md">
                 <div className="space-y-4">
-                    <div className="flex justify-center  gap-2 sm:gap-3">Current Wallet Pin</div>
-                    <InputOTP
-                        maxLength={6}
-                        value={currentPin}
-                        onChange={(value) => setValue("currentPin", value)}
-                    >
-                        <InputOTPGroup className="flex justify-center pl-20 gap-2 sm:gap-3">
-                        <InputOTPSlot index={0}  />
-                        <InputOTPSlot index={1} />
-                        <InputOTPSlot index={2} />
-                        <InputOTPSlot index={3} />
-                        <InputOTPSlot index={4} />
-                        <InputOTPSlot index={5} />
-                        </InputOTPGroup>
-                    </InputOTP>
+                    <div className="flex justify-center  gap-2 sm:gap-3">
+                        Current Wallet Pin
+                    </div>
+                    <Controller 
+                        name="currentPin"
+                        control={control}
+                        rules={{
+                            required: 'Current PIN is required',
+                            minLength: { value: 6, message: "Must be 6 Digits"}
+                        }}
+                        render={({ field }) => (
+                            <InputOTP
+                                maxLength={6}
+                                value={field.value || ""}
+                                onChange={(value) => field.onChange(value)}
+                            >
+                                <InputOTPGroup className="flex justify-center pl-20 gap-2 sm:gap-3">
+                                <InputOTPSlot index={0}  />
+                                <InputOTPSlot index={1} />
+                                <InputOTPSlot index={2} />
+                                <InputOTPSlot index={3} />
+                                <InputOTPSlot index={4} />
+                                <InputOTPSlot index={5} />
+                                </InputOTPGroup>
+                            </InputOTP>
+                        )}
+                    />
+            
                     <div className="text-center text-sm sm:text-base text-muted-foreground">
                         {currentPin === "" ? (
                         <>Enter your Wallet PIN.</>
@@ -140,21 +145,34 @@ const ChangeWalletPin = () => {
                     {errors.currentPin && (
                         <p className="text-red-500 text-sm text-center">{errors.currentPin.message}</p>
                     )}
-                    <div className="flex justify-center  gap-2 sm:gap-3">New Wallet Pin</div>
-                    <InputOTP
-                        maxLength={6}
-                        value={newPin}
-                        onChange={(value) => setValue("newPin", value)}
-                    >
-                        <InputOTPGroup className="flex justify-center pl-20 gap-2 sm:gap-3">
-                        <InputOTPSlot index={0}  />
-                        <InputOTPSlot index={1} />
-                        <InputOTPSlot index={2} />
-                        <InputOTPSlot index={3} />
-                        <InputOTPSlot index={4} />
-                        <InputOTPSlot index={5} />
-                        </InputOTPGroup>
-                    </InputOTP>
+
+                    <div className="flex justify-center  gap-2 sm:gap-3">
+                        New Wallet Pin
+                    </div>
+                    <Controller 
+                        name="newPin"
+                        control={control}
+                        rules={{
+                            required: 'New PIN is required',
+                            minLength: { value: 6, message: "Must be 6 Digits"}
+                        }}
+                        render={({ field }) => (
+                            <InputOTP
+                                maxLength={6}
+                                value={field.value || ""}
+                                onChange={(value) => field.onChange(value)}
+                            >
+                                <InputOTPGroup className="flex justify-center pl-20 gap-2 sm:gap-3">
+                                <InputOTPSlot index={0}  />
+                                <InputOTPSlot index={1} />
+                                <InputOTPSlot index={2} />
+                                <InputOTPSlot index={3} />
+                                <InputOTPSlot index={4} />
+                                <InputOTPSlot index={5} />
+                                </InputOTPGroup>
+                            </InputOTP>
+                        )}
+                    />
 
                     <div className="text-center text-sm sm:text-base text-muted-foreground">
                         {newPin === "" ? (
