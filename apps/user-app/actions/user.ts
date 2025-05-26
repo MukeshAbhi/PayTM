@@ -52,7 +52,9 @@ export async function getUserBankTransactions(): Promise<any> {
     const data = await prisma.user.findUnique({
       where: { id: user.id },
       select: {
-        OnRampTransaction: true, 
+        OnRampTransaction: {
+          orderBy: {startTime: "desc"}
+        }, 
       },
     });
     
@@ -262,7 +264,11 @@ export async function debitedWalletTransactions() : Promise<any> {
       const data = await prisma.user.findUnique({
         where: { id: user.id },
         select: {
-          sentTransfers:true
+          sentTransfers:{
+            orderBy: {
+              createdAt: "desc"
+            }
+          }
         },
       });
       
@@ -298,7 +304,11 @@ export async function creditedWalletTransactions() : Promise<any> {
       const data = await prisma.user.findUnique({
         where: { id: user.id },
         select: {
-          receivedTransfers: true
+          receivedTransfers: {
+            orderBy: {
+              createdAt: "desc"
+            }
+          }
         },
       });
       

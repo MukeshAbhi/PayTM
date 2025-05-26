@@ -9,13 +9,8 @@ const [ transactions, setTransactions ] = useState<BankTransaction[] | null>(nul
   useEffect(() => {
     const getData = async () => {
       const data = await getUserBankTransactions();
-      
       console.log("from here: ", data)
-
-      const sorted = data.sort(
-        (a: { startTime:  Date; },b: { startTime: Date; }) => new Date(b.startTime).getTime() - new Date(a.startTime).getTime()
-      )
-      setTransactions(sorted.slice(0,7));
+      setTransactions(data.slice(0,7));
 
     }
     getData();
