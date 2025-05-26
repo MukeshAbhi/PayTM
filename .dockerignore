@@ -1,0 +1,9 @@
+node_modules
+**/node_modules
+.pnpm
+.git
+.env
+*.log
+dist
+build
+.cache
