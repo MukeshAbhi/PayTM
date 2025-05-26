@@ -51,4 +51,5 @@ export type BasicUser = {
   createdAt: Date;
   updatedAt: Date;
   walletKey: string | null;
+  walletPin: string | null;
 };

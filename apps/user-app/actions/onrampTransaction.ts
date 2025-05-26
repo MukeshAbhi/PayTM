@@ -10,9 +10,15 @@ const HMAC_KEY = process.env.HMAC_KEY;
 
 export async function checkUserBalance(amount: number, provider: string, type:TransactionType){
     const data = await getUserWalletBalance();
-    const balance = data.amount;
-    console.log("balance ", balance);
-    console.log("amount ", amount );
+
+    let balance = 0
+    
+    if ("amount" in data) {
+        balance = data.amount;
+        console.log("Balance:", balance);
+    } else {
+        console.error("Error fetching balance:", data.message);
+    }
     
     if((balance - amount) >= 0){
         createOnrampTransaction(amount,provider,type);

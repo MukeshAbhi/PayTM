@@ -29,7 +29,7 @@ export async function getUserData() {
       emailVerified: true,
       image: true,
       walletKey: true,
-      walletPin: false,
+      walletPin: true,
       createdAt: true,
       updatedAt: true,
     }
@@ -74,7 +74,6 @@ export async function getUserBankTransactions(): Promise<any> {
   }
 }
 
-
 export async function getUserWalletBalance(): Promise<{ amount: number } | { message: string; status: number }> {
   try {
     const user = await getUserData();
@@ -112,7 +111,6 @@ export async function getUserWalletBalance(): Promise<{ amount: number } | { mes
     };
   }
 }
-
 
 export async function getUserWalletPin(id: string): Promise<string | null | { message: string; status: number }>{
 
@@ -248,4 +246,76 @@ export async function createPaymentKey(id:string) {
       console.log("error while creating key ", err)
     }
   
+}
+
+export async function debitedWalletTransactions() : Promise<any> {
+  try {
+      const user = await getUserData();
+
+      if (!user || !user.id) {
+        return {
+          message: "User not authenticated",
+          status: 401,
+        };
+      }
+
+      const data = await prisma.user.findUnique({
+        where: { id: user.id },
+        select: {
+          sentTransfers:true
+        },
+      });
+      
+      if (!data || !data.sentTransfers) {
+        return {
+          message: "No transactions found",
+          status: 404,
+        };
+      }
+      
+      return data.sentTransfers;
+
+    } catch (err) {
+    console.error("Error fetching  transactions:", err);
+    return {
+      message: "Something went wrong. Please try again later.",
+      status: 500,
+    };
+  }
+}
+
+export async function creditedWalletTransactions() : Promise<any> {
+  try {
+      const user = await getUserData();
+
+      if (!user || !user.id) {
+        return {
+          message: "User not authenticated",
+          status: 401,
+        };
+      }
+
+      const data = await prisma.user.findUnique({
+        where: { id: user.id },
+        select: {
+          receivedTransfers: true
+        },
+      });
+      
+      if (!data || !data.receivedTransfers) {
+        return {
+          message: "No transactions found",
+          status: 404,
+        };
+      }
+      
+      return data.receivedTransfers;
+
+    } catch (err) {
+    console.error("Error fetching  transactions:", err);
+    return {
+      message: "Something went wrong. Please try again later.",
+      status: 500,
+    };
+  }
 }
