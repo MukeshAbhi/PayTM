@@ -216,8 +216,6 @@ export async function createPaymentKey(id:string) {
     try{
       while(true){
         const key = generateFormattedKey();
-        console.log("From here key: ", key);
-        console.log("Prisma keys:", Object.keys(prisma));
         const existing = await prisma.walletKey.findFirst({
           where: {key}
         });
@@ -227,7 +225,7 @@ export async function createPaymentKey(id:string) {
           break;
         }
       }
-      console.log("From here 1");
+
       await prisma.walletKey.create({
         data: {
           key: uniqueKey
@@ -244,7 +242,6 @@ export async function createPaymentKey(id:string) {
       })
 
       if(wKey){
-        console.log("From here 2");
         return uniqueKey;
       }
     }catch(err){

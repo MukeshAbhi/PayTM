@@ -34,11 +34,6 @@ const data = {
                 icon: User
             },
             {
-                title: "Password",
-                url: "#",
-                icon: Lock
-            },
-            {
                 title: "Wallet Pin",
                 url: "#",
                 icon:  LockKeyhole 

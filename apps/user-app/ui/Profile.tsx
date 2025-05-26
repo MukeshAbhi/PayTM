@@ -19,8 +19,6 @@ export default function Profile() {
     switch (selected) {
       case "Profile":
         return <UserProfile />;
-      case "Password":
-        return <Passwords />;
       case "Wallet Pin":
         return <WalletPin />;
       default: 

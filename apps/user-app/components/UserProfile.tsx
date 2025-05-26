@@ -23,7 +23,6 @@ export const UserProfile = () => {
 
   const createKey = async () => {
     if (!user) return;
-      console.log("From here hi");
       
       await createPaymentKey(user.id);
       await fetchUser();
