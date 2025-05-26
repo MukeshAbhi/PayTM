@@ -2,6 +2,7 @@
 
 import { auth } from "@/authTypes";
 import { prisma } from "@repo/db/prisma";
+import { WalletTransfer } from "@repo/types/zodtypes";
 import { compare, hash } from "bcrypt";
 
 function generateFormattedKey() {
@@ -279,7 +280,7 @@ export async function createPaymentKey(id:string) {
   
 }
 
-export async function debitedWalletTransactions() : Promise<any> {
+export async function debitedWalletTransactions() : Promise<{transaction: WalletTransfer[] } |{ message: string; status: number }> {
   try {
       const user = await getUserData();
 
@@ -308,7 +309,9 @@ export async function debitedWalletTransactions() : Promise<any> {
         };
       }
       
-      return data.sentTransfers;
+      return {
+        transaction: data.sentTransfers
+      };
 
     } catch (err) {
     console.error("Error fetching  transactions:", err);
@@ -319,7 +322,7 @@ export async function debitedWalletTransactions() : Promise<any> {
   }
 }
 
-export async function creditedWalletTransactions() : Promise<any> {
+export async function creditedWalletTransactions() :  Promise<{transaction: WalletTransfer[] } |{ message: string; status: number }> {
   try {
       const user = await getUserData();
 
@@ -348,7 +351,9 @@ export async function creditedWalletTransactions() : Promise<any> {
         };
       }
       
-      return data.receivedTransfers;
+      return {
+        transaction: data.receivedTransfers
+      };
 
     } catch (err) {
     console.error("Error fetching  transactions:", err);

@@ -99,10 +99,9 @@ export async function p2pTransfer(toWalletKey:string, amount: number, pin: strin
                 message: "Transcation successfull",
                 status: 200
             }
-
-            return result;
         })
 
+        return result;
        
             
     }catch(err:any){

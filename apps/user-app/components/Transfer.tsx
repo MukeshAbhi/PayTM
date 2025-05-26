@@ -5,9 +5,11 @@ import { Label } from "@repo/ui/components/label";
 import { Button } from "@repo/ui/components/button";
 import { InputForForm } from "./input";
 import { InputOTP, InputOTPGroup, InputOTPSlot, MaskedInputOTPSlot } from "@repo/ui/components/input-otp";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { amountType, ErrMsg } from "@repo/types/zodtypes";
 import { p2pTransfer } from "@/actions/p2ptransfer";
+import { creditedWalletTransactions, debitedWalletTransactions } from "@/actions/user";
+import { WalletTransaction } from "../../../packages/db/src/generated/prisma";
 
 type FormData = {
         paytmid: string;
@@ -250,6 +252,38 @@ const transactions = [
 ];
 
 function RecentPayments() {
+
+  const [creditTransactions, setCreditTransactions] = useState<WalletTransaction[] | null>(null);
+  const [debitTransactions, setDebitTransactions] = useState<WalletTransaction[] | null>(null);
+
+  useEffect(() => {
+    const getData = async () => {
+      const credit  = await creditedWalletTransactions()
+      const debit = await debitedWalletTransactions();
+
+      if("transaction" in credit){
+        if(credit.transaction.length > 6){
+          setCreditTransactions(credit.transaction.slice(0,7));
+          return;
+        }
+        setCreditTransactions(credit.transaction)
+      }
+
+      if("transaction" in debit){
+        if(debit.transaction.length > 6){
+          setDebitTransactions(debit.transaction.slice(0,7));
+          return;
+        }
+        setDebitTransactions(debit.transaction)
+      }
+    }
+    getData();
+  }, [])
+
+
+
+
+
   const getAmountColor = (type: string) => {
     if (type.toLowerCase() === "credited") return "text-green-600";
     if (type.toLowerCase() === "debited") return "text-red-600";
