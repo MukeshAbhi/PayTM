@@ -264,9 +264,6 @@ importers:
 
   packages/store:
     dependencies:
-      '@repo/user':
-        specifier: workspace:*
-        version: link:../../apps/user-app
       jotai:
         specifier: ^2.12.3
         version: 2.12.3(@types/react@19.1.0)(react@19.1.0)
