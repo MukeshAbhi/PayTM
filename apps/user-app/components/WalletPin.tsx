@@ -1,3 +1,5 @@
+import {  changeWalletPin, getUserWalletPin, setWalletPin } from "@/actions/user"
+import { ErrMsg } from "@repo/types/zodtypes"
 import { Button } from "@repo/ui/components/button"
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@repo/ui/components/input-otp"
 import { useSession } from "next-auth/react"
@@ -11,6 +13,18 @@ export const WalletPin = () => {
     const userId = session?.user?.id;
     const [isPinPresent, setIsPinPresent] = useState<boolean>(false);
 
+    useEffect(() => {
+        const getData = async () => {
+            const data = await getUserWalletPin()
+            if(data){
+                setIsPinPresent(true);
+            }else{
+                setIsPinPresent(false);
+            }
+        }
+        getData();
+    },[])
+
    return(
         isPinPresent  ? <ChangeWalletPin /> : <SetWalletPin/> 
    )
@@ -20,12 +34,49 @@ const SetWalletPin = () => {
     type FormData = {
         pin: string;
     };
-    const { handleSubmit, watch, control, formState:{ errors} } = useForm<FormData>({mode: "onChange"});
+    const { handleSubmit, watch, control, formState:{ errors}, reset } = useForm<FormData>({mode: "onChange"});
 
     const pinValue = watch("pin");
+
+    const [errMsg, setErrMsg ] = useState<ErrMsg>({
+          message: "",
+          status: ""
+        })
         
-    const onSubmit = (data: FormData) => {
-        console.log("Submitted OTP:", data.pin);
+    const onSubmit = async (data: FormData) => {
+        const { pin } = data;
+        try{
+            const res = await setWalletPin(pin);
+
+            if(!res){
+                setErrMsg({
+                    message: "Failed to set PIN",
+                    status: "failed"
+                })
+                return;
+            }
+
+            if(res.status != 200)
+            {
+                setErrMsg({
+                    message: res.message,
+                    status: "failed"
+                })
+            }else{
+                setErrMsg({
+                    message: res.message,
+                    status: "Success"
+                })
+                reset();
+            }
+
+        }catch(err){
+            console.log("error while setting Pin ", err);
+            setErrMsg({
+                message: "Failed to set PIN",
+                status: "failed"
+            })
+        }
     };
 
     return(
@@ -33,7 +84,17 @@ const SetWalletPin = () => {
             <div className="text-foreground text-xl sm:text-2xl md:text-3xl font-semibold text-center">
                 Set Wallet PIN
             </div>
-
+            <div>
+                {errMsg?.message && (
+                    <span className={`text-sm ${
+                        errMsg.status == 'failed'
+                        ? "text-[#f64949fe]"
+                        : "text-[#2ba150fe]"
+                        }`}>
+                        {errMsg.message}
+                    </span>
+                )}
+            </div>
             <div className="w-full max-w-md">
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                     <Controller 
@@ -62,7 +123,7 @@ const SetWalletPin = () => {
                     />
 
                     <div className="text-center text-sm sm:text-base text-muted-foreground">
-                        {pinValue === "" ? (
+                        {!pinValue  ? (
                         <>Enter your Wallet PIN.</>
                         ) : (
                         <>You entered: {pinValue}</>
@@ -87,13 +148,52 @@ const ChangeWalletPin = () => {
         currentPin: string;
         newPin: string;
     };
-    const { handleSubmit, watch, control, formState:{ errors} } = useForm<FormData>({mode: "onChange"});
+    const { handleSubmit, watch, control, formState:{ errors}, reset } = useForm<FormData>({mode: "onChange"});
 
     const currentPin = watch("currentPin");
     const newPin = watch("newPin");
 
-    const onSubmit = (data: FormData) => {
-        console.log("Changing PIN with values:", data);
+    const [errMsg, setErrMsg ] = useState<ErrMsg>({
+          message: "",
+          status: ""
+        })
+
+    const onSubmit = async (data: FormData) => {
+        const { currentPin, newPin } = data;
+
+        try{
+            const res = await changeWalletPin(currentPin,newPin);
+
+            if(!res){
+                setErrMsg({
+                    message: "Failed to set PIN",
+                    status: "failed"
+                })
+                return;
+            }
+
+            if(res.status != 200)
+            {
+                setErrMsg({
+                    message: res.message,
+                    status: "failed"
+                })
+            }else{
+                reset({ currentPin: "", newPin: "" });
+                setErrMsg({
+                    message: res.message,
+                    status: "success"
+                })
+                
+            }
+
+        }catch(err){
+            console.log("error while setting Pin ", err);
+            setErrMsg({
+                message: "Failed to set PIN",
+                status: "failed"
+            })
+        }
     };
 
     return(
@@ -102,9 +202,19 @@ const ChangeWalletPin = () => {
             className="flex flex-col items-center justify-center gap-6 px-4 py-8 sm:px-8 md:px-12 lg:px-16"
         >
             <div className="text-foreground text-xl sm:text-2xl md:text-3xl font-semibold text-center">
-                Chnage Wallet PIN
+                Change Wallet PIN
             </div>
-
+                
+                {errMsg?.message && (
+                    <span className={`text-sm ${
+                        errMsg.status == 'failed'
+                        ? "text-[#f64949fe]"
+                        : "text-[#2ba150fe]"
+                        }`}>
+                        {errMsg.message}
+                    </span>
+                )}
+            
             <div className="w-full max-w-md">
                 <div className="space-y-4">
                     <div className="flex justify-center  gap-2 sm:gap-3">
@@ -136,7 +246,7 @@ const ChangeWalletPin = () => {
                     />
             
                     <div className="text-center text-sm sm:text-base text-muted-foreground">
-                        {currentPin === "" ? (
+                        {!currentPin  ? (
                         <>Enter your Wallet PIN.</>
                         ) : (
                         <>You entered: {currentPin}</>
@@ -175,7 +285,7 @@ const ChangeWalletPin = () => {
                     />
 
                     <div className="text-center text-sm sm:text-base text-muted-foreground">
-                        {newPin === "" ? (
+                        {!newPin ? (
                         <>Enter your Wallet PIN.</>
                         ) : (
                         <>You entered: {newPin}</>

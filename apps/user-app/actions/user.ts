@@ -114,18 +114,28 @@ export async function getUserWalletBalance(): Promise<{ amount: number } | { mes
   }
 }
 
-export async function getUserWalletPin(id: string): Promise<string | null | { message: string; status: number }>{
+export async function getUserWalletPin(): Promise<string | null | { message: string; status: number }>{
 
   try{
-    const userPin = await prisma.user.findUnique({
-      where:{
-        id
-      },
-      select:{
-        walletPin: true
+     const user = await getUserData();
+
+      if (!user || !user.id) {
+        return {
+          message: "User not authenticated",
+          status: 401,
+        };
       }
-    })
-    return userPin?.walletPin ?? null;
+
+      const userPin = await prisma.user.findUnique({
+        where:{
+          id: user.id
+        },
+        select:{
+          walletPin: true
+        }
+      })
+      return userPin?.walletPin ?? null;
+
   }catch(err){
     console.error("error while getting PIN: ", err);
     return{
@@ -135,12 +145,22 @@ export async function getUserWalletPin(id: string): Promise<string | null | { me
   }
 }
 
-export async function setWalletPin(id:string, pin:string): Promise<{ message: string; status: number }> {
+export async function setWalletPin( pin:string): Promise<{ message: string; status: number }> {
   try{
     const hashedPin = await hash(pin, 10);
+
+    const userFound = await getUserData();
+
+      if (!userFound || !userFound.id) {
+        return {
+          message: "User not authenticated",
+          status: 401,
+        };
+      }
+
     const user = await prisma.user.update({
       where:{
-        id,
+        id: userFound.id
       },data: {
         walletPin: hashedPin
       }
@@ -166,10 +186,19 @@ export async function setWalletPin(id:string, pin:string): Promise<{ message: st
   }
 }
 
-export async function changeUserPin(id:string, currentPin:string, newPin:string):Promise<{ message: string; status: number }> {
+export async function changeWalletPin( currentPin:string, newPin:string):Promise<{ message: string; status: number }> {
 
     try{
-      const oldPin = await getUserWalletPin(id);
+      const user = await getUserData();
+
+      if (!user || !user.id) {
+        return {
+          message: "User not authenticated",
+          status: 401,
+        };
+      }
+
+      const oldPin = await getUserWalletPin();
 
       const isMatch = await compare(currentPin, String(oldPin));
 
@@ -182,7 +211,7 @@ export async function changeUserPin(id:string, currentPin:string, newPin:string)
       const hashedPin = await hash(newPin,10);
       const updatePin = await prisma.user.update({
         where: {
-          id
+          id: user.id
         },data: {
           walletPin: hashedPin
         }
