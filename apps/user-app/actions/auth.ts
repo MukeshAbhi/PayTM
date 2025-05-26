@@ -36,12 +36,23 @@ const customSignUp = async (name: string, email: string) => {
     })
 
     if(!user){
-        await prisma.user.create({
+        const user = await prisma.user.create({
             data: {
                 email,
-                name
+                name,
             }
         })
+
+        await prisma.walletBalance.create({
+            data: {
+                amount: 0,
+                locked: 0,
+                user: {
+                connect: { id: user.id }
+                }
+            }
+        });
+
     } 
     return;
 }

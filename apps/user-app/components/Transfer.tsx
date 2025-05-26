@@ -4,8 +4,10 @@ import { Input } from "@repo/ui/components/input";
 import { Label } from "@repo/ui/components/label";
 import { Button } from "@repo/ui/components/button";
 import { InputForForm } from "./input";
-import { InputOTP, InputOTPGroup, InputOTPSlot } from "@repo/ui/components/input-otp";
+import { InputOTP, InputOTPGroup, InputOTPSlot, MaskedInputOTPSlot } from "@repo/ui/components/input-otp";
 import { useState } from "react";
+import { ErrMsg } from "@repo/types/zodtypes";
+import { p2pTransfer } from "@/actions/p2ptransfer";
 
 type FormData = {
         paytmid: string;
@@ -22,10 +24,49 @@ function Transfer() {
     formState: { errors },
     getValues,
     control,
-    watch
+    reset
   } = useForm<FormData>({ mode: "onChange" });
 
-  const pinValue = watch("pin")
+  const [errMsg, setErrMsg] = useState<ErrMsg>({
+    message: "",
+    status: ""
+  })
+
+  const onSubmit = async (data: FormData) => {
+    const { pin, paytmid, amount } = data;
+    try{
+          const res = await p2pTransfer(paytmid, (amount * 100), pin);
+    
+          if(!res){
+              setErrMsg({
+                  message: "Failed to Process your request",
+                  status: "failed"
+              })
+                  return;
+          }
+    
+          if(res.status != 200)
+          {
+              setErrMsg({
+                message: res.message,
+                status: "failed"
+              })
+          }else{
+              setErrMsg({
+                message: res.message,
+                status: "Success"
+              })
+                reset();
+          }
+    
+            }catch(err){
+                console.log("error while setting Pin ", err);
+                setErrMsg({
+                    message: "Failed to set PIN",
+                    status: "failed"
+                })
+            }
+  }
 
   return (
     <div className="min-h-screen w-full flex flex-col lg:flex-row p-4 gap-4">
@@ -38,10 +79,18 @@ function Transfer() {
               Transfer money from your wallet to other users.
             </p>
           </div>
-
+          {errMsg.message && (
+            <span className={`text-sm ${
+              errMsg.status == 'failed'
+              ? "text-[#f64949fe]"
+              : "text-[#2ba150fe]"
+            } mt-0.5`}>
+              {errMsg.message}
+            </span>
+          )}
           <form
             className="flex flex-col gap-5"
-            onSubmit={handleSubmit((data) => console.log(data))}
+            onSubmit={handleSubmit(onSubmit)}
           >
             {/* Amount */}
             <div className="flex flex-col gap-1">
@@ -118,12 +167,10 @@ function Transfer() {
                                 onChange={(value) => field.onChange(value)}
                             >
                                 <InputOTPGroup className="flex justify-center pl-20 gap-2 sm:gap-3">
-                                <InputOTPSlot index={0}  />
-                                <InputOTPSlot index={1} />
-                                <InputOTPSlot index={2} />
-                                <InputOTPSlot index={3} />
-                                <InputOTPSlot index={4} />
-                                <InputOTPSlot index={5} />
+                                  {Array.from({ length: 6 }).map((_, i) => (
+                                      <MaskedInputOTPSlot key={i} index={i} maskChar="●" />
+                                  ))}
+
                                 </InputOTPGroup>
                             </InputOTP>
                         )}

@@ -1,3 +1,5 @@
+"use server"
+
 import { prisma } from "@repo/db/prisma";
 import { getUserData } from "./user";
 import { compare } from "bcrypt";
@@ -97,7 +99,7 @@ export async function p2pTransfer(toWalletKey:string, amount: number, pin: strin
             }
         })
     }catch(err){
-        console.log("Wallet Transaction ");
+        console.log("Wallet Transaction : ", err);
         return{
             message: "Internal Server Error",
             status: 500

@@ -1,4 +1,5 @@
 import { adapter, prisma } from "@repo/db/prisma"
+import { error } from "console";
 import { NextAuthConfig } from "next-auth"
 import Google from "next-auth/providers/google";
 import Resend from "next-auth/providers/resend"
@@ -34,12 +35,30 @@ export const authOptions : NextAuthConfig = ({
         token.name = user.name
       }
       return token;
-    },
-    
+    }, 
     async redirect({url, baseUrl}){
       return `${baseUrl}/user-dashboard`;
     }
   },
+  events: {
+    async signIn({user, account, profile, isNewUser}) {
+      if (isNewUser) {
+        try {
+          await prisma.walletBalance.create({
+            data: {
+              amount: 0,
+              locked: 0,
+              user: {
+                connect: { id : user.id}
+              }
+            }
+          })
+        }catch (error){
+          console.error("Error creating wallet balance:", error);
+        }
+      } 
+    }
+  }
  
 })
 

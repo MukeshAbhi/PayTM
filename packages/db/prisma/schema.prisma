@@ -25,8 +25,8 @@ model User {
   OnRampTransaction OnRampTransaction[]
   sentTransfers WalletTransaction[] @relation(name: "FromUserRelation")
   receivedTransfers WalletTransaction[] @relation(name: "ToUserRelation")
-  WBalance      WalletBalance[]
-  BBalance      BankBalance[]
+  WBalance      WalletBalance?
+  BBalance      BankBalance?
 
   accounts      Account[]
   sessions      Session[]
