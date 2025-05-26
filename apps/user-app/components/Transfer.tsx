@@ -6,7 +6,7 @@ import { Button } from "@repo/ui/components/button";
 import { InputForForm } from "./input";
 import { InputOTP, InputOTPGroup, InputOTPSlot, MaskedInputOTPSlot } from "@repo/ui/components/input-otp";
 import { useState } from "react";
-import { ErrMsg } from "@repo/types/zodtypes";
+import { amountType, ErrMsg } from "@repo/types/zodtypes";
 import { p2pTransfer } from "@/actions/p2ptransfer";
 
 type FormData = {
@@ -33,13 +33,25 @@ function Transfer() {
   })
 
   const onSubmit = async (data: FormData) => {
+    console.log("data : ", data);
     const { pin, paytmid, amount } = data;
     try{
+          const parsedData = amountType.safeParse(amount);
+          
+          if(parsedData.error || !parsedData)
+          {
+              setErrMsg({
+                  message:"Amount must be a Positive Number",
+                  status: "failed"
+              })
+                return;
+          }
           const res = await p2pTransfer(paytmid, (amount * 100), pin);
+          console.log(res);
     
           if(!res){
               setErrMsg({
-                  message: "Failed to Process your request",
+                  message: "Failed to Process your request ",
                   status: "failed"
               })
                   return;
@@ -56,13 +68,13 @@ function Transfer() {
                 message: res.message,
                 status: "Success"
               })
-                reset();
+              reset({ amount: 0, paytmid: "", confirmpaytmid: "", pin: "" });
           }
     
             }catch(err){
-                console.log("error while setting Pin ", err);
+                console.log("Error during transfe ", err);
                 setErrMsg({
-                    message: "Failed to set PIN",
+                    message: "Error during transfe",
                     status: "failed"
                 })
             }
@@ -97,8 +109,11 @@ function Transfer() {
               <Label className="text-xl font-semibold">Amount</Label>
               <Input
                 placeholder="Enter amount"
-                type="number"
-                {...register("amount", { required: "Amount is required" })}
+                type="text"
+                {...register("amount", { 
+                  required: "Amount is required",
+                  min: { value: 1, message: "Amount must be greater than 0"}
+                 })}
               />
               {errors.amount && (
                 <span className="text-sm text-destructive">
