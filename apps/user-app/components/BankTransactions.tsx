@@ -31,9 +31,9 @@ const getSign = (type: string) => {
 };
 
   return (
-    <div className="w-full max-h-[400px] overflow-y-auto scrollbar-hide relative p-0">
-      <h2 className="text-lg font-semibold mb-4 sticky top-0">Recent Transactions</h2>
-      <ul className="space-y-4 text-sm">
+    <div className="w-full h-full overflow-y-auto ">
+      <h2 className="text-lg font-semibold mb-4">Recent Transactions</h2>
+      <ul className="space-y-4 text-sm max-h-[400px] overflow-y-auto scrollbar-hide relative pr-2">
         {transactions?.map((txn, index) => (
           <li key={index} className="flex justify-between border-b pb-2">
             <div>

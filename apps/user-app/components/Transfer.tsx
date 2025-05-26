@@ -10,6 +10,7 @@ import { amountType, ErrMsg } from "@repo/types/zodtypes";
 import { p2pTransfer } from "@/actions/p2ptransfer";
 import { creditedWalletTransactions, debitedWalletTransactions } from "@/actions/user";
 import { WalletTransaction } from "../../../packages/db/src/generated/prisma";
+import RecentWalletTransactions from "./WalletTransactions";
 
 type FormData = {
         paytmid: string;
@@ -210,7 +211,7 @@ function Transfer() {
 
       {/* Right Panel - Recent Payments */}
       <div className="w-full md:w-3/4 lg:w-1/2 bg-muted/50 rounded-2xl shadow-md p-6">
-        <RecentPayments />
+        <RecentWalletTransactions/>
       </div>
     </div>
   );
@@ -218,97 +219,6 @@ function Transfer() {
 
 export default Transfer;
 
-const transactions = [
-  {
-    id: 1,
-    type: "credited",
-    amount: 5000,
-    createdAt: new Date("2024-04-15"),
-  },
-  {
-    id: 2,
-    type: "debited",
-    amount: 2000,
-    createdAt: new Date("2024-04-16"),
-  },
-  {
-    id: 3,
-    type: "credited",
-    amount: 10000,
-    createdAt: new Date("2024-04-17"),
-  },
-  {
-    id: 4,
-    type: "debited",
-    amount: 1500,
-    createdAt: new Date("2024-04-18"),
-  },
-  {
-    id: 5,
-    type: "credited",
-    amount: 7500,
-    createdAt: new Date("2024-04-19"),
-  },
-];
-
-function RecentPayments() {
-
-  const [creditTransactions, setCreditTransactions] = useState<WalletTransaction[] | null>(null);
-  const [debitTransactions, setDebitTransactions] = useState<WalletTransaction[] | null>(null);
-
-  useEffect(() => {
-    const getData = async () => {
-      const credit  = await creditedWalletTransactions()
-      const debit = await debitedWalletTransactions();
-
-      if("transaction" in credit){
-        if(credit.transaction.length > 6){
-          setCreditTransactions(credit.transaction.slice(0,7));
-          return;
-        }
-        setCreditTransactions(credit.transaction)
-      }
-
-      if("transaction" in debit){
-        if(debit.transaction.length > 6){
-          setDebitTransactions(debit.transaction.slice(0,7));
-          return;
-        }
-        setDebitTransactions(debit.transaction)
-      }
-    }
-    getData();
-  }, [])
 
 
-
-
-
-  const getAmountColor = (type: string) => {
-    if (type.toLowerCase() === "credited") return "text-green-600";
-    if (type.toLowerCase() === "debited") return "text-red-600";
-    return "text-yellow-600";
-  };
-
-  return (
-    <div className="w-full h-full">
-      <h2 className="text-lg font-semibold mb-4">Recent Transactions</h2>
-      <ul className="space-y-4 text-sm max-h-[400px] overflow-y-auto pr-2">
-        {transactions.map((txn) => (
-          <li key={txn.id} className="flex justify-between border-b pb-2">
-            <div>
-              <p className="font-medium capitalize">{txn.type}</p>
-              <p className="text-muted-foreground">
-                {txn.createdAt.toLocaleDateString()}
-              </p>
-            </div>
-            <p className={`${getAmountColor(txn.type)} font-semibold`}>
-              {txn.type.toLowerCase() === "credited" ? "+" : "-"}₹{txn.amount}
-            </p>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
 
