@@ -10,22 +10,59 @@ import {
 } from "@repo/ui/components/card"
 import { Input } from "@repo/ui/components/input"
 import { Label } from "@repo/ui/components/label"
-import {  loginGoogle, loginResend } from "../actions/auth"
+import {  loginGoogle, logInResend,  } from "../actions/auth"
 import { ErrMsg,  } from "@repo/types/zodtypes"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
+import { useForm } from "react-hook-form"
 
 export function LoginForm({
     className,
     ...props
   }: React.ComponentPropsWithoutRef<"div">) {
 
-  const router = useRouter();
+    interface formData {
+      email: string
+    }
+
+  const {register, handleSubmit, formState:{ errors}} = useForm<formData>();
 
   const [errMsg, setErrMsg ] = useState<ErrMsg>({
       message: "",
       status: ""
     })
+
+    const onSubmit = async (data: formData ) => {
+      const { email } = data;
+      try{
+        const res = await logInResend(email);
+
+        if(!res){
+          setErrMsg({
+            message: "Failed to log in",
+            status: "failed"
+          })
+        }
+
+        if(res?.status != 200){
+          setErrMsg({
+            message: res.message,
+            status: "failed"
+          })
+        }else{
+          setErrMsg({
+            message: res.message,
+            status: "success"
+          })
+        }
+      }catch(err){
+        console.log("Error while login : ", err);
+        setErrMsg({
+            message: "Failed to login",
+            status: "failed"
+          })
+      }
+    }
 
   
     return (
@@ -49,17 +86,21 @@ export function LoginForm({
             </span>
           )}
           </div>
-            <form action={loginResend}>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <div className="flex flex-col gap-6">
                 <div className="grid gap-2">
                   <Label htmlFor="email">Email</Label>
                   <Input
-                    name="email"
                     id="email"
                     type="email"
                     placeholder="john@example.com"
-                    required
+                    {...register("email",{
+                      required: "Enter youe Email adress"
+                    })}
                   />
+                  {errors.email?.message && (
+                      <span className="text-xs text-[#f64949fe] mt-0.5 ml-2">{String(errors.email?.message)}</span>
+                  )}
                 </div>
                 
                 <Button type="submit" className="w-full">

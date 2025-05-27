@@ -10,7 +10,7 @@ import {
 } from "@repo/ui/components/card"
 import { Input } from "@repo/ui/components/input"
 import { Label } from "@repo/ui/components/label"
-import { loginGoogle, loginResend } from "../actions/auth"
+import { loginGoogle, signUpResend } from "../actions/auth"
 import { ErrMsg } from "@repo/types/zodtypes"
 import { useState } from "react"
 
@@ -46,7 +46,7 @@ export function SignUpForm({
           )}
           </div>
           <form
-             action={loginResend}
+             action={signUpResend}
              method="post"
             >
             <div className="grid gap-5">
