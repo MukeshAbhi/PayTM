@@ -18,10 +18,11 @@ ENV NODE_ENV=production
 RUN pnpm install 
 
 # Generate Prisma client 
-RUN pnpm generate:db
+RUN pnpm --filter @repo/db db:generate
 
 # Build the Node.js app 
-RUN pnpm run build
+RUN pnpm run --filter @repo/db build
+RUN pnpm run --filter @repo/bankwebhook build
 
 # Start the app
 CMD ["pnpm", "--filter", "@repo/bankwebhook", "start"]

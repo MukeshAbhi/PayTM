@@ -8,7 +8,6 @@ import {
 } from "@repo/ui/components/sidebar"
 import { useState } from "react"
 import { UserProfile } from "../components/UserProfile"
-import { Passwords } from "../components/Passwords"
 import { WalletPin } from "../components/WalletPin"
 
 export default function Profile() {

@@ -3,7 +3,6 @@ import * as React from "react"
 
 import {
     User,
-    Lock,
     LockKeyhole
   } from "lucide-react"
 
@@ -21,7 +20,7 @@ import {
 import Link from "next/link"
 
 
-// This is sample data.
+
 const data = {
   navMain: [
     {
