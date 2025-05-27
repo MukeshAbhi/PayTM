@@ -1,6 +1,6 @@
 import { creditedWalletTransactions, debitedWalletTransactions } from "@/actions/user";
 import { useState, useEffect } from "react";
-import { WalletTransfer } from "@repo/types/zodtypes";
+import { WalletTransfer } from "../types/index";
 
 function RecentWalletTransactions() {
   type LabeledTransaction = WalletTransfer & { type: "credit" | "debit" };

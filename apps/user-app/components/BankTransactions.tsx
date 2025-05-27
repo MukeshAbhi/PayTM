@@ -1,7 +1,7 @@
 "use client"
 import React, { useEffect, useState } from 'react';
 import { getUserBankTransactions } from '../actions/user';
-import { BankTransaction } from '@repo/types/zodtypes';
+import { BankTransaction } from "../types/index"
 
 function BankTransactions() {
 const [ transactions, setTransactions ] = useState<BankTransaction[] | null>(null)

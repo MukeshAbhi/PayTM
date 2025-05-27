@@ -2,7 +2,7 @@
 import { Button } from "@repo/ui/components/button";
 import React, { useState } from "react";
 import { checkUserBalance } from "../actions/onrampTransaction";
-import { amountType, ErrMsg } from "@repo/types/zodtypes";
+import { amountType, ErrMsg } from "../types/index";
 import { useForm } from "react-hook-form";
 
 const BankTransfer = () => (

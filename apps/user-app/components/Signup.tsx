@@ -11,7 +11,7 @@ import {
 import { Input } from "@repo/ui/components/input"
 import { Label } from "@repo/ui/components/label"
 import { loginGoogle, signUpResend } from "../actions/auth"
-import { ErrMsg } from "@repo/types/zodtypes"
+import { ErrMsg } from "../types/index"
 import { useState } from "react"
 
 export function SignUpForm({

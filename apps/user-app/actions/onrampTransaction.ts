@@ -3,7 +3,7 @@
 import { prisma } from "@repo/db/prisma";
 import axios from "axios";
 import { getUserData, getUserWalletBalance } from "./user";
-import { TransactionType } from "@repo/types/zodtypes";
+import { TransactionType } from "../types/index";
 
 const WEBHOOK_URL = process.env.BANK_WEBHOOK_URL;
 const HMAC_KEY = process.env.HMAC_KEY;

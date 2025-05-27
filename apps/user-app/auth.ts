@@ -1,5 +1,4 @@
 import { adapter, prisma } from "@repo/db/prisma"
-import { error } from "console";
 import { NextAuthConfig } from "next-auth"
 import Google from "next-auth/providers/google";
 import Resend from "next-auth/providers/resend"

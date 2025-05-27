@@ -1,7 +1,7 @@
 "use client";
 
 import { createPaymentKey, getUserData } from "@/actions/user";
-import { BasicUser } from "@repo/types/zodtypes";
+import { BasicUser } from "../types/index";
 import { Button } from "@repo/ui/components/button";
 import { useEffect, useState } from "react";
 

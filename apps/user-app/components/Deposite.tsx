@@ -3,7 +3,7 @@ import { Button } from "@repo/ui/components/button";
 import React, { useState } from "react";
 import { createOnrampTransaction } from "../actions/onrampTransaction";
 import { useForm } from "react-hook-form";
-import { amountType, ErrMsg } from "@repo/types/zodtypes";
+import { amountType, ErrMsg } from "../types/index";
 
 const Card = () => (
   <div className="p-4 border border-border rounded-lg bg-background">

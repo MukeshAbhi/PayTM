@@ -1,5 +1,5 @@
 import {  changeWalletPin, getUserWalletPin, setWalletPin } from "@/actions/user"
-import { ErrMsg } from "@repo/types/zodtypes"
+import { ErrMsg } from "../types/index"
 import { Button } from "@repo/ui/components/button"
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@repo/ui/components/input-otp"
 import { useSession } from "next-auth/react"

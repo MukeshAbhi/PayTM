@@ -1,15 +1,14 @@
 "use client";
+
 import { Controller, useForm } from "react-hook-form";
 import { Input } from "@repo/ui/components/input";
 import { Label } from "@repo/ui/components/label";
 import { Button } from "@repo/ui/components/button";
 import { InputForForm } from "./input";
-import { InputOTP, InputOTPGroup, InputOTPSlot, MaskedInputOTPSlot } from "@repo/ui/components/input-otp";
-import { useEffect, useState } from "react";
-import { amountType, ErrMsg } from "@repo/types/zodtypes";
+import { InputOTP, InputOTPGroup, MaskedInputOTPSlot } from "@repo/ui/components/input-otp";
+import {  useState } from "react";
+import { amountType, ErrMsg } from "../types/index"
 import { p2pTransfer } from "@/actions/p2ptransfer";
-import { creditedWalletTransactions, debitedWalletTransactions } from "@/actions/user";
-import { WalletTransaction } from "../../../packages/db/src/generated/prisma";
 import RecentWalletTransactions from "./WalletTransactions";
 
 type FormData = {

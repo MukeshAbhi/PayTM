@@ -2,8 +2,6 @@
 
 import { signIn, signOut } from "@/authTypes"
 import { prisma } from "@repo/db/prisma";
-import { SignIn, signUpSchema, SignUpSchema } from "@repo/types/zodtypes";
-import { hash, compare } from "bcrypt";
 import { redirect } from "next/navigation";
 
 export const signUpResend = async (formDta: FormData) => {

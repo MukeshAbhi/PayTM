@@ -11,9 +11,8 @@ import {
 import { Input } from "@repo/ui/components/input"
 import { Label } from "@repo/ui/components/label"
 import {  loginGoogle, logInResend,  } from "../actions/auth"
-import { ErrMsg,  } from "@repo/types/zodtypes"
+import { ErrMsg,  } from "../types/index"
 import { useState } from "react"
-import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
 
 export function LoginForm({

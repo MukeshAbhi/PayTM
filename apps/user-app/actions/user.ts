@@ -2,7 +2,7 @@
 
 import { auth } from "@/authTypes";
 import { prisma } from "@repo/db/prisma";
-import { WalletTransfer } from "@repo/types/zodtypes";
+import { WalletTransfer } from "../types/index";
 import { compare, hash } from "bcrypt";
 
 function generateFormattedKey() {
