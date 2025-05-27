@@ -15,13 +15,13 @@ COPY packages ./packages
 ENV NODE_ENV=production
 
 # Install dependencies (include devDependencies for build)
-RUN pnpm install --frozen-lockfile --network-timeout 300000 
+RUN pnpm install 
 
 # Generate Prisma client 
 RUN pnpm generate:db
 
-# Build the Next.js app 
+# Build the Node.js app 
 RUN pnpm run build
 
 # Start the app
-CMD ["pnpm", "--filter", "@repo/user", "start"]
+CMD ["pnpm", "--filter", "@repo/bankwebhook", "start"]

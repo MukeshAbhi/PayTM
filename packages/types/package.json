@@ -2,12 +2,11 @@
   "name": "@repo/types",
   "version": "1.0.0",
   "type": "module",
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "packageManager": "pnpm@10.10.0",
+  "scripts": {
+    "build": "tsc --emitDeclarationOnly --outDir dist"
+  },
   "exports": {
-    "./zodtypes": "./src/index.ts"
+    "./zodtypes": "./dist/index.d.ts"
   },
   "dependencies": {
     "zod": "^3.24.4",

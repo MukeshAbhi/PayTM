@@ -7,8 +7,7 @@
     "lint": "turbo run lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "check-types": "turbo run check-types",
-    "generate:db": "turbo run db:generate",
-    "start-user-app": "cd ./apps/user-app && pnpm start"
+    "generate:db": "turbo run db:generate"
   },
   "devDependencies": {
     "prettier": "^3.5.3",
