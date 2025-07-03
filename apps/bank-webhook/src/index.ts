@@ -5,7 +5,7 @@ import z from "zod";
 const app = express();
 app.use(express.json());
 
-const HMAC_KEY="JNAFJSDJJK";
+const HMAC_KEY = process.env.HMAC_KEY;
 
 const zodSchema = z.object({
     token: z.string(),
@@ -168,6 +168,8 @@ app.post("/toWebhook",async (req, res) => {
    }
 });
 
-app.listen(3003, () => {
-    console.log("Server running on port 3003");
+const PORT = process.env.PORT || 3003;
+
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
 });

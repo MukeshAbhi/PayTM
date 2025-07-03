@@ -6,6 +6,7 @@ WORKDIR /app
 
 # Copy root config files for dependency resolution
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml turbo.json ./
+COPY docker/build-for-docker.js ./docker/
 
 # Copy the rest of the monorepo
 COPY apps ./apps
@@ -20,9 +21,23 @@ RUN pnpm install
 # Generate Prisma client 
 RUN pnpm --filter @repo/db db:generate
 
-# Build the Node.js app 
+# Build the packages in correct order
 RUN pnpm run --filter @repo/db build
 RUN pnpm run --filter @repo/bankwebhook build
 
-# Start the app
-CMD ["pnpm", "--filter", "@repo/bankwebhook", "start"]
+# Run our custom script to fix imports for Docker
+RUN node docker/build-for-docker.js
+
+# Debug: Check what files were actually built
+RUN ls -la packages/db/dist/
+RUN ls -la apps/bank-webhook/dist/
+
+# Copy our custom entrypoint
+COPY docker/docker-entrypoint.js ./
+
+# Create a package.json for the entrypoint to specify it's an ES module
+RUN echo '{"type": "module"}' > docker-entrypoint-pkg.json
+RUN mv docker-entrypoint-pkg.json package.json
+
+# Use our custom entrypoint
+CMD ["node", "docker-entrypoint.js"]
