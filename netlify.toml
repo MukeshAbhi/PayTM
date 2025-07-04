@@ -1,0 +1,46 @@
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+[build]
+  # Build command for the monorepo
+  command = "pnpm install && pnpm --filter @repo/db db:generate && pnpm --filter @repo/user build"
+
+  # Publish directory (Next.js output)
+  publish = "apps/user-app/.next"
+
+  # Base directory for the build
+  base = "."
+
+[build.environment]
+  # Node.js version
+  NODE_VERSION = "18"
+
+  # Prisma settings for serverless
+  PRISMA_CLI_BINARY_TARGETS = "native,rhel-openssl-1.0.x"
+
+  # Next.js build settings
+  NEXT_TELEMETRY_DISABLED = "1"
+
+# Headers for security and performance
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[headers]]
+  for = "/_next/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Environment-specific settings
+[context.production]
+  command = "pnpm install && pnpm --filter @repo/db db:generate && pnpm --filter @repo/user build"
+
+[context.deploy-preview]
+  command = "pnpm install && pnpm --filter @repo/db db:generate && pnpm --filter @repo/user build"
+
+[context.branch-deploy]
+  command = "pnpm install && pnpm --filter @repo/db db:generate && pnpm --filter @repo/user build"
