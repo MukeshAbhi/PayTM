@@ -6,7 +6,7 @@ const globalForPrisma = globalThis as unknown as { prisma: PrismaClient };
 // Lazy initialization to avoid issues during build time
 function createPrismaClient() {
   return new PrismaClient({
-    log: process.env.NODE_ENV === "development" ? ["query", "error", "warn"] : ["error"],
+    log: ["error"], // Only log errors, no queries
   });
 }
 

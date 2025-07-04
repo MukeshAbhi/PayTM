@@ -1,24 +1,29 @@
+[build]
+  # Monorepo build command
+  command = "pnpm install --ignore-scripts=false && pnpm generate:db && pnpm --filter @repo/db build && pnpm --filter @repo/user build"
+  
+  # Next.js output folder
+  publish = "apps/user-app/.next"
+  
+  # Base of your monorepo
+  base = "."
+
+  [build.environment]
+    NODE_VERSION = "18"
+    NEXT_TELEMETRY_DISABLED = "1"
+    NEXTAUTH_URL = "https://payments.mukeshtech.site"
+
+
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
-[build]
-  # Build command for the monorepo
-  command = "pnpm install --ignore-scripts=false && pnpm generate:db && pnpm --filter @repo/db build && pnpm --filter @repo/user build"
+  [plugins.inputs]
+    # Since you’re in a monorepo, explicitly tell Netlify where the app is
+    # The plugin uses this to find your next.config.js
+    # Adjust if your path is different
+    base = "apps/user-app"
 
-  # Publish directory (Next.js output)
-  publish = "apps/user-app/.next"
-
-  # Base directory for the build
-  base = "."
-
-[build.environment]
-  # Node.js version
-  NODE_VERSION = "18"
-
-  # Next.js build settings
-  NEXT_TELEMETRY_DISABLED = "1"
-
-# Headers for security and performance
+# Global security headers
 [[headers]]
   for = "/*"
   [headers.values]
@@ -27,12 +32,13 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
 
+# Caching for static files
 [[headers]]
   for = "/_next/static/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
-# Environment-specific settings
+# Context-specific overrides (same command reused)
 [context.production]
   command = "pnpm install --ignore-scripts=false && pnpm generate:db && pnpm --filter @repo/db build && pnpm --filter @repo/user build"
 
