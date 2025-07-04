@@ -10,13 +10,13 @@ export const authOptions : NextAuthConfig = ({
     Resend({
       from: "no-reply@updates.mukeshtech.site",
       sendVerificationRequest,
-      secret: process.env.AUTH_RESEND_KEY
+      secret: process.env.RESEND_API_KEY
     })
   ],
   session: {
     strategy: "jwt"
   },
-  secret: process.env.AUTH_SECRET,
+  secret: process.env.NEXTAUTH_SECRET,
   pages: {
     signIn: "/signin"
   },
