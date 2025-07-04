@@ -17,12 +17,6 @@
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
-  [plugins.inputs]
-    # Since you’re in a monorepo, explicitly tell Netlify where the app is
-    # The plugin uses this to find your next.config.js
-    # Adjust if your path is different
-    base = "apps/user-app"
-
 # Global security headers
 [[headers]]
   for = "/*"
