@@ -9,11 +9,11 @@ function AppbarClient() {
   const router = useRouter();
 
   const handleProfileClick = () => {
-    router.push('user-profile');
+    router.replace('/user/profile');
   }
 
   const handleHomeClick = () => {
-    router.push('dashboard');
+    router.replace('/dashboard/home');
   }
   return (
     <div className="fixed top-0 left-0 w-full z-50 bg-fixed ">

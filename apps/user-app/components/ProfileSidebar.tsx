@@ -1,5 +1,7 @@
 "use client"
 import * as React from "react"
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 import {
     User,
@@ -17,24 +19,21 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "@repo/ui/components/sidebar"
-import Link from "next/link"
 
-
-
+// Sidebar config
 const data = {
   navMain: [
     {
         title: "",
-        url: "#",
         items: [
             {
                 title: "Profile",
-                url: "/user-profile",
+                url: "/user/profile",
                 icon: User
             },
             {
                 title: "Wallet Pin",
-                url: "#",
+                url: "/user/walletpin",
                 icon:  LockKeyhole 
             },
         ]
@@ -44,40 +43,35 @@ const data = {
   ],
 }
 
-type AppSidebarProps = {
-  onItemSelect: (title: string) => void;
-  children?: React.ReactNode; // ✅ Accepts children
-};
+export function AppSidebar()  {
+  const pathname = usePathname();
 
-export function AppSidebar({ onItemSelect, children }: AppSidebarProps)  {
-
-  const [activeTitle, setActiveTitle] = React.useState("Profile");
   return (
     <Sidebar className="pt-20"  >
       <SidebarContent >
         {/* We create a SidebarGroup for each parent. */}
-        {data.navMain.map((item) => (
-          <SidebarGroup  key={item.title} className="pt-32 ">
-            <SidebarGroupLabel>{item.title}</SidebarGroupLabel>
+        {data.navMain.map((group) => (
+          <SidebarGroup  key={group.title} className="pt-32 ">
+            {group.title && <SidebarGroupLabel>{group.title}</SidebarGroupLabel>}
             <SidebarGroupContent  >
               <SidebarMenu   >
-                {item.items.map((item) => (
-                  <SidebarMenuItem key={item.title} >
-                    <SidebarMenuButton 
-                      asChild 
-                      isActive={activeTitle === item.title} 
-                      onClick={() => {
-                        setActiveTitle(item.title);
-                        onItemSelect(item.title);
-                      }} 
-                      className="text-2xl py-4 my-1">
-                    <Link href={item.url} className="flex items-center">
-                        <div className="w-8 ">{item.icon && <item.icon />}</div>
-                        <span>{item.title}</span>
-                    </Link>
-                    </SidebarMenuButton>
-                  </SidebarMenuItem>
-                ))}
+                {group.items.map(item => {
+                  const isActive =  pathname === item.url;
+                   return (
+                    <SidebarMenuItem key={item.title}>
+                      <SidebarMenuButton
+                        asChild
+                        isActive={isActive}
+                        className="text-2xl py-4 my-1"
+                      >
+                        <Link href={item.url} className="flex items-center">
+                          <div className="w-8">{item.icon && <item.icon />}</div>
+                          <span>{item.title}</span>
+                        </Link>
+                      </SidebarMenuButton>
+                    </SidebarMenuItem>
+                  );
+                })}
               </SidebarMenu>
             </SidebarGroupContent>
           </SidebarGroup>

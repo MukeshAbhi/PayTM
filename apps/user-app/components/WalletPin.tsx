@@ -1,3 +1,4 @@
+"use client"
 import {  changeWalletPin, getUserWalletPin, setWalletPin } from "@/actions/user"
 import { ErrMsg } from "../types/index"
 import { Button } from "@repo/ui/components/button"
