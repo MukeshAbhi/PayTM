@@ -3,7 +3,7 @@
 
 [build]
   # Build command for the monorepo
-  command = "pnpm install --ignore-scripts=false && pnpm --filter @repo/db db:generate && pnpm --filter @repo/user build"
+  command = "pnpm install --ignore-scripts=false && pnpm generate:db && pnpm --filter @repo/db build && pnpm --filter @repo/user build"
 
   # Publish directory (Next.js output)
   publish = "apps/user-app/.next"
@@ -34,10 +34,10 @@
 
 # Environment-specific settings
 [context.production]
-  command = "pnpm install --ignore-scripts=false && pnpm --filter @repo/db db:generate && pnpm --filter @repo/user build"
+  command = "pnpm install --ignore-scripts=false && pnpm generate:db && pnpm --filter @repo/db build && pnpm --filter @repo/user build"
 
 [context.deploy-preview]
-  command = "pnpm install --ignore-scripts=false && pnpm --filter @repo/db db:generate && pnpm --filter @repo/user build"
+  command = "pnpm install --ignore-scripts=false && pnpm generate:db && pnpm --filter @repo/db build && pnpm --filter @repo/user build"
 
 [context.branch-deploy]
-  command = "pnpm install --ignore-scripts=false && pnpm --filter @repo/db db:generate && pnpm --filter @repo/user build"
+  command = "pnpm install --ignore-scripts=false && pnpm generate:db && pnpm --filter @repo/db build && pnpm --filter @repo/user build"
