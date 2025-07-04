@@ -3,11 +3,12 @@
   "ui": "tui",
   "tasks": {
     "db:generate": {
-      "cache": false
+      "cache": false,
+      "outputs": ["src/generated/prisma/**"]
     },
     "db:migrate": {
-        "cache": false,
-        "persistent": true
+      "cache": false,
+      "persistent": true
     },
     "db:deploy": {
       "cache": false
@@ -15,7 +16,7 @@
     "build": {
       "dependsOn": ["^build", "^db:generate"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": [".next/**", "!.next/cache/**"]
+      "outputs": [".next/**", "dist/**", "build/**", "!**/.next/cache/**"]
     },
     "lint": {
       "dependsOn": ["^lint"]
@@ -28,5 +29,14 @@
       "cache": false,
       "persistent": true
     }
-  }
+  },
+  "globalDependencies": [
+    "DATABASE_URL",
+    "BANK_WEBHOOK_URL",
+    "HMAC_KEY",
+    "AUTH_SECRET",
+    "AUTH_GOOGLE_ID",
+    "AUTH_GOOGLE_SECRET",
+    "AUTH_RESEND_KEY"
+  ]
 }
