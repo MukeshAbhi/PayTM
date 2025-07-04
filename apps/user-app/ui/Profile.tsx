@@ -12,7 +12,6 @@ import { WalletPin } from "../components/WalletPin"
 
 export default function Profile() {
   const [ selected, setSelected ] = useState("Profile");
-  console.log(selected)
 
   const renderComponents = () => {
     switch (selected) {

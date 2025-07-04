@@ -13,7 +13,7 @@ function AppbarClient() {
   }
 
   const handleHomeClick = () => {
-    router.push('user-dashboard');
+    router.push('dashboard');
   }
   return (
     <div className="fixed top-0 left-0 w-full z-50 bg-fixed ">
