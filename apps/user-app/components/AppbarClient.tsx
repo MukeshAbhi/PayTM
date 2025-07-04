@@ -1,7 +1,7 @@
 "use client"
 import { Topbar } from '@repo/ui/pages/topbar'
-import { homeRedirect, logout } from '../actions/auth'
-import { useSession } from "next-auth/react"
+import { homeRedirect } from '../actions/auth'
+import { useSession, signOut } from "next-auth/react"
 import { useRouter } from 'next/navigation'
 
 function AppbarClient() {
@@ -15,9 +15,17 @@ function AppbarClient() {
   const handleHomeClick = () => {
     router.replace('/dashboard/home');
   }
+
+  const handleLogout = async () => {
+    await signOut({
+      callbackUrl: '/signin',
+      redirect: true
+    });
+  }
+
   return (
     <div className="fixed top-0 left-0 w-full z-50 bg-fixed ">
-      <Topbar loginHandler={homeRedirect} logoutHandler={logout} user={session?.user} homeClick={handleHomeClick} profileClick={handleProfileClick} />
+      <Topbar loginHandler={homeRedirect} logoutHandler={handleLogout} user={session?.user} homeClick={handleHomeClick} profileClick={handleProfileClick} />
     </div>
   )
 }

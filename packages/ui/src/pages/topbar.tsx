@@ -15,7 +15,7 @@ export const Topbar: FC<TopbarProps> = ({user, loginHandler, logoutHandler, prof
     return(
         <div className="fixed bg-background flex items-center justify-between w-full  border-b p-5 ">
             <div className="px-8 text-2xl">
-                PayTM
+                PayMents
             </div>
             <div className=" flex space-x-4 justify-center items-center">
                 <House onClick={homeClick} />

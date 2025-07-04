@@ -34,11 +34,11 @@ export const logInResend = async (email: string) => {
 }         
 
 export const loginGoogle = async() => {
-    await signIn("google",{redirectTo: '/user-dashboard'});
+    await signIn("google", { callbackUrl: '/dashboard/home' });
 }
 
 export const logout = async () => {
-    await signOut({redirectTo: "/signin"});
+    await signOut();
 }
 
 export const homeRedirect = async () => {

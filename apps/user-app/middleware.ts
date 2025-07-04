@@ -1,21 +1,26 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
 
-const protectedRoutes = ["/user"];
+const protectedRoutes = ["/user","/dashboard"];
 
 export const middleware = async (request:NextRequest) =>  {
-    const token = await getToken({req: request , secret: process.env.AUTH_SECRET});
-    
     const { pathname } = request.nextUrl;
 
-    const isProtected = protectedRoutes.some((route) => 
+    // Skip middleware for auth API routes and signin page
+    if (pathname.startsWith('/api/auth') || pathname === '/signin') {
+        return NextResponse.next();
+    }
+
+    const token = await getToken({req: request , secret: process.env.AUTH_SECRET});
+
+    const isProtected = protectedRoutes.some((route) =>
         pathname.startsWith(route)
     );
 
     if(isProtected && !token) {
-        return NextResponse.redirect(new URL("api/auth/signin", request.url));
+        return NextResponse.redirect(new URL("/signin", request.url));
     }
 
     return NextResponse.next();
-    
+
 }

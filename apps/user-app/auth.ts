@@ -36,7 +36,7 @@ export const authOptions : NextAuthConfig = ({
       return token;
     }, 
     async redirect({url, baseUrl}){
-      return `${baseUrl}/user-dashboard`;
+      return `${baseUrl}/dashboard/home`;
     }
   },
   events: {

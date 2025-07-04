@@ -295,7 +295,7 @@ const ChangeWalletPin = () => {
                     {errors.newPin && (
                         <p className="text-red-500 text-sm text-center">{errors.newPin.message}</p>
                     )}
-                    <Button className="text-white w-20 ml-40">
+                    <Button className="text-white w-20 ml-46">
                         Set
                     </Button>
                     <div className="text-center">Forgot Wallet Pin..?</div>
