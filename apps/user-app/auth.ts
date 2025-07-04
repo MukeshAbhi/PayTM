@@ -10,29 +10,37 @@ export const authOptions : NextAuthConfig = ({
     Resend({
       from: "no-reply@updates.mukeshtech.site",
       sendVerificationRequest,
-      apiKey: process.env.AUTH_RESEND_KEY
+      secret: process.env.AUTH_RESEND_KEY
     })
   ],
   session: {
-    strategy: "database"
+    strategy: "jwt"
   },
   secret: process.env.AUTH_SECRET,
   pages: {
     signIn: "/signin"
   },
   callbacks:  {
-    async session({ session, user }) {
-      if (user && session.user) {
-        session.user.id = user.id;
+    async session({ session, token }) {
+      if (token && session.user) {
+        session.user.id = token.sub!;
       }
       return session;
     },
-    async redirect({baseUrl}){
+    async jwt({ token, user}) {
+      if(user) {
+        token.sub = user.id,
+        token.email = user.email,
+        token.name = user.name
+      }
+      return token;
+    }, 
+    async redirect({url, baseUrl}){
       return `${baseUrl}/dashboard/home`;
     }
   },
   events: {
-    async signIn({user, isNewUser}) {
+    async signIn({user, account, profile, isNewUser}) {
       if (isNewUser) {
         try {
           await prisma.walletBalance.create({
