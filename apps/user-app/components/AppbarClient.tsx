@@ -1,4 +1,5 @@
-"use client"
+"use client";
+
 import { Topbar } from '@repo/ui/pages/topbar'
 import { homeRedirect } from '../actions/auth'
 import { useSession, signOut } from "next-auth/react"

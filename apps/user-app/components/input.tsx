@@ -1,3 +1,5 @@
+"use client";
+
 import * as React from "react"
 import { UseFormRegisterReturn } from "react-hook-form"
 import { cn } from "@repo/ui/lib/utils"

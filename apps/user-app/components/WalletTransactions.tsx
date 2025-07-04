@@ -1,3 +1,5 @@
+"use client";
+
 import { creditedWalletTransactions, debitedWalletTransactions } from "@/actions/user";
 import { useState, useEffect } from "react";
 import { WalletTransfer } from "../types/index";

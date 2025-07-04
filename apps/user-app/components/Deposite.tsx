@@ -1,4 +1,5 @@
-"use client"
+"use client";
+
 import { Button } from "@repo/ui/components/button";
 import React, { useState } from "react";
 import { createOnrampTransaction } from "../actions/onrampTransaction";

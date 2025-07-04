@@ -1,4 +1,5 @@
-"use client"
+"use client";
+
 import { useState } from "react";
 import Deposite from "./Deposite";
 import Withdraw from "./Withdraw";
