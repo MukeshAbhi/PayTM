@@ -27,7 +27,7 @@ DEPLOYMENT_CHECKLIST.md
 .next/
 out/
 build
-dist
+
 
 
 # Debug
