@@ -11,7 +11,7 @@ export const middleware = async (request:NextRequest) =>  {
         return NextResponse.next();
     }
 
-    const token = await getToken({req: request , secret: process.env.AUTH_SECRET});
+    const token = await getToken({req: request , secret: process.env.NEXTAUTH_SECRET});
 
     const isProtected = protectedRoutes.some((route) =>
         pathname.startsWith(route)
