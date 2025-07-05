@@ -2,7 +2,7 @@
   "name": "paytm",
   "private": true,
   "scripts": {
-    "postinstall": "cd packages/db && pnpm db:generate",
+    "postinstall": "cd packages/db && pnpm db:generate && mkdir -p packages/db/src/generated/prisma && cp node_modules/.prisma/client/libquery_engine-rhel-openssl-3.0.x.so.node packages/db/src/generated/prisma/",
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
