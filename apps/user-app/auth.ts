@@ -6,11 +6,14 @@ import Resend from "next-auth/providers/resend"
 export const authOptions : NextAuthConfig = ({
   adapter: adapter,
   providers: [
-    Google,
+    Google({
+    clientId: process.env.AUTH_GOOGLE_ID!,
+    clientSecret: process.env.AUTH_GOOGLE_SECRET!,
+  }),
     Resend({
       from: "no-reply@updates.mukeshtech.site",
       sendVerificationRequest,
-      apiKey: process.env.AUTH_RESEND_KEY
+      secret: process.env.AUTH_RESEND_KEY
     })
   ],
   session: {
