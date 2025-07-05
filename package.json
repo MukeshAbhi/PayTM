@@ -2,6 +2,7 @@
   "name": "paytm",
   "private": true,
   "scripts": {
+    "postinstall": "pnpm --filter @repo/db... run generate",
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
