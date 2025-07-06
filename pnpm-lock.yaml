@@ -57,9 +57,6 @@ importers:
       '@netlify/next':
         specifier: ^1.4.9
         version: 1.4.9(next@15.3.5(react-dom@19.1.0(react@19.1.0))(react@19.1.0))
-      '@prisma/client':
-        specifier: 6.6.0
-        version: 6.6.0(prisma@6.11.1(typescript@5.8.2))(typescript@5.8.2)
       '@repo/db':
         specifier: workspace:*
         version: link:../../packages/db
@@ -773,18 +770,6 @@ packages:
 
   '@prisma/client@6.11.1':
     resolution: {integrity: sha512-5CLFh8QP6KxRm83pJ84jaVCeSVPQr8k0L2SEtOJHwdkS57/VQDcI/wQpGmdyOZi+D9gdNabdo8tj1Uk+w+upsQ==}
-    engines: {node: '>=18.18'}
-    peerDependencies:
-      prisma: '*'
-      typescript: '>=5.1.0'
-    peerDependenciesMeta:
-      prisma:
-        optional: true
-      typescript:
-        optional: true
-
-  '@prisma/client@6.6.0':
-    resolution: {integrity: sha512-vfp73YT/BHsWWOAuthKQ/1lBgESSqYqAWZEYyTdGXyFAHpmewwWL2Iz6ErIzkj4aHbuc6/cGSsE6ZY+pBO04Cg==}
     engines: {node: '>=18.18'}
     peerDependencies:
       prisma: '*'
@@ -3832,11 +3817,6 @@ snapshots:
       prisma: 6.11.1(typescript@5.8.3)
       typescript: 5.8.3
 
-  '@prisma/client@6.6.0(prisma@6.11.1(typescript@5.8.2))(typescript@5.8.2)':
-    optionalDependencies:
-      prisma: 6.11.1(typescript@5.8.2)
-      typescript: 5.8.2
-
   '@prisma/config@6.11.1':
     dependencies:
       jiti: 2.4.2
@@ -6126,14 +6106,6 @@ snapshots:
   prelude-ls@1.2.1: {}
 
   prettier@3.6.2: {}
-
-  prisma@6.11.1(typescript@5.8.2):
-    dependencies:
-      '@prisma/config': 6.11.1
-      '@prisma/engines': 6.11.1
-    optionalDependencies:
-      typescript: 5.8.2
-    optional: true
 
   prisma@6.11.1(typescript@5.8.3):
     dependencies:

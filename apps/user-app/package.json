@@ -6,14 +6,12 @@
   "scripts": {
     "dev": "next dev --turbopack --port 3000",
     "build": "next build",
-    "postbuild": "ts-node scripts/copyPrismaEngine.ts",
     "start": "next start",
     "lint": "next lint --max-warnings 0",
     "check-types": "tsc --noEmit"
   },
   "dependencies": {
     "@netlify/next": "^1.4.9",
-    "@prisma/client": "6.6.0",
     "@repo/db": "workspace:*",
     "@repo/ui": "workspace:*",
     "@tailwindcss/postcss": "^4.0.8",
