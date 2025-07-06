@@ -4,7 +4,7 @@
   "tasks": {
     "db:generate": {
       "cache": false,
-      "outputs": ["src/generated/prisma/**"]
+      "outputs": ["src/generated/prisma/**", "node_modules/.prisma/**"]
     },
     "db:migrate": {
       "cache": false,
