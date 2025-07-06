@@ -16,7 +16,19 @@
     "build": {
       "dependsOn": ["^build", "^db:generate"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": [".next/**", "dist/**", "build/**", "!**/.next/cache/**"]
+      "outputs": [".next/**", "dist/**", "build/**", "!**/.next/cache/**"],
+      "env": [
+        "DATABASE_URL",
+        "BANK_WEBHOOK_URL",
+        "HMAC_KEY",
+        "NEXTAUTH_SECRET",
+        "AUTH_GOOGLE_ID",
+        "AUTH_GOOGLE_SECRET",
+        "AUTH_RESEND_KEY",
+        "NEXTAUTH_URL",
+        "NODE_ENV",
+        "PRISMA_CLI_BINARY_TARGETS"
+      ]
     },
     "lint": {
       "dependsOn": ["^lint"]
