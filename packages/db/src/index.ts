@@ -1,5 +1,5 @@
 import { PrismaAdapter } from "@auth/prisma-adapter";
-import { PrismaClient, Prisma, $Enums } from "./generated/prisma/index.js";
+import { PrismaClient, Prisma, $Enums } from "./generated/client/index.js";
 
 const globalForPrisma = globalThis as unknown as { prisma: PrismaClient };
 
