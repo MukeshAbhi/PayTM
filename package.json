@@ -2,7 +2,7 @@
   "name": "paytm",
   "private": true,
   "scripts": {
-    "postinstall": "cd packages/db && pnpm db:generate ",
+    "postinstall": "cd packages/db && ./postinstall.sh ",
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
