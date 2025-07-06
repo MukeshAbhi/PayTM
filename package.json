@@ -2,7 +2,7 @@
   "name": "paytm",
   "private": true,
   "scripts": {
-    "postinstall": "cd packages/db && pnpm db:generate && mkdir -p packages/db/src/generated/prisma && cp packages/db/src/generated/prisma",
+    "postinstall": "cd packages/db && pnpm db:generate ",
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
