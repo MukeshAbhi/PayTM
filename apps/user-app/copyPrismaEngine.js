@@ -1,21 +1,19 @@
-import { existsSync, mkdirSync, copyFileSync } from "fs";
-import { join } from "path";
+import {  mkdirSync, copyFileSync } from "fs";
+import { join, resolve } from "path";
 
-const source = join(
+const binaryTarget = "rhel-openssl-3.0.x";
+const src = resolve(
   __dirname,
-  "../../node_modules/.prisma/client/libquery_engine-rhel-openssl-3.0.x.so.node"
+  "../../packages/db/node_modules/@prisma/engines/query-engine-" + binaryTarget + ".so.node"
 );
+const destDir = resolve(__dirname, "../src/generated/prisma");
+const dest = join(destDir, `libquery_engine-${binaryTarget}.so.node`);
 
-const destination = join(
-  __dirname,
-  "../.next/server/.prisma/client/libquery_engine-rhel-openssl-3.0.x.so.node"
-);
+mkdirSync(destDir, { recursive: true });
 
-if (!existsSync(source)) {
-  console.error("❌ Prisma engine binary not found at:", source);
-  process.exit(1);
+try {
+  copyFileSync(src, dest);
+  console.log("✅ Copied Prisma engine:", dest);
+} catch (e) {
+  console.warn("❌ Failed to copy Prisma engine:", e.message);
 }
-
-mkdirSync(join(destination, ".."), { recursive: true });
-copyFileSync(source, destination);
-console.log("✅ Copied Prisma query engine to Next.js runtime output");
