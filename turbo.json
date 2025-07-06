@@ -30,13 +30,5 @@
       "persistent": true
     }
   },
-  "globalDependencies": [
-    "DATABASE_URL",
-    "BANK_WEBHOOK_URL",
-    "HMAC_KEY",
-    "NEXTAUTH_SECRET",
-    "AUTH_GOOGLE_ID",
-    "AUTH_GOOGLE_SECRET",
-    "AUTH_RESEND_KEY"
-  ]
+  "globalDependencies": []
 }
