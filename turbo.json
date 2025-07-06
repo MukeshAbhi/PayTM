@@ -16,7 +16,9 @@
     "build": {
       "dependsOn": ["^build", "^db:generate"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": [".next/**", "dist/**", "build/**", "!**/.next/cache/**"],
+      "outputs": [".next/**", "dist/**", "build/**", "!**/.next/cache/**","node_modules/.prisma/**",
+                  "node_modules/@prisma/client/**",
+                  "src/generated/**"],
       "env": [
         "DATABASE_URL",
         "BANK_WEBHOOK_URL",
