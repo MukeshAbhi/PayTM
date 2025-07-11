@@ -27,7 +27,8 @@
         "AUTH_RESEND_KEY",
         "NEXTAUTH_URL",
         "NODE_ENV",
-        "PRISMA_CLI_BINARY_TARGETS"
+        "PRISMA_CLI_BINARY_TARGETS",
+        "PRISMA_SCHEMA_PATH"
       ]
     },
     "lint": {
