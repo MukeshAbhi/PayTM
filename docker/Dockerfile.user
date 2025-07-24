@@ -1,18 +1,14 @@
-FROM node:18-alpine
+FROM node:20-alpine
+
+WORKDIR /paytm
 
 RUN npm install -g pnpm
-
-WORKDIR /app
-
 # Copy root config files for dependency resolution
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml turbo.json ./
 
 # Copy the rest of the monorepo
 COPY apps ./apps
 COPY packages ./packages
-
-# Set environment for production build
-ENV NODE_ENV=production
 
 # Install dependencies (include devDependencies for build)
 RUN pnpm install
