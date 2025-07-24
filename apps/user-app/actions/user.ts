@@ -15,9 +15,12 @@ export async function getUserData() {
   const session = await auth();
 
   if (!session || !session.user?.email) {
-    console.log("No valid session")
+    console.log("From getUserDat : No valid session")
     return null
   }
+
+  console.log("From getUserDat : ", session);
+  
 
   const user = await prisma.user.findUnique({
     where: {
