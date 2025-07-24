@@ -3,7 +3,7 @@ import { getToken } from "next-auth/jwt";
 
 const protectedRoutes = ["/user","/dashboard"];
 
-export const middleware = async (request:NextRequest) =>  {
+const middleware = async (request:NextRequest) =>  {
     const { pathname } = request.nextUrl;
 
     // Skip middleware for auth API routes and signin page
@@ -22,5 +22,6 @@ export const middleware = async (request:NextRequest) =>  {
     }
 
     return NextResponse.next();
-
 }
+
+export default middleware;
