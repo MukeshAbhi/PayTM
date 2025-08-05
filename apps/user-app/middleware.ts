@@ -8,7 +8,7 @@ const protectedRoutes = ["/user","/dashboard"];
 //   return NextResponse.next(); // 🔁 do nothing, just pass through
 // }
 
-const middleware = async (request:NextRequest) =>  {
+export const middleware = async (request:NextRequest) =>  {
     const { pathname } = request.nextUrl;
     console.log("path name: ", pathname);
     
@@ -18,6 +18,7 @@ const middleware = async (request:NextRequest) =>  {
     }
 
     const token = await getToken({req: request , secret: process.env.NEXTAUTH_SECRET});
+    console.log("token name: ", token);
 
     const isProtected = protectedRoutes.some((route) =>
         pathname.startsWith(route)
@@ -30,4 +31,6 @@ const middleware = async (request:NextRequest) =>  {
     return NextResponse.next();
 }
 
-export default middleware;
+export const config = {
+  matcher: ["/user/:path*", "/dashboard/:path*"],
+};
