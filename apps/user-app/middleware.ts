@@ -10,7 +10,7 @@ const protectedRoutes = ["/user","/dashboard"];
 
 export const middleware = async (request:NextRequest) =>  {
     const { pathname } = request.nextUrl;
-    console.log("path name: ", pathname);
+    
     
     // Skip middleware for auth API routes and signin page
     if (pathname.startsWith('/api/auth') || pathname === '/signin' || pathname.startsWith('/o/oauth2/v2')) {
