@@ -1,10 +1,10 @@
 "use client";
 
-import { AppSidebar } from "../../../components/ProfileSidebar"
+import { AppSidebar } from "../../components/DashboardSidebar"
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@repo/ui/components/sidebar";
 import { Separator } from "@repo/ui/components/separator";
 
-export default function UserLayout({ children }: { children: React.ReactNode }) {
+export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
     <SidebarProvider>
       <AppSidebar />

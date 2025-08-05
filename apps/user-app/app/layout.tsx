@@ -3,6 +3,7 @@ import "@repo/ui/globals.css"
 import { SessionProvider } from "next-auth/react"
 import { Providers } from "@/components/providers"
 import { JotaiProvider } from "@/components/jotaiProviders"
+import AppbarClient from "@/components/AppbarClient"
 
 const fontSans = Geist({
   subsets: ["latin"],
@@ -27,7 +28,12 @@ export default function RootLayout({
         <JotaiProvider>
           <SessionProvider>
             <Providers>
-              {children}
+              <div className="flex flex-col min-h-screen">
+                <AppbarClient />
+                <div className="flex-1 pt-20 px-4">
+                    {children}
+                </div>
+              </div>
             </Providers>
           </SessionProvider>
         </JotaiProvider> 
