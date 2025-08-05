@@ -18,7 +18,6 @@ const middleware = async (request: NextRequest) => {
     return NextResponse.next();
   }
 
-  // ✅ Fix: Use correct cookie name for Auth.js v5+
   const token = await getToken({
     req: request,
     secret: process.env.NEXTAUTH_SECRET,

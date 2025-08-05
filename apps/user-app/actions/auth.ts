@@ -9,25 +9,41 @@ export const signUpResend = async (formDta: FormData) => {
     const name = formDta.get("name") as string;
 
     await customSignUp(name, email);
-    await signIn("resend", formDta);
+    await signIn("resend",
+        formDta
+    );
 }
 
 export const logInResend = async (email: string) => {
     const result = await customLogin (email);
-
+    
     if (!result.success) {
         // handle error accordingly
         console.error(result.message);
         return {
             message: "Email Id not found. Sign up",
             status: 411
-        }; // or throw error
+        }; 
     }
+
     const formDta = new FormData();
     formDta.append("email", email);
-    await signIn("resend", formDta);
+     console.log("formDta :", formDta);
+     
+    const signInRes  = await signIn("resend", {
+        redirect: false,
+        email, 
+    });
 
-    return{
+
+    if (!signInRes || signInRes?.error) {
+        return {
+            status: 500,
+            message: "Failed to send email."
+        };
+    }
+
+    return {
         status:200,
         message: "Sign-in link has been sent to your email.",
   };
