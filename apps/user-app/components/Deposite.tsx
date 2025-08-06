@@ -112,11 +112,12 @@ function Deposite() {
                                         });
   
   const{register, handleSubmit, formState:{ errors}, reset} = useForm({mode: "onChange"});
+  const [isLoading, setLoading] = useState(false);
 
   const onClickHandler =  async (data: any ) => {
     const { amount } = data;
     const parsedData = amountType.safeParse(amount);
-
+    
     if(parsedData.error || !parsedData)
     {
       setErrMsg({
@@ -127,6 +128,7 @@ function Deposite() {
     }
 
     try {
+          setLoading(true)
           const res =  await createOnrampTransaction((Number(amount)*100), bank?.name!, "Credit");
 
           if(!res){
@@ -141,6 +143,7 @@ function Deposite() {
             setErrMsg(res);
             reset();
           }else{
+            setLoading(false)
             setErrMsg(res);
             window.open(bank?.redirectUrl || "")
             reset();
@@ -234,8 +237,15 @@ function Deposite() {
             )}
           {renderForm()}
           <Button variant={"destructive"} className="w-full text-white">
-            Add Money
+            {isLoading ?
+              (<div className="flex items-center justify-center gap-2">
+                      <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                      Processing...
+              </div>)
+              : ( "Add Money")
+            }
           </Button>
+          
           
         </form>
       </div>

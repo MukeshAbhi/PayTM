@@ -118,7 +118,7 @@ export function LoginForm({
                 )}
               </div>
 
-              <Button type="submit" className="w-full" disabled={loading}>
+              <Button type="submit" className="w-full text-white" disabled={loading}>
                 {loading ? (
                   <div className="flex items-center justify-center gap-2">
                     <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />

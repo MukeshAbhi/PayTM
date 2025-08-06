@@ -42,7 +42,7 @@ return (
         </p>
       </div>
       <button
-        onClick={getData} // define this function
+        onClick={getData} 
         className="p-2 hover:bg-muted rounded-full"
         aria-label="Refresh balance"
       >

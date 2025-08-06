@@ -1,13 +1,24 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Deposite from "./Deposite";
 import Withdraw from "./Withdraw";
 import Balance from "./Balance";
 import BankTransactions from "./BankTransactions";
+import HomeSkeleton from "@/skeleton/HomeSkeleton";
 
 function Home() {
   const [activeTab, setActiveTab] = useState<"deposite" | "withdraw">("deposite");
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => setIsLoading(false), 1500);
+    return () => clearTimeout(timeout);
+  }, []);
+
+  if (isLoading) {
+    return <HomeSkeleton />;
+  }
 
   return (
     <div className="flex h-screen w-full flex-col p-4">

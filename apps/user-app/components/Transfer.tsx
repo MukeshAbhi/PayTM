@@ -6,10 +6,11 @@ import { Label } from "@repo/ui/components/label";
 import { Button } from "@repo/ui/components/button";
 import { InputForForm } from "./input";
 import { InputOTP, InputOTPGroup, MaskedInputOTPSlot } from "@repo/ui/components/input-otp";
-import {  useState } from "react";
+import {  useEffect, useState } from "react";
 import { amountType, ErrMsg } from "../types/index"
 import { p2pTransfer } from "@/actions/p2ptransfer";
 import RecentWalletTransactions from "./WalletTransactions";
+import TransferSkeleton from "@/skeleton/TransferSkeleton";
 
 type FormData = {
         paytmid: string;
@@ -33,6 +34,15 @@ function Transfer() {
     message: "",
     status: ""
   })
+
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => setIsLoading(false), 1500);
+    return () => clearTimeout(timeout);
+  }, []);
+
+  if (isLoading) return <TransferSkeleton />;
 
   const onSubmit = async (data: FormData) => {
     console.log("data : ", data);

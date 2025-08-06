@@ -1,11 +1,21 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import BankTransactions from "./BankTransactions";
 import RecentWalletTransactions from "./WalletTransactions";
+import TransactionsSkeleton from "@/skeleton/TransactionsSkeleton";
+
 
 function Transactions() {
   const [isSelected, setIsSelected] = useState<"bank" | "wallet">("bank");
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const t = setTimeout(() => setIsLoading(false), 1500);
+    return () => clearTimeout(t);
+  }, []);
+
+  if (isLoading) return <TransactionsSkeleton />;
 
   return (
     <div className="p-4">
